@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Cancellar\TrackerBundle\Entity\LogEntryRepository")
  */
-class LogEntry
+class LogEntry implements TrackingEntityInterface
 {
     /**
      * @var integer $id
