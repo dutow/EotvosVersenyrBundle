@@ -1,0 +1,15 @@
+
+services:
+  cancellar.tracker.logger:
+    class: Cancellar\TrackerBundle\Logger\EntityLogger
+    arguments:
+      entityManager: "@doctrine.orm.entity_manager"
+  
+  cancellar.tracker.cookie_listener:
+    class: Cancellar\TrackerBundle\Listener\CookieListener
+    arguments:
+      logger: "@cancellar.tracker.logger"
+    tags:
+      - name: kernel.event_listener
+        event: kernel.response
+        method: onResponse
