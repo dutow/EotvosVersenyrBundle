@@ -6,6 +6,7 @@ use Cancellar\TrackerBundle\Logger\TrackerLoggerInterface;
 use Cancellar\CommonBundle\Generator\UuidGenerator;
 use Cancellar\CommonBundle\Client\ClientUtils;
 
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -65,6 +66,23 @@ class CookieListener
     $inCookie = false;  // found in cookie
     $tokenDiff = false; // found both, but different
 
+    if(HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()){
+      // TODO: add config setting for slave request logging
+      // but at the moment we simply do not care about ajax requests in the log
+      return;
+    }
+
+    if($request->isXmlHttpRequest()){
+      // TODO: add config setting for AJAX request logging
+      // but at the moment we simply do not care about ajax requests in the log
+      return;
+    }
+
+    if(!in_array($response->headers->get('Content-Type'), array('text/html', 'text/xhtml'))){
+      // TODO: add config setting for non-html request logging
+      // but at the moment we simply do not care about ajax requests in the log
+      return;
+    }
 
     $clientUtils = new ClientUtils();
     $ip = $clientUtils->getRealIp();
