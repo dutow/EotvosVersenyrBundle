@@ -13,3 +13,13 @@ services:
       - name: kernel.event_listener
         event: kernel.response
         method: onResponse
+
+  cancellar.tracker.dbprefix:
+    class: Cancellar\CommonBundle\Listener\TablePrefixListener
+    arguments:
+      prefix: "tracker_"
+      interfaceName: "Cancellar\TrackerBundle\Entity\TrackerEntityInterface"
+    tags:
+      - name: doctrine.event_listener
+        event: name
+        method: loadClassMetadata
