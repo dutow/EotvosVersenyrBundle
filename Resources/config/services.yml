@@ -20,6 +20,5 @@ services:
       prefix: "tracker_"
       interfaceName: "Cancellar\TrackerBundle\Entity\TrackerEntityInterface"
     tags:
-      - name: doctrine.event_listener
-        event: name
+      - name: doctrine.event_subscriber
         method: loadClassMetadata
