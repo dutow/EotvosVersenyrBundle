@@ -73,7 +73,7 @@ class LogEntry implements TrackerEntityInterface
     /**
      * @var string $sess_uuid
      *
-     * @ORM\Column(name="sess_uuid", type="string", length=36)
+     * @ORM\Column(name="sess_uuid", type="string", length=36, nullable=true)
      */
     private $sess_uuid;
 
