@@ -1,0 +1,706 @@
+<?php
+
+namespace Eotvos\VersenyrBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\ExecutionContext;
+use Eotvos\VersenyrBundle\Validator as EcAssert;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
+
+/**
+ * User Entity
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Eotvos\VersenyrBundle\Entity\UserRepository")
+ * @ORM\HasLifecycleCallbacks
+ * @DoctrineAssert\UniqueEntity( fields = {"email", "year"}, message = "Ez az e-mail cím már foglalt!" )
+ * @EcAssert\School(message="Az iskola megadása kötelező!")
+ * 
+ * @author    Zsolt Parragi <zsolt.parragi@cancellar.hu> 
+ * @copyright 2012 Cancellar
+ * @license   MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @version   Release: v0.1
+ */
+class User implements UserInterface, \Serializable
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string $email
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="A mező kitöltése kötelező!")
+     * @Assert\Email( checkMX = false, message = "Hibás e-mail cím!" )
+     */
+    private $email;
+
+    /**
+     * @var string $password
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     */
+    private $password;
+
+    /**
+     * @var string $salt
+     *
+     * @ORM\Column(name="salt", type="string", length=32, nullable=false)
+     */
+    private $salt;
+
+    /**
+     * @var string $firstname
+     *
+     * @ORM\Column(name="firstname", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="A mező kitöltése kötelező!")
+     */
+    private $firstname;
+
+    /**
+     * @var string $lastname
+     *
+     * @ORM\Column(name="lastname", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="A mező kitöltése kötelező!")
+     */
+    private $lastname;
+
+    /**
+     * Stores the country of the user.
+     *
+     * @var string $country
+     *
+     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Country", inversedBy="users")
+     * @Assert\NotBlank(message="A mező kitöltése kötelező!")
+     */
+    private $country;
+
+    /**
+     * Five digit postalcode of a hungarian city referenced from Postalcode entity.
+     *
+     * @var string $postalcode
+     *
+     * RM\JoinColumn(name="postalcode", referencedColumnName="code",nullable=true)
+     * RM\ManyToOne(targetEntity="Postalcode")
+     * @ORM\Column(name="postalcode", type="string", length=5,nullable=true)
+     */
+    private $postalcode;
+
+    /**
+     * Name of the user's town if he isn't from Hungary.
+     *
+     * @var string $other_city
+     *
+     * @ORM\Column(name="other_city", type="string", length=255,nullable=true)
+     */
+    private $other_city;
+
+    /**
+     * @var string $address
+     *
+     * @ORM\Column(name="address", type="string", length=255,nullable=true)
+     */
+    private $address;
+
+    /**
+     * @var string $school
+     *
+     * @ORM\JoinColumn(name="school_id", referencedColumnName="id",nullable=true)
+     * @ORM\ManyToOne(targetEntity="School", inversedBy="users")
+     */
+    private $school;
+
+    /**
+     * Name of the user's school if he isn't from Hungary.
+     *
+     * @var string $other_school
+     *
+     * @ORM\Column(name="other_school", type="string", length=255,nullable=true)
+     */
+    private $other_school;
+
+    /**
+     * @var string $school_teacher
+     *
+     * @ORM\Column(name="school_teacher", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="A mező kitöltése kötelező!")
+     */
+    private $school_teacher;
+
+    /**
+     * @var string $school_teacher_contact
+     *
+     * @ORM\Column(name="school_teacher_contact", type="string", length=255, nullable=true)
+     */
+    private $school_teacher_contact;
+
+    /**
+     * @var string $school_teacher
+     *
+     * @ORM\Column(name="school_year", type="integer", nullable=false)
+     * @Assert\NotBlank(message="A mező kitöltése kötelező!")
+     */
+    private $school_year;
+
+    /**
+     * Active year of the user.
+     *
+     * @todo this is bad here, probably need to refactor the user class into two
+     *
+     * @var string $year
+     *
+     * @ORM\Column(name="year", type="integer", nullable=false)
+     * @Assert\NotBlank(message="A mező kitöltése kötelező!")
+     */
+    private $year;
+
+    /**
+     * The sections which the user joined.
+     *
+     * @ORM\ManyToMany(targetEntity="Section", inversedBy="attendees")
+     * @EcAssert\EntityCollection(message="Legalább egy szekcióban részt kell venned!")
+     * @ORM\JoinTable(
+     *   name="UserSections",
+     *   joinColumns={@ORM\JoinColumn(name="useR_id", referencedColumnName="id")},
+     *   inverseJoinColumns={@ORM\JoinColumn(name="section_id", referencedColumnName="id")}
+     * )
+     */
+    private $sections;
+
+    /**
+     * List of the user's submissions in all sections and rounds.
+     *
+     * @ORM\OneToMany(targetEntity="Submission", mappedBy="user_id")
+     */
+    private $submissions;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->sections = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string 
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set firstname
+     *
+     * @param string $firstname
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+    }
+
+    /**
+     * Get firstname
+     *
+     *
+     * @return string 
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * Set lastname
+     *
+     *
+     * @param string $lastname
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+    }
+
+    /**
+     * Get lastname
+     *
+     *
+     * @return string 
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * Set year
+     *
+     *
+     * @param string $year
+     */
+    public function setYear($year)
+    {
+        $this->year = $year;
+    }
+
+    /**
+     * Get year
+     *
+     *
+     * @return string 
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
+
+    /**
+     * Set postalcode
+     *
+     *
+     * @param string $postalcode
+     */
+    public function setPostalcode($postalcode)
+    {
+        $this->postalcode = $postalcode;
+    }
+
+    /**
+     * Get postalcode
+     *
+     *
+     * @return string 
+     */
+    public function getPostalcode()
+    {
+        return $this->postalcode;
+    }
+
+    /**
+     * Set address
+     *
+     *
+     * @param string $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * Get address
+     *
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set school_teacher
+     *
+     *
+     * @param string $schoolTeacher
+     */
+    public function setSchoolTeacher($schoolTeacher)
+    {
+        $this->school_teacher = $schoolTeacher;
+    }
+
+    /**
+     * Get school_teacher
+     *
+     *
+     * @return string 
+     */
+    public function getSchoolTeacher()
+    {
+        return $this->school_teacher;
+    }
+
+    /**
+     * Set school_teacher_contact
+     *
+     *
+     * @param string $schoolTeacherContact
+     */
+    public function setSchoolTeacherContact($schoolTeacherContact)
+    {
+        $this->school_teacher_contact = $schoolTeacherContact;
+    }
+
+    /**
+     * Get school_teacher_contact
+     *
+     *
+     * @return string 
+     */
+    public function getSchoolTeacherContact()
+    {
+        return $this->school_teacher_contact;
+    }
+
+    /**
+     * Set school_year
+     *
+     *
+     * @param integer $schoolYear
+     */
+    public function setSchoolYear($schoolYear)
+    {
+        $this->school_year = $schoolYear;
+    }
+
+    /**
+     * Get school_year
+     *
+     *
+     * @return integer 
+     */
+    public function getSchoolYear()
+    {
+        return $this->school_year;
+    }
+
+    /**
+     * Set school
+     *
+     *
+     * @param School $school
+     */
+    public function setSchool(\Eotvos\VersenyrBundle\Entity\School $school)
+    {
+        $this->school= $school;
+    }
+
+    /**
+     * Get school
+     *
+     *
+     * @return School 
+     */
+    public function getSchool()
+    {
+        return $this->school;
+    }
+
+    /**
+     * Add a section
+     *
+     *
+     * @param Eotvos\VersenyrBundle\Entity\Section $sections
+     */
+    public function addSection(\Eotvos\VersenyrBundle\Entity\Section $section)
+    {
+        $this->sections[] = $section;
+    }
+
+    /**
+     * Get sections
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getSections()
+    {
+        return $this->sections;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string 
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string 
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * Add a submission
+     *
+     * @param Eotvos\VersenyrBundle\Entity\Submission $submission
+     */
+    public function addSubmission(\Eotvos\VersenyrBundle\Entity\Submission $submission)
+    {
+        $this->submissions[] = $submission;
+    }
+
+    /**
+     * Get submissions
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getSubmissions()
+    {
+        return $this->submissions;
+    }
+
+    /**
+     * Set other_city
+     *
+     * @param string $otherCity
+     */
+    public function setOtherCity($otherCity)
+    {
+        $this->other_city = $otherCity;
+    }
+
+    /**
+     * Get other_city
+     *
+     * @return string 
+     */
+    public function getOtherCity()
+    {
+        return $this->other_city;
+    }
+
+    /**
+     * Set other_school
+     *
+     * @param string $otherSchool
+     */
+    public function setOtherSchool($otherSchool)
+    {
+        $this->other_school = $otherSchool;
+    }
+
+    /**
+     * Get other_school
+     *
+     * @return string 
+     */
+    public function getOtherSchool()
+    {
+        return $this->other_school;
+    }
+
+    /**
+     * Set country
+     *
+     * @param Eotvos\VersenyrBundle\Entity\Country $country
+     */
+    public function setCountry(\Eotvos\VersenyrBundle\Entity\Country $country)
+    {
+        $this->country= $country;
+    }
+
+    /**
+     * Get country
+     *
+     * @return Eotvos\VersenyrBundle\Entity\Country 
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+
+    /**
+     * Gets the roles of the user
+     *
+     * @return array`
+     */
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    /**
+     * Erases the user's sensitive data - so nothing.
+     *
+     */
+    public function eraseCredentials()
+    {
+    }
+
+    /**
+     * Equality operator
+     *
+     *
+     * @return bool
+     */
+    public function equals(UserInterface $oth)
+    {
+        return $oth->getEmail() == $this->getEmail();
+    }
+
+    /**
+     * Serializes the object.
+     *
+     * @todo refactor, probably just the email is enough
+     *
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            'id' => $this->id,
+            'email' => $this->email,
+            'password' => $this->password,
+            'salt' => $this->salt,
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'address' => $this->address,
+            'school_teacher' => $this->school_teacher,
+            'school_teacher_contact' => $this->school_teacher_contact,
+            'school_year' => $this->school_year,
+            'year' => $this->year,
+        ));
+    }
+
+    /**
+     * Serializes the object.
+     *
+     * @todo refactor, probably just the email is enough
+     *
+     */
+    public function unserialize($str)
+    {
+        $tmp = unserialize($str);
+
+        foreach($tmp as $key => $v){
+            $this->$key = $v;
+        }
+        return $this;
+    }
+
+    /**
+     * Did the user join the given section?
+     *
+     *
+     * @return bool
+     */
+    public function hasSection(\Eotvos\VersenyrBundle\Entity\Section $section)
+    {
+        foreach($this->sections as $sec){
+            if($sec->getId() == $section->getId()) return true;
+        }
+        return false;
+    }
+
+    /**
+     * May the user join the given section?
+     *
+     * @return bool
+     */
+    public function mayJoin(\Eotvos\VersenyrBundle\Entity\Section $section)
+    {
+        $now = new \DateTime();
+        $now->sub(new \DateInterval('P1D'));
+
+        return ($section->getRegistrationUntil() > $now);
+    }
+
+    /**
+     * Returns the user's unique identifier required for his submissions.
+     *
+     * @return string
+     */
+    public function getUniqueIdentifier()
+    {
+        $id = $this->getId();
+        $betu = array(
+            'L',
+            'H',
+            'A',
+            'B',
+            'G',
+            'C',
+            'J',
+            'P',
+            'E',
+            'K',
+            'O',
+            'R',
+            'I',
+            'M',
+            'D',
+            'F',
+            'N'
+        );
+        $sum = 0;
+        $idn = $id;
+        while ($idn) {
+            $sum = $sum + $idn % 37;
+            $idn /= 37;
+        }
+        $betuid = $sum % 17;
+
+        return $id.$betu[$betuid];
+    }
+}
+

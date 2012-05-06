@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="hu">
+<head>
+	<base href="http://honlap.eotvos.elte.hu/" />
+	<title>ELTE Eötvös József Collegium</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+        <link rel="shortcut icon" href="templates/layout1/images/favicon.ico" type="image/ico" />
+        <meta name="lang" content="hu" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="lang" content="hu" />
+	<meta name="revisit-after" content="5 days" />
+	<meta name="copyright" content="ELTE Eötvös József Collegium" />
+	<meta name="robots" content="FOLLOW,INDEX" />
+	     
+	<link type="text/css" rel="stylesheet" href="templates/layout1/style/style.css" media="screen" />
+	<link type="text/css" rel="stylesheet" href="templates/layout1/scripts/fancybox/jquery.fancybox.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/vader/jquery-ui.css" media="screen,display" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="http://static.xnetwork.hu/jquery.validate.js"></script>
+        <script type="text/javascript" src="templates/layout1/scripts/jquery.validate.hu.js"></script>
+        
+        <script type="text/javascript" src="templates/layout1/scripts/fancybox/jquery.easing.js"></script>
+        <script type="text/javascript" src="templates/layout1/scripts/fancybox/jquery.fancybox.js"></script>
+        <!--[if lte IE 7]>
+            <link type="text/css" rel="stylesheet" href="templates/layout1/style/style_ie7.css" media="screen" />
+        <![endif]-->
+</head>
+<body>
+	<div id="wrapper">
+    <div id="header">
+        <a href="/" id="logo"></a>
+        <a href="http://www.elte.hu" rel="external" id="elte-logo" title="www.elte.hu"></a>
+        <div id="lang-container">
+            <a href="hu">
+                <img src="templates/layout1/images/lang-hu.jpg" alt="Magyar" title="Magyar" />
+            </a>
+            <a href="en">
+                <img src="templates/layout1/images/lang-en.jpg" alt="English" title="English" />
+            </a>
+            <a href="fr">
+                <img src="templates/layout1/images/lang-fr.jpg" alt="Français" title="Français" />
+            </a>
+        </div>
+        <div id="head-text">
+            Szabadon szolgál<span>a szellem...</span>
+        </div>
+
+        <form id="searchform" action="/search/list/" method="get">
+        <div id="search-container">
+            <input type="text" class="text" value="" name="q" />
+                        <input type="submit" class="submit" value="Keresés" />
+        </div>
+        </form>
+
+    </div>
+    <div id="main-container" class="clearfix">
+        <div id="left-side">
+                <ul id="main-menu">
+            <li class="main-menu-item">
+            <a class="trajan" href="fooldal" title="Főoldal">Főoldal</a>
+                    </li>
+            <li class="main-menu-item">
+            <a class="trajan" href="felveteli2011" title="Felvételi - 2011">Felvételi - 2011</a>
+                    </li>
+            <li class="main-menu-item">
+            <a class="trajan" href="kapcsolat" title="Kapcsolat">Kapcsolat</a>
+                    </li>
+            <li class="main-menu-item">
+            <a class="trajan" href="a-collegiumrol" title="A Collegiumról">A Collegiumról</a>
+                    </li>
+            <li class="main-menu-item">
+            <a class="trajan" href="cathedra-magistrorum" title="Cathedra Magistrorum">Cathedra Magistrorum</a>
+                    </li>
+            <li class="main-menu-item">
+            <a class="trajan" href="szakmai-munka-muhelyek" title="Szakmai munka">Szakmai munka</a>
+                    </li>
+            <li class="main-menu-item">
+            <a class="trajan" href="rendezvenyek" title="Rendezvények">Rendezvények</a>
+                    </li>
+            <li class="main-menu-item">
+            <a class="trajan" href="dokumentumtar" title="Szabályzatok">Szabályzatok</a>
+                    </li>
+            <li class="main-menu-item">
+            <a class="trajan" href="collegistak" title="Collegisták">Collegisták</a>
+                    </li>
+            <li class="main-menu-item">
+            <a class="trajan" href="diakelet" title="Diákélet">Diákélet</a>
+                    </li>
+            <li class="main-menu-item">
+            <a class="trajan" href="galeria" title="Galéria">Galéria</a>
+                    </li>
+            <li class="main-menu-item last">
+            <a class="trajan" href="barati-kor---alumni" title="Baráti Kör - Alumni">Baráti Kör - Alumni</a>
+                    </li>
+        </ul>
+
+                <form id="loginform" action="user/login" method="post">
+    <div id="login-container">
+        
+        <div class="row">
+            <label for="login_email">E-mail cím:</label>
+            <input type="text" class="text" name="login_email" id="login_email" value="" />
+        </div>
+        <div class="row">
+            <label for="login_pass">Jelszó:</label>
+            <input type="password" class="text" name="login_pass" id="login_pass" value="" />
+        </div>
+        <div class="row">
+            <b id="login-error">Hibás adatmegadás!</b>
+            <input type="submit" value="Belépés" class="submit" />
+            <a href="registration/" id="registration">Regisztráció</a>
+            <a href="registration/lostpass" id="forgotten-pass">Jelszó emlékeztető</a>
+        </div>
+    </div>
+    </form>
+
+        </div>
+        <div id="right-side">
+            <div id="content">
+                <h1></h1>
+
+
+<div id="banner_top">
+<div id="banner_content">
+    <div class="bannerini"></div>
+    <div class="content-banner">        
+        <div id="banner-top" style="text-align:center" class="clearfix">
+	</div>    </div>
+</div>
+
+</div>
+<h2>404 - Nincs ilyen oldal a webszerveren</h2>
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="footer">
+        <div id="footer-text">2010. Eötvös Collegium • Minden jog fenntartva!</div>
+        <div id="xnetwork-logo"><a href="http://xnetwork.hu" title="Xnetwork"></a></div>
+    </div>
+    <script type="text/javascript" src="templates/layout1/scripts/cufon-yui.js"></script>
+    <script type="text/javascript" src="templates/layout1/scripts/TrajanPro.font.js"></script>
+    <script type="text/javascript" src="templates/layout1/scripts/global.js"></script>
+</body>
+</html>

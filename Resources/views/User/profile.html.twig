@@ -1,0 +1,21 @@
+{% extends 'EotvosVersenyrBundle::base.html.twig'  %}
+{% set threecol = false %}
+{% set fbbox = false %}
+
+{% block body %}
+<h2>Felhasználói profil</h2>
+
+<div class="profil">
+<ul>
+  <li><span class="key">Név: </span><span class="value">{{ app.user.lastName }} {{ app.user.firstName }}</span></li>
+  <li><span class="key">Cím: </span><span class="value">{{ app.user.country.name }} {% if app.user.otherCity=="" %}{{ app.user.postalcode }}{% else %}{{ app.user.otherCity }}{% endif %} {{ app.user.address }}</span></li>
+  <li><span class="key">E-mail: </span><span class="value">{{ app.user.email }} </span></li>
+  <li><span class="key">Iskola: </span><span class="value">{% if app.user.otherSchool %}{{ app.user.otherSchool }}{% else %}{{ app.user.school.name }}{% endif %} </span></li>
+  <li><span class="key">Felkészítő tanár: </span><span class="value">{{ app.user.schoolTeacher }} - {{ app.user.schoolTeacherContact }} </span></li>
+  <li><span class="key">Azonosító: </span><span class="value">{{ app.user.uniqueIdentifier }}</span></li>
+</ul>
+</div>
+<p>
+ Amennyiben valamelyik adatod megváltozott, vagy véletlenül elírtad, kérjük írj a <a href="mailto:verseny@eotvos.elte.hu">verseny@eotvos.elte.hu</a> e-mail címre egy e-mailt.
+</p>
+{% endblock %}

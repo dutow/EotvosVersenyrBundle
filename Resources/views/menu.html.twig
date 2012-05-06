@@ -1,0 +1,11 @@
+<ul id="main-menu">
+{% if ecvroot() %}
+{% for menuitem in ecvroot().children %}
+{% if menuitem.inMenu %}
+  <li class="main-menu-item" {% if active_menu is defined and active_menu==menuitem.slug %}id="active-menu"{% endif %}>
+    <a href="{{ menuitem | ecvurl }}" title="{{ menuitem.title }}">{{ menuitem.title }}</a>
+  </li>
+{% endif %}
+{% endfor %}
+{% endif %}
+</ul>

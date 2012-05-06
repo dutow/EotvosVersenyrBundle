@@ -1,0 +1,28 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block postalcode_widget %}
+  <input type="number" name="somename_todo" id="postal1" value="{{ value }}" maxlength="4" class="len4" />
+  <select {{ block('widget_attributes') }} class="postalcode">
+{% for city in cities %}
+    <option value="{{ city.code }}"{% if city.code == cities_selected %} selected="selected"{% endif %}>{{ city.name }}</option>
+{% endfor %}
+  </select>
+  <script>
+  $(document).ready(function(){
+    $('#postal1').keyup(function(){
+      if($(this).val().length == 4){
+        $.get('{{ url('postalcode', { 'code' : 'CODE' }) }}'.replace('CODE', $(this).val()), function(data){
+          $('#{{ id }}')
+            .find('option')
+            .remove();
+          for(i in data.results){
+            item = data.results[i]
+            $("<option/>").val(item.code).text(item.name).appendTo("#{{ id }}");
+          }
+        });
+      }
+    });
+  });
+  </script>
+{% endblock %}
+

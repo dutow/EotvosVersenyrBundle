@@ -1,0 +1,36 @@
+{% extends 'EotvosVersenyrBundle::base.html.twig'  %}
+{% set active_menu = page.slug %}
+{% set threecol = true %}
+{% set fbbox = page.fbbox %}
+
+{% block title %}
+  {{ page.title }}
+{% endblock %}
+
+{% block body %}
+{{ page.body | markdown }}
+{% endblock %}
+
+{% block rbody %}
+{% if page.children|length > 0 or page.parent.children|length > 1 %}
+<div class="submenu">
+<h3>Aloldalak</h3>
+<ul>
+{% if page.parent and page.parent.children|length > 1 %}
+  {% for item in page.parent.children %}
+  {% if item.inmenu %}
+  <li>» <a href="{{ item | ecvurl }}">{{ item.title }}</a></li>
+  {% endif %}
+  {% endfor %}
+{% endif %}
+{% for item in page.children %}
+  {% if item.inmenu %}
+<li>» <a href="{{ item | ecvurl }}">{{ item.title }}</a></li>
+  {% endif %}
+{% endfor %}
+</ul>
+<br />
+<br />
+</div>
+{% endif %}
+{% endblock %}

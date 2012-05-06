@@ -1,0 +1,10 @@
+registration:
+  form:
+    title: 'Regisztracio'
+    account: 'Felhasznaloi adatok'
+    sections: 'Szekciok'
+    email: 'E-mail cim'
+    email_help: 'Erre a címre küldjük el a belépéshez szükséges jelszót'
+    password: 'Jelszo'
+    confirm:  'Jelszo megegyszer'
+    accept: 'A feltetelelet elfogadom'

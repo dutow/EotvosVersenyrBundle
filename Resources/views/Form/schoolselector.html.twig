@@ -1,0 +1,49 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block schoolselector_widget %}
+  <input type="hidden" {{ block('widget_attributes') }} value="{{ value }}" />
+  <input type="text" name="{{ name }}_text" id="{{ id }}_text" value="{{ value_name }}" autocomplete="off" />
+  <div class="schoolinfo" id="{{ id }}_box">
+    <h4>Iskola adatai:</h4>
+    <ul>
+      <li class="omid">OM Azonosító: {{ box_omid }}</li>
+      <li class="nev">{{ box_name }}</li>
+      <li class="varos">{{ box_place }}</li>
+      <li class="cim">{{ box_addr }}</li>
+    </ul>
+  </div>
+  <script>
+  $(document).ready(function(){
+{% if box_omid != "" %}
+    $('#{{ id }}_box').show();
+{% endif %}
+    $('#{{ id }}_text').autocomplete('{{ url('schoolselect', { 'term' : 2011 }) }}', {
+      minChars: 2,
+      width: 400,
+      parse: function(data) {
+                // clear
+                $('#{{ id }}').val("");
+                $('#{{ id }}_box').hide();
+                var array = new Array();
+                for(var i=0;i<data.results.length;i++)
+                {
+                        array[array.length] = { data: data.results[i], value: data.results[i], result: data.results[i].name };
+                }
+                return array;
+      },
+      formatItem: function(row){
+        return row.name + ', ' + row.city;
+      }
+    });
+    $('#{{ id }}_text').result(function(event,data,formatted){
+      $('#{{ id }}').val(data.id);
+      $('#{{ id }}_box .omid').text('OM Azonoító: ' + data.omid);
+      $('#{{ id }}_box .nev').text(data.name);
+      $('#{{ id }}_box .varos').text(data.postalcode + ' ' +data.city);
+      $('#{{ id }}_box .cim').text(data.address);
+      $('#{{ id }}_box').show();
+    });
+  });
+  </script>
+{% endblock %}
+

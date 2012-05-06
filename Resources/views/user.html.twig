@@ -1,0 +1,9 @@
+{% if app.user %}
+Bejelentkezve: {{ app.user.email }} | <a href="{{ url('competition_profile', { 'term' : 2013 } ) }}">Profil</a> | <a href="{{ url('competition_subscriptions', { 'term' : 2011 }) }}">Verseny</a> | <a href="{{ path('logout') }}">Kijelentkezés</a>
+{% else %}
+<form method="post" action="{{ path("login_check") }}">
+  <input name="_username" type="text" placeholder="E-mail cím" tabindex="1" />
+  <input name="_password" type="password" placeholder="Jelszó" tabindex="2" />
+  <input type="submit" value="Bejelentkezés" tabindex="3" />
+</form>
+{% endif %}

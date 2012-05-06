@@ -1,0 +1,17 @@
+Új regisztráció a versenyre:
+
+E-mail cím: {{ user.email }}
+Vezetéknév: {{ user.lastName }}
+Keresztnév: {{ user.firstName }}
+Lakhely: {{ user.postalcode }} {{ user.otherCity }} {{ user.address }}
+Iskola: {% if user.otherSchool == "" %} {{ user.school.name }} {% else %} {{ user.otherSchool }} {% endif %}  
+
+Felkészítő tanár: {{ user.schoolTeacher }}
+Elérhetősége: {{ user.schoolTeacherContact }}
+Évfolyama: {{ user.schoolYear }}
+Szekciói: 
+{% for sec in user.sections %}
+  * {{ sec.page.title }}
+{% endfor %}
+
+-- Ez egy automatikusan generált üzenet --

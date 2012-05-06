@@ -1,0 +1,675 @@
+
+/************************/
+/**     Clearfix       **/
+/************************/
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix { display: inline-block; }
+/* Hides from IE-mac \*/
+* html .clearfix { height: 1%; min-width: 980px; }
+.clearfix { display: block; }
+/* End hide from IE-mac */
+
+a{
+  color: #00c;
+}
+a:visited{
+  color: #00c;
+}
+a:hover{
+  color: #00f;
+}
+
+
+#right-side h1, #right-side h2{
+  padding-top: 0px;
+  margin-top: 0px;
+}
+#breadcrumb{
+  margin-bottom: 15px;
+}
+
+
+/************************/
+/**     Common         **/
+/************************/
+body { background: url('../images/backgroundBody.jpg') repeat-x 0 63px; color: #444; font-size: 11px; font-family: "Tahoma", sans-serif; }
+
+/************************/
+/**     Layout         **/
+/************************/
+#container { width: 980px; background: url('../images/backgroundWrapper.jpg') no-repeat; }
+
+header { position: relative; height: 188px; }
+header #logo { position: absolute; width: 163px; height: 163px; top: 24px; left: 70px; }
+header #head-text { font-size: 22px; color: #fff; position: absolute; width: 684px; right:-10px; top: 80px; font-weight: bold; font-family: TrajanProRegular, inherit; }
+header #head-text span { font-size: 22px; display: block; margin-left: 60px; }
+header #search-container { position: absolute; right: 0; bottom: 0;}
+
+
+#main { margin-top: 40px; }
+#main:after{
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hoveridden;
+  text-indent: -10000px;
+  overflow: hidden;
+  line-height: 0;
+  height: 0;
+  margin-bottom: 40px;
+}
+#left-side { width: 173px; float: left; text-align: right; padding-right: 20px; margin-left: 30px; }
+#right-side { width: 493px; float: left; font-size: 14px; position: relative; top: -48px; }
+#right-side.long { width: 727px; }
+#right-side2 { width: 233px; float: left; text-align: left; padding-left: 0px; margin-left: 30px; }
+
+#right-side p{
+  width: 493px;
+  text-align: justify;
+}
+
+#right-side h2{
+  font-family: "times new roman", serif;
+}
+
+
+#login-head{
+  position: absolute;
+  top: 40px;
+  text-align: right;
+  left: 460px;
+  width: 500px;
+}
+
+#login-head input{
+  background-color: #fff;
+  border: #aaa 1px solid;
+  color: #333;
+  width: 120px;
+}
+
+#login-head input[type=submit]{
+  background-color: #ddd;
+}
+#login-head input[type=submit]:hover{
+  background-color: #ccc;
+}
+
+#main-menu a{
+  text-decoration: none;
+}
+#main-menu .main-menu-item { list-style: none; border-bottom: 1px dotted #D8D8D8; padding: 0 10px 13px 10px; margin: 0 0 13px 0; font-family: "times new roman", serif; font-variant: small-caps; }
+#main-menu #active-menu { background: url('../images/backgroundMenuLi.jpg') no-repeat 74px 1px; background-position: 25px 5px; }
+#main-menu .main-menu-item a { font-size: 16px; color: #555; }
+#main-menu .main-menu-item > a{ display: inline-block; font-weight: bold; text-decoration:none; }
+#main-menu #active-menu a { color: #000; text-decoration:none; }
+#main-menu #active-menu .sub-menu a { color: #666; }
+#main-menu #active-menu .sub-menu a:hover { color: #000; }
+#main-menu #active-menu #active-sub-menu a { color: #000; font-weight: bold; }
+#main-menu .last { border-bottom: none; margin-bottom: 15px; }
+
+#main-menu .sub-menu { margin-top: 5px; }
+#main-menu .sub-menu-item { padding: 1px 0; }
+#main-menu .sub-menu-item a { font-size: 10px; color: #9B9B9B; }
+
+.sectimg{
+  display: block;
+  float: left;
+  width: 240px;
+  height: 100px;
+  background-repeat: no-repeat;
+  text-indent: -10000px;
+  overflow: hidden;
+}
+#sectimg_angol{  background-image: url('../images/szekciok/sz_angol.png'); }
+#sectimg_bizantinologia{  background-image: url('../images/szekciok/sz_bizantinologia.png'); }
+#sectimg_filozofia{  background-image: url('../images/szekciok/sz_filozofia.png'); }
+#sectimg_foldrajz{  background-image: url('../images/szekciok/sz_foldrajz.png'); }
+#sectimg_francia{  background-image: url('../images/szekciok/sz_francia.png'); }
+#sectimg_informatika{  background-image: url('../images/szekciok/sz_informatika.png'); }
+#sectimg_latin{  background-image: url('../images/szekciok/sz_latin.png'); }
+#sectimg_magyar{  background-image: url('../images/szekciok/sz_magyar.png'); }
+#sectimg_matematika{  background-image: url('../images/szekciok/sz_matematika.png'); }
+#sectimg_nemet{  background-image: url('../images/szekciok/sz_nemet.png'); }
+#sectimg_fizika{  background-image: url('../images/szekciok/sz_fizika.png'); }
+#sectimg_nemet{  background-image: url('../images/szekciok/sz_nemet.png'); }
+#sectimg_ogorog{  background-image: url('../images/szekciok/sz_ogorog.png'); }
+#sectimg_orientalisztika{  background-image: url('../images/szekciok/sz_orientalisztika.png'); }
+#sectimg_tarstud{  background-image: url('../images/szekciok/sz_tarstud.png'); }
+
+
+ul, li{
+  list-style: square;
+}
+
+#breadcrumb ul{
+  margin-left: 0px;
+  padding-left: 10px;
+}
+#breadcrumb ul li{
+  list-style: none;
+  float: left;
+  font-size: 10px;
+}
+#breadcrumb a{
+  color: #74532C;
+}
+#breadcrumb a:hover{
+  color: #4C2F0E;
+}
+#breadcrumb:after{
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hoveridden;
+  text-indent: -10000px;
+  overflow: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.submenu li, .submenu ul{
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+
+
+/* forms */
+form fieldset{
+}
+
+form fieldset legend{
+  border-bottom: #555 1px dashed;
+  width: 470px;
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+form .formrow{
+  margin: 5px;
+  width: 100%;
+  padding-top: 5px;
+  position: relative;
+}
+
+form .formrow .inputholder{
+  margin: 0px;
+  padding: 0px;
+  padding: 3px;
+  margin-top: 5px;
+  padding-top: 5px;
+  width: 100%;
+  position: relative;
+}
+
+form .formrow .inputholder label{
+  display: block;
+  width: 200px;
+  margin-left: 40px;
+  padding-right: 10px;
+  border-bottom: #777 1px dotted;
+  text-align: left;
+  float: left;
+  font-weight: bold;
+  font-size: 18px;
+  font-family: "Times New Roman", serif;
+}
+form .formrow .inputholder select{
+  position: relative;
+  top: -3px;
+  padding-left: 10px;
+  right: 1px;
+  float: left;
+  font-size: 18px;
+  width: 222px;
+  background-color: #eee;
+  border: #aaa 1px solid;
+}
+
+
+form .formrow .inputholder input{
+  position: relative;
+  top: -3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  right: 1px;
+  float: left;
+  font-size: 18px;
+  width: 200px;
+  background-color: #eee;
+  border: #aaa 1px solid;
+}
+
+form .row_required .inputholder input, form .row_required .inputholder select{
+  background-color: #ddd;
+}
+
+form .inputholder:after{
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hoveridden;
+  text-indent: -10000px;
+  overflow: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+form .formrow .help{
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 40px;
+    padding-left: 10px;
+    font-size: 10px;
+    width: 400px;
+    text-align: justify;
+}
+
+form .button{
+  float: right;
+  border: #555 1px solid;
+  background-color: #ccc;
+  color: #000;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-weight: bold;
+}
+
+
+form .button:hover{
+  background-color: #bbb;
+}
+
+fieldset.choices .choice{
+  margin-left: 20px;
+  float: left;
+  width: 134px;
+  margin-top: 3px;
+  padding: 3px;
+}
+/* tarstud fix */
+fieldset.choices .choice_form_sections_14{
+  width: 200px;
+}
+fieldset.choices .choice:hover{
+  background-color: #BAB27A;
+}
+
+fieldset.choices .choice input{
+  margin-right: 5px;
+  position: relative;
+  top: 2px;
+}
+
+form .inputholder input.len4{
+  width: 58px;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
+form .inputholder select.postalcode{
+  width: 150px;
+  margin-left: 10px;
+}
+
+form .row_error, form .row_error input, form .row_error select{
+  color: #410C21;
+}
+
+form .errors{
+  clear: both;
+  font-size: 10px;
+  position: relative;
+  top: -6px;
+  margin-left: 43px;
+  margin-right: 35px;
+  background-color: #410C21;
+  color: #ee0;
+  padding: 3px;
+  font-weight: bold;
+
+}
+form .errors ul, form .errors li{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+fieldset.choices .errors{
+  top: 3px;
+}
+
+
+/* schoolbox */
+.schoolinfo{
+  position: absolute;
+  width: 223px;
+  left: 500px;
+  top: 0px;
+  background-color: #8DB460;
+  border: #3E4F2A 1px solid;
+  font-size: 11px;
+  padding: 5px;
+  display: none;
+}
+.schoolinfo h4{
+  margin: 0px;
+  padding: 0px;
+  color: #000;
+}
+.schoolinfo ul, .schoolinfo li{
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.submenu{
+  margin-top: 10px;
+}
+.submenu h3{
+  margin: 0px;
+  padding: 0px;
+}
+
+.submenu h3 a{
+  color: white;
+}
+
+.successround{
+  background-color: #8DB460;
+  border: #333 1px solid;
+  padding: 5px;
+}
+.failround{
+  background-color: #B2758D;
+  color: #000;
+  border: #333 1px solid;
+  padding: 5px;
+}
+.standardround{
+  background-color: #767CA8;
+  color: white;
+  border: #333 1px solid;
+  padding: 5px;
+}
+
+.standardround a, .failround a, .successround a{
+  font-weight: bold;
+}
+
+.activeround{
+  background-color: #98B477;
+  color: black;
+  border: #333 1px solid;
+  padding: 5px;
+  font-size: 11px;
+  margin-bottom: 20px;
+}
+
+.activeround h3{
+  font-size:12px;
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 5px;
+}
+.activeround p.linkbar a{
+  font-weight: bold;
+}
+#right-side .activeround p{
+  padding-left: 10px;
+  padding-right: 10px;
+  width: auto;
+}
+
+table,td,th,tr,{
+  border-collapse: collapse;
+}
+table{
+  width: 100%;
+  font-size: 12px;
+}
+td,th{
+  padding: 5px;
+  border: #999 1px dashed;
+}
+th{
+  background-color: #c1dee6;
+}
+table .idn{
+  width: 25px;
+}
+td.idn{
+  text-align: center;
+}
+td.uplname a{
+  text-decoration: none;
+}
+td.uplname a:hover{
+  text-decoration: underline;
+}
+td.time{
+  text-align: center;
+}
+tr:nth-child(even){
+  background-color: #eee;
+}
+tr:hover{
+  background-color: #aaa;
+}
+table tr:first-child th { border-top: 0; }
+table tr:last-child td { border-bottom: 0; }
+table tr td:first-child, table tr th:first-child {  border-left: 0; }
+table tr td:last-child, table tr th:last-child { border-right: 0; }
+
+.sectionsubscription{
+  padding: 5px;
+  font-size: 11px;
+  border: #333 1px solid;
+  margin: 5px;
+  color: #000;
+  text-align: left;
+}
+.sectionsubscription h3{
+  margin: 0px;
+  padding: 0px;
+  font-size: 12px;
+  width: 200px;
+  float: left;
+}
+
+.flash{
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-top: #222 2px solid;
+  border-bottom: #222 2px solid;
+  color: #000;
+}
+.flash_error{ background-color: #B2758D; }
+.flash_notice{ background-color: #757CA8; }
+.flash_info{ background-color: #8DB460; }
+
+footer{
+  display: block;
+  clear: both;
+  width: 100%;
+  background-color: #252a50;
+  height: 90px;
+  min-width: 980px;
+}
+footer h3{
+  margin: 0px;
+  padding: 0px;
+  margin-top: 20px;
+  display: block;
+  text-align: left;
+  color: #eee;
+  margin-bottom: 5px;
+}
+footer .logo{
+  float: left;
+  margin-left: 20px;
+  width: 290px;
+  height: 80px;
+  padding: 5px;
+  
+}
+footer .logo a{
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+footer img{
+  display: block;
+  float: left;
+  margin-right: 20px;
+}
+form .formrow .inputholder input[type=file]{
+  width: 350px;
+}
+#flashProgress{
+  height: 30px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  border: #444 2px solid;
+  background-color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #444;
+  position: relative;
+}
+
+#flashProgress .progress{
+  width: 3px;
+  position: absolute;
+	left: 0;
+  height: 30px;
+  background-color: #090;
+}
+
+#flashProgress .percent{
+  position: relative;
+  top: 3px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+tr.st_subscribed{
+  background-color: #8DB460;
+}
+tr.st_joinable{
+  background-color: #E2FFFF;
+}
+tr.st_disabled{
+  background-color: #E0CDD2;
+}
+
+.tabs .tab{
+  float: left;
+  background-color: #E2FFFF;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  text-align: center;
+  width: 25px;
+  margin: 5px;
+  border: #8DB460 1px solid;
+  cursor: pointer;
+}
+
+.tabs .tab:hover{
+  background-color: #8DB460;
+}
+
+#timeStill{
+  position: absolute;
+  display: block;
+  top: 75px;
+  right: -10px;
+}
+.crosser{
+  width: 740px;
+  position: relative;
+  margin-top: 100px;
+}
+.crossli ul{
+  position: relative;
+  width: 230px;
+  margin: 0px;
+  margin-right: 8px;
+  padding: 5px;
+  border: #8DB460 2px solid;
+  float: left;
+}
+.cross_leftblock ul{
+  width: 150px;
+  text-align: center;
+  font-weight: bold;
+}
+.crossli li{
+  position: relative;
+  background-color: #E2FFFF;
+  list-style: none;
+  margin: 0px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: #8DB460 1px solid;
+}
+.draggable{
+  cursor: pointer;
+}
+.crossli li.draggable{
+  background-color: #E0CDD2;
+}
+
+.cross_long ul{
+  text-align: justify;
+  width: 100%;
+}
+.cross_long li input{
+  width: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.qstatus{
+    text-align: center;
+    position: relative;
+    top: -20px;
+    font-size: 16px;
+}
+
+div.info{
+  background-color: #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 20px;
+  padding: 10px;
+  font-style: italic;
+  overflow: hidden;
+}
+
+#right-side div.info p{
+  width: 100%;
+}
+
+#right-side .feladat p{
+  line-height: 2em;
+}
+
+#right-side .feladat p input{
+  width: 120px;
+  border: #222 2px solid;
+  padding: 2px;
+}
+
+.feladat textarea{
+  width: 100%;
+  height: 60px;
+}

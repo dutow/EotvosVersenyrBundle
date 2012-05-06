@@ -1,0 +1,8 @@
+{% extends 'EotvosVersenyrBundle::base.html.twig'  %}
+{% set threecol = true %}
+{% set fbbox = false %}
+{% block body %}
+{% if error %}
+    <div>{{ error.message }}</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'EotvosVersenyrBundle::base.html.twig'  %}
+{% set active_menu = page.slug %}
+{% set threecol = true %}
+{% set fbbox = page.fbbox %}
+
+{% block title %}
+  {{ page.title }} Szekció
+{% endblock %}
+
+{% block body %}
+  <h2>{{ page.title }} Szekció</h2>
+  {% include 'EotvosVersenyrBundle:Competition:activeround.html.twig' %}
+  {{ page.body | markdown }}
+{% endblock %}
+
+{% block rbody %}
+  {% include 'EotvosVersenyrBundle:Competition:section_sidebar.html.twig' %}
+{% endblock %}

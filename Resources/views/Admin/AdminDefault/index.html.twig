@@ -1,0 +1,15 @@
+<table border="1" cellpadding="5">
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Szekcio</th>
+    <th>Fordulo</th>
+    <th>Kitoltok</th>
+  </tr>
+</thead>
+<tbody>
+{% for round in rounds %}
+<tr><td><a href="{{ url('admin_round', { 'round_id': round['id']  }) }}">{{ round['id'] }}</a></td><td>{{ round['section'] }}</td><td>{{ round['title'] }}</td><td>{{ round['cnt'] }}</td></tr>
+{% endfor %}
+</tbody>
+</table>

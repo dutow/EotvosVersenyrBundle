@@ -1,0 +1,18 @@
+{% extends 'EotvosVersenyrBundle::base.html.twig'  %}
+{% set active_menu = 'szekciok' %}
+{% set threecol = true %}
+{% set fbbox = page.fbbox %}
+
+{% block title %}
+  {{ section.page.title }} Szekció
+{% endblock %}
+
+{% block body %}
+  {% include 'EotvosVersenyrBundle:Competition:activeround.html.twig'  with { 'page' : section.page } %}
+  <h2>{{ section.page.title }} Szekció - {{ page.title }}</h2>
+  {{ page.body | markdown }}
+{% endblock %}
+
+{% block rbody %}
+  {% include 'EotvosVersenyrBundle:Competition:section_sidebar.html.twig' with { 'page' : section.page } %}
+{% endblock %}

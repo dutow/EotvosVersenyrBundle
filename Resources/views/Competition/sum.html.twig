@@ -1,0 +1,45 @@
+{% extends 'EotvosVersenyrBundle::base.html.twig'  %}
+{% set active_menu = 'szekciok' %}
+{% set threecol = true %}
+{% set fbbox = page.fbbox %}
+
+{% block title %}
+  {{ section.page.title }} Szekció
+{% endblock %}
+
+{% block body %}
+  {% include 'EotvosVersenyrBundle:Competition:activeround.html.twig'  with { 'page' : section.page } %}
+  <h2>{{ section.page.title }} Eredmények - {{ page.title }}</h2>
+<table>
+  <thead>
+    <tr><th style="width: 50%;">Név</th><th style="width: 30%;">Pont</th><th style="width: 20%;">Továbbjutott?</th></tr>
+  </thead>
+</thead>
+<tbody>
+{% for st in standing %}
+{% if st[1] != 0 %}
+{% if app.user or loop.index <= round.advanceNo %}
+{% if loop.index == round.advanceNo %}
+  <tr style=="border-bottom: #000 2px solid;">
+{% else %}
+  <tr>
+{% endif %}
+<td>{{ st[0] }}</td><td style="text-align: center">{% if st[1]!=1 %}{{ st[1] }}{% else %}-{% endif %}</td>
+<td style="text-align: center">
+{% if loop.index <= round.advanceNo %}
+igen
+{% else %}
+nem
+{% endif %}
+{% endif %}
+</td>
+</tr>
+{% endif %}
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
+
+{% block rbody %}
+  {% include 'EotvosVersenyrBundle:Competition:section_sidebar.html.twig' with { 'page' : section.page } %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'EotvosVersenyrBundle::base.html.twig' %}
+{% set active_menu = 'szekciok' %}
+
+{% block title %}
+  Szekciók
+{% endblock %}
+
+{% block body %}
+{% for display in sections %}
+<a href="{{ display.page | ecvurl  }}" id="sectimg_{{ display.page.slug }}" class="sectimg">{{ display.page.title }}</a>
+{% endfor %}
+{% endblock %}
