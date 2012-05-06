@@ -1,0 +1,18 @@
+<?php
+
+namespace Eotvos\VersenyrBundle\Cwm;
+
+use Cancellar\CommonBundle\Cwm\AdminModuleInterface;
+use Cancellar\CommonBundle\Menu\Menu;
+use Cancellar\CommonBundle\Menu\MenuItem;
+
+class VersenyrAdminModule implements AdminModuleInterface
+{
+
+    public function constructMenu(Menu $menu, $container)
+    {
+        $router = $container->get('router');
+        $menu->addChild(new MenuItem('Felhasznalok', $router->generate('admin_user_index'), 10));
+    }
+}
+

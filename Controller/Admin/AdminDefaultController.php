@@ -25,7 +25,7 @@ class AdminDefaultController extends Controller
      *
      * @todo move ROOT page and end slug to configuration
      *
-     * @Route("/{round_id}", name = "admin_round" )
+     * @Route("/round/{round_id}", name = "admin_round" )
      * @Template
      */
     public function roundAction($roundId)

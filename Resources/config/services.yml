@@ -1,27 +1,6 @@
 
 services:
 
-  eotvos_versenyr.round.upload:
-    class: Eotvos\VersenyrBundle\Controller\UploadRoundController
-    calls:
-      - [ setContainer, [@service_container] ]
-    tags:
-      - { name: eotvos.versenyr.roundtype }
-
-  eotvos_versenyr.round.quiz:
-    class: Eotvos\VersenyrBundle\Controller\QuizRoundController
-    calls:
-      - [ setContainer, [@service_container] ]
-    tags:
-      - { name: eotvos.versenyr.roundtype }
-
-  eotvos_versenyr.round.infocontest:
-    class: Eotvos\VersenyrBundle\Controller\InfocontestRoundController
-    calls:
-      - [ setContainer, [@service_container] ]
-    tags:
-      - { name: eotvos.versenyr.roundtype }
-
   eotvos.versenyr.password_generator:
     class: Eotvos\VersenyrBundle\Extension\PasswordGenerator
     calls:
@@ -36,3 +15,9 @@ services:
     class: Eotvos\VersenyrBundle\UserType\DummyType
     tags:
       - { name: eotvos.versenyr.usertype }
+
+  eotvos.versenyr.cwm.module:
+    class:  Eotvos\VersenyrBundle\Cwm\VersenyrModule
+    tags:
+      - { name: cancellar.cwm }
+

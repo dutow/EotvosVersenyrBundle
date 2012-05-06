@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Loader;
  * @license   MIT License (http://www.opensource.org/licenses/mit-license.php)
  * @version   Release: v0.1
  */
-class EotvosVersenyExtension extends Extension
+class EotvosVersenyrExtension extends Extension
 {
     /**
      * load
