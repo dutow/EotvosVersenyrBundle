@@ -170,5 +170,59 @@ class Term
 
     public function generateChildren($em)
     {
+        $root = new TextPage();
+        $root->setTitle('Root page');
+        $root->setParent(null);
+        $root->setSpecial('termroot');
+        $root->setInMenu(false);
+        $root->setBody("Lorem ipsum stbstb");
+        $em->persist($root);
+
+        $this->setRootPage($root);
+
+        $sections = new TextPage();
+        $sections->setTitle('Sections');
+        $sections->setParent($root);
+        $sections->setInMenu(true);
+        $sections->setSpecial('sections');
+        $sections->setBody("Lorem ipsum stbstb");
+        $em->persist($sections);
+
+        $section = new TextPage();
+        $section->setTitle('Example section');
+        $section->setParent($sections);
+        $section->setInMenu(false);
+        $section->setSpecial('section');
+        $section->setBody("Lorem ipsum stbstb");
+        $em->persist($section);
+
+        $until = $this->getRegistrationStart();
+        $until->modify('+4 days');
+        $sec = new Section();
+        $sec->setRegistrationUntil($until);
+        $sec->setPage($section);
+        $sec->setNotify('notify@example.com');
+        $em->persist($sec);
+
+
+        $round = new TextPage();
+        $round->setTitle('Example section');
+        $round->setParent($section);
+        $round->setInMenu(false);
+        $round->setSpecial('round');
+        $round->setBody("Lorem ipsum stbstb");
+        $em->persist($round);
+
+        $stop = $until;
+        $stop->modify('+4 days');
+        $rnd = new Round();
+        $rnd->setRoundtype('eotvos.versenyr.finals');
+        $rnd->setConfig('{}');
+        $rnd->setStart($until);
+        $rnd->setStop($stop);
+        $rnd->setPage($round);
+        $rnd->setPublicity('private');
+        $rnd->setAdvanceNo(10);
+        $em->persist($rnd);
     }
 }

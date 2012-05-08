@@ -86,6 +86,7 @@ class TextPage
      * @var string $slug
      *
      * @ORM\Column(name="slug", type="string", length=255, nullable=false)
+     * @Gedmo\Slug(fields={"title"})
      */
     private $slug;
 
@@ -130,6 +131,7 @@ class TextPage
      */
     public function __construct()
     {
+        $this->fbbox = false;
     }
 
     /**

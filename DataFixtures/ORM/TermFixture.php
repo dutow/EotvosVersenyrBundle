@@ -46,6 +46,8 @@ class TermFixture extends AbstractFixture implements OrderedFixtureInterface, Co
      */
     public function load(ObjectManager $om)
     {
+        $em = $this->container->get('doctrine')->getEntityManager();
+
         $term = new Term();
 
         $start = new \DateTime();
@@ -55,7 +57,7 @@ class TermFixture extends AbstractFixture implements OrderedFixtureInterface, Co
         $term->setActive(true);
         $term->setRegistrationStart($start);
         $term->setUserType('eotvos.versenyr.usertype.dummy');
-        $term->setRootPage($this->getReference('example-page-root'));
+        $term->generateChildren($em);
 
         $om->persist($term);
 
