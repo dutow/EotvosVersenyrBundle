@@ -59,5 +59,10 @@ class DummyType implements UserTypeInterface
     {
         return 'EotvosVersenyrBundle:User:emptyRegistrationBox.html.twig';
     }
+
+    public function getDisplayName()
+    {
+        return 'Dummy Type';
+    }
 }
 

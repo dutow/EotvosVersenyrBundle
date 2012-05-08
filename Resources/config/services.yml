@@ -14,7 +14,7 @@ services:
   eotvos.versenyr.usertype.dummy:
     class: Eotvos\VersenyrBundle\UserType\DummyType
     tags:
-      - { name: eotvos.versenyr.usertype }
+      - { name: eotvos.versenyr.registrationtype }
 
   eotvos.versenyr.cwm.module:
     class:  Eotvos\VersenyrBundle\Cwm\VersenyrModule

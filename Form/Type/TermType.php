@@ -41,7 +41,7 @@ class TermType extends AbstractType
         $regtypes = $this->container->get('eotvos.versenyr.registrationregistry')->getModuleList();
         $types = array();
         foreach ($regtypes as $service => $obj) {
-            $types[$service] = $service;
+            $types[$service] = $obj->getDisplayName();
         }
 
         $builder->add('name', 'text');

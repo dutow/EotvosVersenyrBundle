@@ -43,6 +43,8 @@ interface UserTypeInterface
      * @return void
      */
     public function getRegistrationRightBox();
+
+    public function getDisplayName();
 }
 
 
