@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+    /**
+     * Return the list of the contensants : not including admins and testers
+     * 
+     * @return array
+     */
+    public function getAllContensants()
+    {
+        return $this
+            ->getEntityManager()
+            ->createQuery('SELECT u.* FROM Eotvos\VersenyrBundle\Entity\User u WHERE u.admin=0 AND u.tester=0')->getResult();
+    }
 }

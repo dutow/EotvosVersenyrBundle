@@ -167,4 +167,8 @@ class Term
     {
         return $this->registrationStart;
     }
+
+    public function generateChildren($em)
+    {
+    }
 }

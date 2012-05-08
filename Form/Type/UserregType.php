@@ -7,6 +7,8 @@ use Eotvos\VersenyrBundle\Entity as Entity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 /**
  * Form type for user registration. Data modification is handled by different forms.
  *

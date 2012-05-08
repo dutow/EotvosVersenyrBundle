@@ -3,6 +3,11 @@
 namespace Eotvos\VersenyrBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+
+use Eotvos\VersenyrBundle\DependencyInjection\Mod\RoundModCompilerPass;
+use Eotvos\VersenyrBundle\DependencyInjection\Mod\RegistrationModCompilerPass;
 
 /**
  * EotvosVersenyrBundle
@@ -15,4 +20,13 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class EotvosVersenyrBundle extends Bundle
 {
+
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new RoundModCompilerPass());
+        $container->addCompilerPass(new RegistrationModCompilerPass());
+    }
+
 }

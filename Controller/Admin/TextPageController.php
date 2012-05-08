@@ -2,31 +2,31 @@
 
 namespace Eotvos\VersenyrBundle\Controller\Admin;
 
-use Eotvos\VersenyrBundle\Entity\User;
-use Eotvos\VersenyrBundle\Form\Type\AdminUserType;
+use Eotvos\VersenyrBundle\Entity\TextPage;
+use Eotvos\VersenyrBundle\Form\Type\TextPageType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * Minimal admin interface.
+ * Minimal admin interface for textpages.
  *
  * @author    Zsolt Parragi <zsolt.parragi@cancellar.hu> 
  * @copyright 2012 Cancellar
  * @license   MIT License (http://www.opensource.org/licenses/mit-license.php)
  * @version   Release: v0.1
  *
- * @Route("/admin/user");
+ * @Route("/admin/textpage");
  */
-class UserController extends Controller
+class TextPageController extends Controller
 {
     /**
-     * Shows user list
+     * Shows textpage list
      *
      * @return array template parameters
      *
-     * @Route("/", name = "admin_user_index" )
+     * @Route("/", name = "admin_textpage_index" )
      * @Template
      */
     public function indexAction()
@@ -34,88 +34,77 @@ class UserController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
         $repo = $this->getDoctrine()
-            ->getRepository('EotvosVersenyrBundle:User')
+            ->getRepository('EotvosVersenyrBundle:TextPage')
             ;
 
         $request = $this->get('request');
         $type = $request->query->get('type', 'all');
 
-        if (!in_array($type, array('all', 'admin', 'tester', 'user'))) {
+        if (!in_array($type, array('all'))) {
             throw $this->createNotFoundException("Bad parameter");
         }
 
         switch ($type) {
-            case 'admin':
-                $users = $repo->findByAdmin(true);
-                break;
-
-            case 'tester':
-                $users = $repo->findByTester(true);
-                break;
-
-            case 'user':
-                $users = $repo->getAllContensants();
-                break;
 
             case 'all':
-                $users = $repo->findAll();
+                $textpages = $repo->getTreeList();
                 break;
         }
 
         return array(
-            'users' => $users,
+            'textpages' => $textpages,
         );
     }
 
     /**
-     * Delete a user
+     * Delete a textpage
      *
-     * @param int $id Id of the user
+     * @param int $id Id of the textpage
      *
      * @return array of template parameters
      *
-     * @Route("/delete/{id}", name = "admin_user_delete" )
+     * @Route("/delete/{id}", name = "admin_textpage_delete" )
      * @Template
      */
     public function deleteAction($id)
     {
         if (!is_numeric($id)) {
-            throw $this->createNotFoundException("User not found");
+            throw $this->createNotFoundException("TextPage not found");
         }
 
         $em = $this->getDoctrine()->getEntityManager();
         $repo = $this->getDoctrine()
-            ->getRepository('EotvosVersenyrBundle:User')
+            ->getRepository('EotvosVersenyrBundle:TextPage')
             ;
-        $user =  $repo->findOneById($id);
+        $textpage =  $repo->findOneById($id);
 
-        if (!$user) {
-            throw $this->createNotFoundException("User not found");
+        if (!$textpage) {
+            throw $this->createNotFoundException("TextPage not found");
         }
 
-        $em->remove($user);
+        $em->remove($textpage);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('admin_user_index'));
+        return $this->redirect($this->generateUrl('admin_textpage_index'));
     }
 
     /**
-     * Creates a new user
+     * Creates a new textpage
      *
      * @return array of template parameters
      *
-     * @Route("/new", name = "admin_user_new" )
+     * @Route("/new", name = "admin_textpage_new" )
      * @Template
      */
     public function newAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
         $repo = $this->getDoctrine()
-            ->getRepository('EotvosVersenyrBundle:User')
+            ->getRepository('EotvosVersenyrBundle:TextPage')
             ;
 
-        $user = new User();
-        $form = $this->createForm(new AdminUserType(), $user);
+        $textpage = new TextPage();
+        $form = $this->createForm(new TextPageType(), $textpage);
 
         $request = $this->get('request');
 
@@ -123,14 +112,14 @@ class UserController extends Controller
             $form->bindRequest($request);
             if ($form->isValid()) {
 
-                $user = $form->getData();
+                $textpage = $form->getData();
                 $passwordGenerator = $this->get('eotvos.versenyr.password_generator');
-                $passwordGenerator->encodePassword($user, $user->getPassword());
+                $passwordGenerator->encodePassword($textpage, $textpage->getPassword());
 
-                $em->persist($user);
+                $em->persist($textpage);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('admin_user_index'));
+                return $this->redirect($this->generateUrl('admin_textpage_index'));
             }
         }
 
@@ -140,33 +129,33 @@ class UserController extends Controller
     }
 
     /**
-     * Editing a user
+     * Editing a textpage
      *
-     * @param int $id Id of the user
+     * @param int $id Id of the textpage
      *
      * @return array of template parameters
      *
-     * @Route("/edit/{id}", name = "admin_user_edit" )
+     * @Route("/edit/{id}", name = "admin_textpage_edit" )
      * @Template
      */
     public function editAction($id)
     {
         if (!is_numeric($id)) {
-            throw $this->createNotFoundException("User not found");
+            throw $this->createNotFoundException("TextPage not found");
         }
 
         $em = $this->getDoctrine()->getEntityManager();
         $repo = $this->getDoctrine()
-            ->getRepository('EotvosVersenyrBundle:User')
+            ->getRepository('EotvosVersenyrBundle:TextPage')
             ;
 
-        $user = $repo->findOneById($id);
+        $textpage = $repo->findOneById($id);
 
-        if (!$user) {
-            throw $this->createNotFoundException("User not found");
+        if (!$textpage) {
+            throw $this->createNotFoundException("TextPage not found");
         }
 
-        $form = $this->createForm(new AdminUserType(), $user);
+        $form = $this->createForm(new TextPageType(), $textpage);
 
         $request = $this->get('request');
 
@@ -174,58 +163,58 @@ class UserController extends Controller
             $form->bindRequest($request);
             if ($form->isValid()) {
 
-                $user = $form->getData();
+                $textpage = $form->getData();
 
-                if ($user->getId()!=$id) {
+                if ($textpage->getId()!=$id) {
                     throw $this->createNotFoundException("Don't forge stupid updates");
                 }
 
-                if ($user->getPassword()) {
+                if ($textpage->getPassword()) {
                     $passwordGenerator = $this->get('eotvos.versenyr.password_generator');
-                    $passwordGenerator->encodePassword($user, $user->getPassword());
+                    $passwordGenerator->encodePassword($textpage, $textpage->getPassword());
                 }
 
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('admin_user_index'));
+                return $this->redirect($this->generateUrl('admin_textpage_index'));
             }
         }
 
         return array(
-            'user' => $user,
+            'textpage' => $textpage,
             'form' => $form->createView(),
         );
     }
 
     /**
-     * Shows a user
+     * Shows a textpage
      *
-     * @param int $id Id of the user
+     * @param int $id Id of the textpage
      *
      * @return array of template parameters
      *
-     * @Route("/{id}", name = "admin_user_show" )
+     * @Route("/{id}", name = "admin_textpage_show" )
      * @Template
      */
     public function showAction($id)
     {
         if (!is_numeric($id)) {
-            throw $this->createNotFoundException("User not found");
+            throw $this->createNotFoundException("TextPage not found");
         }
 
         $em = $this->getDoctrine()->getEntityManager();
         $repo = $this->getDoctrine()
-            ->getRepository('EotvosVersenyrBundle:User')
+            ->getRepository('EotvosVersenyrBundle:TextPage')
             ;
 
-        $user = $repo->findOneById($id);
+        $textpage = $repo->findOneById($id);
 
-        if (!$user) {
-            throw $this->createNotFoundException("User not found");
+        if (!$textpage) {
+            throw $this->createNotFoundException("TextPage not found");
         }
 
         return array(
-            'user' => $user,
+            'textpage' => $textpage,
         );
     }
 

@@ -63,6 +63,8 @@ class UserType extends AbstractType
             ))
             ;
 
+        return;
+
         $builder->add('sections', 'entity', array(
             'class' => 'Eotvos\VersenyrBundle\Entity\Section',
             'multiple' => true,

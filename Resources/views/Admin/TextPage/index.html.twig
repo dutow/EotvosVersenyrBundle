@@ -1,0 +1,31 @@
+{% extends 'CancellarAdminBundle::layout.html.twig'  %}
+
+{% block main %}
+<h2>Felhasznalok</h2>
+<a style="float: right" href="{{ path('admin_textpage_new') }}">uj alkalom</a>
+<br />
+<br />
+<table class="standard" style="width:100%;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nev</th>
+            <th>Special type?</th>
+            <th>Muveletek</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in textpages %}
+        <tr>
+            <td><a href="{{ path('admin_textpage_show', { id: row.id }) }}">{{ row.id }}</a></td>
+            <td>{% for i in 0..row.lvl %}-{% endfor %} {{ row.title }}</td>
+            <td>{{ row.lvl }}</td>
+            <td>
+                <a href="{{ path('admin_textpage_edit', { id: row.id }) }}">szerkesztes</a>
+                <a href="{{ path('admin_textpage_delete', { id: row.id }) }}">torol</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'CancellarAdminBundle::layout.html.twig' %}
+
+{% form_theme form 'CancellarAdminBundle::form.html.twig' %}
+
+{% block main %}
+<h2>Oldal szerkesztese</h2>
+<form class="wide" action="{{ path('admin_term_edit', { 'id': term.id } ) }}" method="post" {{ form_enctype(form) }}>
+  <fieldset>
+    <legend>Adatok</legend>
+    {{ form_row(form.name) }}
+    {{ form_row(form.special) }}
+    {{ form_row(form.slug) }}
+    <div class="formrow row_required">
+      <p class="inputholder">
+      <input type="submit" value="Mentés" class="button" />
+      </p>
+    </div>
+  </fieldset>
+  {{ form_rest(form) }}
+</form>
+{% endblock %}
