@@ -47,7 +47,7 @@ class TermController extends Controller
         switch ($type) {
 
             case 'all':
-                $terms = $repo->getFlatList();
+                $terms = $repo->findAll();
                 break;
         }
 

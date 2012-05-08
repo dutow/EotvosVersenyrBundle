@@ -1,0 +1,35 @@
+{% extends 'CancellarAdminBundle::layout.html.twig'  %}
+
+{% block main %}
+<h2>Felhasznalok</h2>
+<a style="float: right" href="{{ path('admin_term_new') }}">uj alkalom</a>
+<br />
+<br />
+<table class="standard" style="width:100%;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nev</th>
+            <th>Aktiv?</th>
+            <th>Regisztracio kezdete</th>
+            <th>Regisztracio tipusa</th>
+            <th>Muveletek</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in terms %}
+        <tr>
+            <td>{{ row.id }}</td>
+            <td>{{ row.name }}</td>
+            <td>{{ row.active? 'IGEN' : 'NEM' }}</td>
+            <td>{{ row.registrationStart|date('Y-m-d') }}</td>
+            <td>{{ row.userType }}</td>
+            <td>
+                <a href="{{ path('admin_term_edit', { id: row.id }) }}">szerkesztes</a>
+                <a href="{{ path('admin_term_delete', { id: row.id }) }}">torol</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

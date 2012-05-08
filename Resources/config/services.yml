@@ -21,3 +21,8 @@ services:
     tags:
       - { name: cancellar.cwm }
 
+  eotvos.versenyr.registrationregistry:
+    class: Eotvos\VersenyrBundle\DependencyInjection\Registry\ModuleRegistry
+
+  eotvos.versenyr.roundregistry:
+    class: Eotvos\VersenyrBundle\DependencyInjection\Registry\ModuleRegistry
