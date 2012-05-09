@@ -94,7 +94,7 @@ class SubmissionController extends Controller
         $em->remove($submission);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('admin_submission_index'));
+        return $this->redirect($this->generateUrl('admin_submission_indexr', array( 'round' => $submission->getRound()->getId())));
     }
 
     /**
