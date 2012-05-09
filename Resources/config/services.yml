@@ -16,6 +16,11 @@ services:
     tags:
       - { name: eotvos.versenyr.registrationtype }
 
+  eotvos.versenyr.roundtype.finals:
+    class: Eotvos\VersenyrBundle\RoundType\FinalsType
+    tags:
+      - { name: eotvos.versenyr.roundtype }
+
   eotvos.versenyr.cwm.module:
     class:  Eotvos\VersenyrBundle\Cwm\VersenyrModule
     tags:

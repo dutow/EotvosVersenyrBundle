@@ -76,7 +76,6 @@ class Round
      */
     private $submissions;
 
-
     /**
      * Get id
      *
@@ -281,6 +280,7 @@ class Round
     public function __construct()
     {
         $this->submissions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setConfig('{}');
     }
 
     /**

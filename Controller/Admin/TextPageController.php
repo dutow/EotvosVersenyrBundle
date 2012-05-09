@@ -7,6 +7,7 @@ use Eotvos\VersenyrBundle\Entity\Section;
 use Eotvos\VersenyrBundle\Entity\Round;
 use Eotvos\VersenyrBundle\Form\Type\TextPageType;
 use Eotvos\VersenyrBundle\Form\Type\SectionType;
+use Eotvos\VersenyrBundle\Form\Type\RoundType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -128,8 +129,22 @@ class TextPageController extends Controller
         $subform = null;
         $textpage = new TextPage();
         if ("section" == $subtype) {
+            if ("sections"!=$parent->getSpecial()) {
+                throw $this->createNotFoundException("Illegal parent page");
+            }
             $subform = new SectionType($this->container);
             $textpage->setSection(new Section());
+            $textpage->setSpecial($subtype);
+            $textpage->setParent($parent);
+            $textpage->setInMenu(false);
+            $textpage->setFbbox(false);
+        }
+        if ("round" == $subtype) {
+            if ("section"!=$parent->getSpecial()) {
+                throw $this->createNotFoundException("Illegal parent page");
+            }
+            $subform = new RoundType($this->container);
+            $textpage->setRound(new Round());
             $textpage->setSpecial($subtype);
             $textpage->setParent($parent);
             $textpage->setInMenu(false);
@@ -146,6 +161,9 @@ class TextPageController extends Controller
                 $em->persist($textpage);
                 if ("section" == $subtype) {
                     $em->persist($textpage->getSection());
+                }
+                if ("round" == $subtype) {
+                    $em->persist($textpage->getRound());
                 }
 
                 $em->flush();
@@ -191,6 +209,9 @@ class TextPageController extends Controller
         $subform = null;
         if ("section" == $textpage->getSpecial()) {
             $subform = new SectionType($this->container);
+        }
+        if ("round" == $textpage->getSpecial()) {
+            $subform = new RoundType($this->container);
         }
         $form = $this->createForm(new TextPageType($this->container, $textpage->getSpecial(), $subform), $textpage);
 
