@@ -103,10 +103,11 @@ class TermController extends Controller
             ->getRepository('EotvosVersenyrBundle:Term')
             ;
 
+        $request = $this->get('request');
+
         $term = new Term();
         $form = $this->createForm(new TermType($this->container), $term);
 
-        $request = $this->get('request');
 
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);

@@ -17,23 +17,26 @@
     <tbody>
         {% for row in textpages %}
         <tr>
-            <td><a href="{{ path('admin_textpage_show', { id: row.id }) }}">{{ row.id }}</a></td>
-            <td>{% for i in 0..row.lvl %}-{% endfor %} {{ row.title }}{% if row.inMenu %} (menuben){% endif %}</td>
+          <td style="text-align: left"><a href="{{ path('admin_textpage_show', { id: row.id }) }}">{{ row.id }}</a>
+                {% if not row.firstChild %}
+                <a href="{{ path('admin_textpage_moveup', { id: row.id }) }}" class="button up">fel</a>
+                {% endif %}
+                {% if not row.lastChild %}
+                <a href="{{ path('admin_textpage_movedown', { id: row.id }) }}" class="button down">le</a>
+                {% endif %}
+          </td>
+            <td style="text-align: left">{% for i in 0..row.lvl %}-{% endfor %} {{ row.title }}{% if row.inMenu %} (menuben){% endif %}</td>
             <td>{{ row.special }}</td>
             <td>
                 <a href="{{ path('admin_textpage_edit', { id: row.id }) }}">szerkesztes</a>
+                {% if row.isDeletable %}
                 <a href="{{ path('admin_textpage_delete', { id: row.id }) }}">torol</a>
-                {% if not row.firstChild %}
-                <a href="{{ path('admin_textpage_moveup', { id: row.id }) }}">fel</a>
-                {% endif %}
-                {% if not row.lastChild %}
-                <a href="{{ path('admin_textpage_movedown', { id: row.id }) }}">le</a>
                 {% endif %}
                 {% if row.special == 'sections' %}
-                <a href="{{ path('admin_textpage_delete', { id: row.id }) }}">uj szekcio</a>
+                <a href="{{ path('admin_textpage_new', { parent: row.id, type: 'section' }) }}">uj szekcio</a>
                 {% endif %}
                 {% if row.special == 'section' %}
-                <a href="{{ path('admin_textpage_delete', { id: row.id }) }}">uj fordulo</a>
+                <a href="{{ path('admin_textpage_new', { parent: row.id, type: 'round' }) }}">uj fordulo</a>
                 {% endif %}
             </td>
         </tr>

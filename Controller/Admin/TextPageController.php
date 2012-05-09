@@ -3,7 +3,10 @@
 namespace Eotvos\VersenyrBundle\Controller\Admin;
 
 use Eotvos\VersenyrBundle\Entity\TextPage;
+use Eotvos\VersenyrBundle\Entity\Section;
+use Eotvos\VersenyrBundle\Entity\Round;
 use Eotvos\VersenyrBundle\Form\Type\TextPageType;
+use Eotvos\VersenyrBundle\Form\Type\SectionType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -82,6 +85,10 @@ class TextPageController extends Controller
             throw $this->createNotFoundException("TextPage not found");
         }
 
+        if (!$textpage->isDeletable()) {
+            throw $this->createNotFoundException("This special textpage can't be deleted!");
+        }
+
         $em->remove($textpage);
         $em->flush();
 
@@ -103,10 +110,32 @@ class TextPageController extends Controller
             ->getRepository('EotvosVersenyrBundle:TextPage')
             ;
 
-        $textpage = new TextPage();
-        $form = $this->createForm(new TextPageType($this->container), $textpage);
-
         $request = $this->get('request');
+
+        $subtype = $request->query->get('type', null);
+        $parentId = $request->query->get('parent', null);
+        if ($parentId!==null) {
+            $parent = $repo->findOneById($parentId);
+            if (!$parent) {
+                throw $this->createNotFoundException("Parent not found");
+            }
+        }
+
+        if (!in_array($subtype, array(null, 'round', 'section'))) {
+            throw $this->createNotFoundException("Illegal type parameter");
+        }
+
+        $subform = null;
+        $textpage = new TextPage();
+        if ("section" == $subtype) {
+            $subform = new SectionType($this->container);
+            $textpage->setSection(new Section());
+            $textpage->setSpecial($subtype);
+            $textpage->setParent($parent);
+            $textpage->setInMenu(false);
+            $textpage->setFbbox(false);
+        }
+        $form = $this->createForm(new TextPageType($this->container, $subtype, $subform), $textpage);
 
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
@@ -115,14 +144,20 @@ class TextPageController extends Controller
                 $textpage = $form->getData();
 
                 $em->persist($textpage);
+                if ("section" == $subtype) {
+                    $em->persist($textpage->getSection());
+                }
+
                 $em->flush();
 
                 return $this->redirect($this->generateUrl('admin_textpage_index'));
+            }else{
             }
         }
 
         return array(
             'form' => $form->createView(),
+            'textpage' => $textpage,
         );
     }
 
@@ -153,7 +188,11 @@ class TextPageController extends Controller
             throw $this->createNotFoundException("TextPage not found");
         }
 
-        $form = $this->createForm(new TextPageType($this->container), $textpage);
+        $subform = null;
+        if ("section" == $textpage->getSpecial()) {
+            $subform = new SectionType($this->container);
+        }
+        $form = $this->createForm(new TextPageType($this->container, $textpage->getSpecial(), $subform), $textpage);
 
         $request = $this->get('request');
 
@@ -165,11 +204,6 @@ class TextPageController extends Controller
 
                 if ($textpage->getId()!=$id) {
                     throw $this->createNotFoundException("Don't forge stupid updates");
-                }
-
-                if ($textpage->getPassword()) {
-                    $passwordGenerator = $this->get('eotvos.versenyr.password_generator');
-                    $passwordGenerator->encodePassword($textpage, $textpage->getPassword());
                 }
 
                 $em->flush();

@@ -21,14 +21,19 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class TextPageType extends AbstractType
 {
 
-    public function __construct(ContainerInterface $container, $special = null)
+    public function __construct(ContainerInterface $container, $special = null, $subform = null)
     {
         $this->container = $container;
         $this->special = $special;
+        $this->subform = $subform;
     }
 
     /**
      * Builds the form.
+     *
+     * Symfony2 doesn't let us see the form data in this method, unless using an event listener hook. Which seems
+     * perfectyl logical, but we need it. So we are requiring the calling method to give us the neccessary data in
+     * the constructor...
      * 
      * @param FormBuilder $builder builder
      * @param array       $options form options
@@ -70,6 +75,10 @@ class TextPageType extends AbstractType
                 'multiple' => false,
                 'expanded' => false,
             ));
+        } else {
+            if ($this->subform) {
+                $builder->add($this->special, $this->subform);
+            }
         }
 
     }

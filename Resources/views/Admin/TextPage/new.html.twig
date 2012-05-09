@@ -4,11 +4,14 @@
 
 {% block main %}
 <h2>Uj szoveges oldal letrehozasa</h2>
-<form class="wide" action="{{ path('admin_textpage_new' ) }}" method="post" {{ form_enctype(form) }}>
+<form class="wide" method="post" {{ form_enctype(form) }}>
   <fieldset>
     <legend>Adatok</legend>
+    {{ form_errors(form) }}
     {{ form_row(form.title) }}
+    {% if textpage.parent == null %}
     {{ form_row(form.parent) }}
+    {% endif %}
     {{ form_row(form.body) }}
     {{ form_rest(form) }}
     <div class="formrow row_required">

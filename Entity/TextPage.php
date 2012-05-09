@@ -56,7 +56,7 @@ class TextPage
     private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="TextPage", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="TextPage", mappedBy="parent", cascade={"persist", "remove"})
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     private $children;
@@ -114,14 +114,14 @@ class TextPage
     /**
      * @var object $section
      *
-     * @ORM\OneToOne(targetEntity="Section", mappedBy="page")
+     * @ORM\OneToOne(targetEntity="Section", mappedBy="page", cascade={"persist", "remove"})
      */
     private $section;
 
     /**
      * @var object $round
      *
-     * @ORM\OneToOne(targetEntity="Round", mappedBy="page")
+     * @ORM\OneToOne(targetEntity="Round", mappedBy="page", cascade={"persist", "remove"})
      */
     private $round;
 
@@ -131,7 +131,7 @@ class TextPage
      */
     public function __construct()
     {
-        $this->fbbox = false;
+        //$this->fbbox = false;
     }
 
     /**
@@ -468,6 +468,15 @@ class TextPage
     public function isParentChangable()
     {
         if (in_array($this->getSpecial(), array('sections', 'section', 'round', 'termroot', 'termemail', 'regemail'))) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function isDeletable()
+    {
+        if (in_array($this->getSpecial(), array('sections', 'termroot', 'termemail', 'regemail'))) {
             return false;
         }
 
