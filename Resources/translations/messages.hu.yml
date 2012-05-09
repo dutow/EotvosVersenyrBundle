@@ -64,16 +64,27 @@ admin:
     display:
       list: 'Megoldasok'
       rounds: 'Fordulo:'
+      advancesno: 'Maximum tovabbjutok szama: %no%'
+      edit: 'Megoldas szerkesztese'
+      new:  'Uj megoldas'
     actions:
       new: 'Uj'
       edit: 'Szerkeszt'
       delete: 'Torol'
       save: 'Mentes'
+      generate: 'Tovabbjutok frissitese'
+    legend:
+      fields: 'Adatok'
     fields:
       user: 'Versenyzo'
       category: 'Kategoria'
       id: 'ID'
       time: 'Ido'
+      advances: 'Tovabbjutott'
+      points: 'Pontok'
+    advances:
+      yes: 'IGEN'
+      no: 'NEM'
     
   user:
     display:

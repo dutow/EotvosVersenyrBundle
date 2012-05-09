@@ -53,7 +53,7 @@ class SubmissionController extends Controller
         }
 
         if ($round) {
-            $submissions = $repo->findByRound($round->getId());
+            $submissions = $repo->getLastUniqByRound($round);
         } else {
             $submissions = array();
         }
@@ -135,7 +135,7 @@ class SubmissionController extends Controller
                 $em->persist($submission);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('admin_submission_index'));
+                return $this->redirect($this->generateUrl('admin_submission_indexr', array( 'round' => $round->getId())));
             }
         }
 
@@ -172,7 +172,9 @@ class SubmissionController extends Controller
             throw $this->createNotFoundException("Submission not found");
         }
 
-        $form = $this->createForm(new SubmissionType($this->container), $submission);
+        $round = $submission->getRound();
+
+        $form = $this->createForm(new SubmissionType($this->container, $round), $submission);
 
         $request = $this->get('request');
 
@@ -188,7 +190,7 @@ class SubmissionController extends Controller
 
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('admin_submission_index'));
+                return $this->redirect($this->generateUrl('admin_submission_indexr', array( 'round' => $round->getId())));
             }
         }
 

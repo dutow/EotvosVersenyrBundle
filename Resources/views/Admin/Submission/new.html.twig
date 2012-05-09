@@ -3,16 +3,16 @@
 {% form_theme form 'CancellarAdminBundle::form.html.twig' %}
 
 {% block main %}
-<h2>Uj alkalom letrehozasa</h2>
+<h2>{% trans %}admin.submission.display.new{% endtrans %}</h2>
 <form class="wide" action="{{ path('admin_submission_new', { 'round': round.id } ) }}" method="post" {{ form_enctype(form) }}>
   <fieldset>
-    <legend>Adatok</legend>
+    <legend>{% trans %}admin.submission.legend.fields{% endtrans %}</legend>
     {{ form_row(form.user) }}
     {{ form_row(form.category) }}
     {{ form_row(form.points) }}
     <div class="formrow row_required">
       <p class="inputholder">
-      <input type="submit" value="Mentés" class="button" />
+      <input type="submit" value="{% trans %}admin.submission.actions.save{% endtrans %}" class="button" />
       </p>
     </div>
   </fieldset>

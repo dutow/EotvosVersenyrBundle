@@ -40,7 +40,7 @@ class Submission
     /**
      * @var boolean $advances
      *
-     * @ORM\Column(name="advances", type="boolean", nullable=true)
+     * @ORM\Column(name="advances", type="integer", nullable=true)
      */
     private $advances;
 
@@ -159,6 +159,16 @@ class Submission
     public function getAdvances()
     {
         return $this->advances;
+    }
+
+    public function advanced()
+    {
+        return $this->getAdvances()==2;
+    }
+
+    public function notAdvanced()
+    {
+        return $this->getAdvances()==1;
     }
 
     /**

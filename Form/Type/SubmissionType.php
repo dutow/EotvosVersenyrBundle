@@ -58,6 +58,13 @@ class SubmissionType extends AbstractType
             'required' => true,
         ));
 
+        $builder->add('advances', 'choice', array(
+            'choices' => array(1 => 'NEM', 2 => 'IGEN'),
+            'multiple' => false,
+            'expanded' => false,
+            'required' => false
+        ));
+
         $builder->add('category');
         $builder->add('points', 'number');
     }

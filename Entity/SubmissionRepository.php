@@ -12,6 +12,26 @@ use Doctrine\ORM\EntityRepository;
  */
 class SubmissionRepository extends EntityRepository
 {
+    public function getLastUniqByRound($round)
+    {
+        $registry = array();
+        $ret = array();
+
+        foreach ($this->getLastByRound($round) as $record) {
+            if (!isset($registry[$record->getUser()->__toString()])) {
+                $registry[$record->getUser()->__toString()] = array();
+            }
+            $ref =& $registry[$record->getUser()->__toString()];
+            if (!isset($ref[$record->getCategory()])) {
+                $ref[$record->getCategory()] = true;
+                $ret[] = $record;
+            }
+        }
+
+        return $ret;
+    }
+
+
     /**
      * Get submission for the round ordered by time.
      * 
@@ -24,7 +44,7 @@ class SubmissionRepository extends EntityRepository
     public function getLastByRound($round)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT s FROM Eotvos\VersenyrBundle\Entity\Submission s WHERE s.round_id=:round_id ORDER BY s.submitted_at DESC')
+            ->createQuery('SELECT s FROM Eotvos\VersenyrBundle\Entity\Submission s WHERE s.round=:round_id ORDER BY s.submitted_at DESC')
             ->setParameter('round_id', $round->getId())
             ->getResult();
     }

@@ -24,7 +24,12 @@
       });
 </script>
 {% if thisround %}
+<br />
 <a style="float: right" href="{{ path('admin_submission_new', { 'round' : thisround.id }) }}">{% trans %}admin.submission.actions.new{% endtrans %}</a>
+{% trans with { '%no%': thisround.advanceno } %}admin.submission.display.advancesno{% endtrans %}
+<br />
+<br />
+<a href="">{% trans %}admin.submission.actions.generate{% endtrans %}</a>
 {% endif %}
 <br />
 <br />
@@ -35,6 +40,8 @@
             <th>{% trans %}admin.submission.fields.user{% endtrans %}</th>
             <th>{% trans %}admin.submission.fields.category{% endtrans %}</th>
             <th>{% trans %}admin.submission.fields.time{% endtrans %}</th>
+            <th>{% trans %}admin.submission.fields.points{% endtrans %}</th>
+            <th>{% trans %}admin.submission.fields.advances{% endtrans %}</th>
             <th>{% trans %}admin.actions{% endtrans %}</th>
         </tr>
     </thead>
@@ -44,7 +51,9 @@
             <td>{{ row.id }}</td>
             <td>{{ row.user }}</td>
             <td>{{ row.category }}</td>
-            <td>{{ row.submittedAt|date('Y-m-d') }}</td>
+            <td>{{ row.submittedAt|date('Y-m-d H:i:s') }}</td>
+            <td>{{ row.points }}</td>
+            <td>{{ (row.advances<1 ? '' : (row.advances == 2 ? 'admin.submission.advances.yes' : 'admin.submission.advances.no' ))|trans }}</td>
             <td>
                 <a href="{{ path('admin_submission_edit', { id: row.id }) }}">{% trans %}admin.submission.actions.edit{%endtrans%}</a>
                 <a href="{{ path('admin_submission_delete', { id: row.id }) }}">{% trans %}admin.submission.actions.delete{%endtrans%}</a>

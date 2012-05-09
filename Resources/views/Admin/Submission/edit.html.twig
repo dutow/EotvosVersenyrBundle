@@ -3,17 +3,17 @@
 {% form_theme form 'CancellarAdminBundle::form.html.twig' %}
 
 {% block main %}
-<h2>Alkalom szerkesztese</h2>
-<form class="wide" action="{{ path('admin_term_edit', { 'id': term.id } ) }}" method="post" {{ form_enctype(form) }}>
+<h2>{% trans %}admin.submission.display.new{% endtrans %}</h2>
+<form class="wide" action="{{ path('admin_submission_edit', { 'id': submission.id } ) }}" method="post" {{ form_enctype(form) }}>
   <fieldset>
-    <legend>Adatok</legend>
-    {{ form_row(form.name) }}
-    {{ form_row(form.userType) }}
-    {{ form_row(form.registrationStart) }}
-    {{ form_row(form.active) }}
+    <legend>{% trans %}admin.submission.legend.fields{% endtrans %}</legend>
+    {{ form_row(form.user) }}
+    {{ form_row(form.category) }}
+    {{ form_row(form.points) }}
+    {{ form_row(form.advances) }}
     <div class="formrow row_required">
       <p class="inputholder">
-      <input type="submit" value="Mentés" class="button" />
+      <input type="submit" value="{% trans %}admin.submission.actions.save{% endtrans %}" class="button" />
       </p>
     </div>
   </fieldset>
