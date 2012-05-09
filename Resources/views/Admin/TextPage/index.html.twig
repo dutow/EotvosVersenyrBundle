@@ -1,7 +1,7 @@
 {% extends 'CancellarAdminBundle::layout.html.twig'  %}
 
 {% block main %}
-<h2>Felhasznalok</h2>
+<h2>Szoveges oldalak</h2>
 <a style="float: right" href="{{ path('admin_textpage_new') }}">uj alkalom</a>
 <br />
 <br />
@@ -18,11 +18,23 @@
         {% for row in textpages %}
         <tr>
             <td><a href="{{ path('admin_textpage_show', { id: row.id }) }}">{{ row.id }}</a></td>
-            <td>{% for i in 0..row.lvl %}-{% endfor %} {{ row.title }}</td>
-            <td>{{ row.lvl }}</td>
+            <td>{% for i in 0..row.lvl %}-{% endfor %} {{ row.title }}{% if row.inMenu %} (menuben){% endif %}</td>
+            <td>{{ row.special }}</td>
             <td>
                 <a href="{{ path('admin_textpage_edit', { id: row.id }) }}">szerkesztes</a>
                 <a href="{{ path('admin_textpage_delete', { id: row.id }) }}">torol</a>
+                {% if not row.firstChild %}
+                <a href="{{ path('admin_textpage_moveup', { id: row.id }) }}">fel</a>
+                {% endif %}
+                {% if not row.lastChild %}
+                <a href="{{ path('admin_textpage_movedown', { id: row.id }) }}">le</a>
+                {% endif %}
+                {% if row.special == 'sections' %}
+                <a href="{{ path('admin_textpage_delete', { id: row.id }) }}">uj szekcio</a>
+                {% endif %}
+                {% if row.special == 'section' %}
+                <a href="{{ path('admin_textpage_delete', { id: row.id }) }}">uj fordulo</a>
+                {% endif %}
             </td>
         </tr>
         {% endfor %}

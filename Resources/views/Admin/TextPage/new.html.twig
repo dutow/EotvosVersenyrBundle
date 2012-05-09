@@ -3,21 +3,20 @@
 {% form_theme form 'CancellarAdminBundle::form.html.twig' %}
 
 {% block main %}
-<h2>Uj felhasznalo letrehozasa</h2>
-<form class="wide" action="{{ path('admin_user_new' ) }}" method="post" {{ form_enctype(form) }}>
+<h2>Uj szoveges oldal letrehozasa</h2>
+<form class="wide" action="{{ path('admin_textpage_new' ) }}" method="post" {{ form_enctype(form) }}>
   <fieldset>
-    <legend>Felhasznaloi adatok</legend>
-    {{ form_row(form.email) }}
-    {{ form_row(form.password) }}
-    {{ form_row(form.tester) }}
-    {{ form_row(form.admin) }}
+    <legend>Adatok</legend>
+    {{ form_row(form.title) }}
+    {{ form_row(form.parent) }}
+    {{ form_row(form.body) }}
+    {{ form_rest(form) }}
     <div class="formrow row_required">
       <p class="inputholder">
       <input type="submit" value="Mentés" class="button" />
       </p>
     </div>
   </fieldset>
-  {{ form_rest(form) }}
 </form>
 {% endblock %}
 

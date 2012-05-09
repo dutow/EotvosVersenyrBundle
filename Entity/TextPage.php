@@ -464,4 +464,41 @@ class TextPage
     {
         return $this->redirects_to;
     }
+
+    public function isParentChangable()
+    {
+        if (in_array($this->getSpecial(), array('sections', 'section', 'round', 'termroot', 'termemail', 'regemail'))) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function isFirstChild()
+    {
+        if ($this->getParent()) {
+            $ch = $this->getParent()->getChildren();
+
+            return ($ch[0]->getId() == $this->getId());
+        }
+    }
+    public function isLastChild()
+    {
+        if ($this->getParent()) {
+            $ch = $this->getParent()->getChildren();
+
+            return ($ch[count($ch)-1]->getId() == $this->getId());
+        }
+    }
+
+    public function getTitleWithLevel()
+    {
+        $r = '';
+        for ($i = 0; $i < $this->getLvl(); $i++) {
+            $r .= '-';
+        }
+        $r .= $this->getTitle();
+
+        return $r;
+    }
 }

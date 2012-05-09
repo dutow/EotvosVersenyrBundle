@@ -24,6 +24,19 @@ class TextPageRepository extends NestedTreeRepository
         ;
     }
 
+    public function getPossibleParentList()
+    {
+        return $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('node')
+            ->from('EotvosVersenyrBundle:TextPage', 'node')
+            ->where('node.special!=\'sections\'')
+            ->orderBy('node.root, node.lft', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /**
      * Returns the root page of a term
      * 

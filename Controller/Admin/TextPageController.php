@@ -104,7 +104,7 @@ class TextPageController extends Controller
             ;
 
         $textpage = new TextPage();
-        $form = $this->createForm(new TextPageType(), $textpage);
+        $form = $this->createForm(new TextPageType($this->container), $textpage);
 
         $request = $this->get('request');
 
@@ -113,8 +113,6 @@ class TextPageController extends Controller
             if ($form->isValid()) {
 
                 $textpage = $form->getData();
-                $passwordGenerator = $this->get('eotvos.versenyr.password_generator');
-                $passwordGenerator->encodePassword($textpage, $textpage->getPassword());
 
                 $em->persist($textpage);
                 $em->flush();
@@ -155,7 +153,7 @@ class TextPageController extends Controller
             throw $this->createNotFoundException("TextPage not found");
         }
 
-        $form = $this->createForm(new TextPageType(), $textpage);
+        $form = $this->createForm(new TextPageType($this->container), $textpage);
 
         $request = $this->get('request');
 
@@ -184,6 +182,83 @@ class TextPageController extends Controller
             'textpage' => $textpage,
             'form' => $form->createView(),
         );
+    }
+
+
+    /**
+     * Moves a record upwards
+     *
+     * @param int $id Id of the textpage
+     *
+     * @return array of template parameters
+     *
+     * @Route("/moveup/{id}", name = "admin_textpage_moveup" )
+     * @Template
+     */
+    public function moveUpAction($id)
+    {
+        if (!is_numeric($id)) {
+            throw $this->createNotFoundException("TextPage not found");
+        }
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $repo = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:TextPage')
+            ;
+
+        $textpage = $repo->findOneById($id);
+
+        if (!$textpage) {
+            throw $this->createNotFoundException("TextPage not found");
+        }
+
+        if ($textpage->isFirstChild()) {
+            throw $this->createNotFoundException("First child can't be moved");
+        }
+
+        $repo->moveUp($textpage);
+
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('admin_textpage_index'));
+    }
+
+    /**
+     * Moves a record downwards
+     *
+     * @param int $id Id of the textpage
+     *
+     * @return array of template parameters
+     *
+     * @Route("/movedown/{id}", name = "admin_textpage_movedown" )
+     * @Template
+     */
+    public function moveDownAction($id)
+    {
+        if (!is_numeric($id)) {
+            throw $this->createNotFoundException("TextPage not found");
+        }
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $repo = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:TextPage')
+            ;
+
+        $textpage = $repo->findOneById($id);
+
+        if (!$textpage) {
+            throw $this->createNotFoundException("TextPage not found");
+        }
+
+        if ($textpage->isLastChild()) {
+            throw $this->createNotFoundException("Last child can't be moved");
+        }
+
+        $repo->moveDown($textpage);
+
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('admin_textpage_index'));
     }
 
     /**
@@ -217,5 +292,4 @@ class TextPageController extends Controller
             'textpage' => $textpage,
         );
     }
-
 }
