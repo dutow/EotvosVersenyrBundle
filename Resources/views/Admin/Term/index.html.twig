@@ -1,35 +1,35 @@
 {% extends 'CancellarAdminBundle::layout.html.twig'  %}
 
 {% block main %}
-<h2>Felhasznalok</h2>
-<a style="float: right" href="{{ path('admin_term_new') }}">uj alkalom</a>
+<h2>{% trans %}admin.term.display.list{% endtrans %}</h2>
+<a style="float: right" href="{{ path('admin_term_new') }}">{% trans %}admin.term.actions.new{% endtrans %}</a>
 <br />
 <br />
 <table class="standard" style="width:100%;">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nev</th>
-            <th>Aktiv?</th>
-            <th>Regisztracio kezdete</th>
-            <th>Regisztracio tipusa</th>
-            <th>Muveletek</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for row in terms %}
-        <tr>
-            <td>{{ row.id }}</td>
-            <td>{{ row.name }}</td>
-            <td>{{ row.active? 'IGEN' : 'NEM' }}</td>
-            <td>{{ row.registrationStart|date('Y-m-d') }}</td>
-            <td>{{ row.userType }}</td>
-            <td>
-                <a href="{{ path('admin_term_edit', { id: row.id }) }}">szerkesztes</a>
-                <a href="{{ path('admin_term_delete', { id: row.id }) }}">torol</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+  <thead>
+    <tr>
+      <th>{% trans %}admin.term.fields.id{% endtrans %}</th>
+      <th>{% trans %}admin.term.fields.name{% endtrans %}</th>
+      <th>{% trans %}admin.term.fields.active{% endtrans %}</th>
+      <th>{% trans %}admin.term.fields.start{% endtrans %}</th>
+      <th>{% trans %}admin.term.fields.type{% endtrans %}</th>
+      <th>{% trans %}admin.actions{% endtrans %}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in terms %}
+    <tr>
+      <td>{{ row.id }}</td>
+      <td>{{ row.name }}</td>
+      <td>{{ (row.active? 'admin.term.activity.active' : 'admin.term.activity.inactive')|trans }}</td>
+      <td>{{ row.registrationStart|date('Y-m-d') }}</td>
+      <td>{{ row.userType }}</td>
+      <td>
+        <a href="{{ path('admin_term_edit', { id: row.id }) }}">{% trans %}admin.term.actions.edit{% endtrans %}</a>
+        <a href="{{ path('admin_term_delete', { id: row.id }) }}">{% trans %}admin.term.actions.delete{% endtrans %}</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% endblock %}

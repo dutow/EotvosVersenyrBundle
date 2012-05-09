@@ -318,4 +318,14 @@ class Round
     {
         return $this->getPage()->getTitle();
     }
+
+    public function getTerm()
+    {
+        return $this->getPage()->getParent()->getParent()->getParent()->getTerm();
+    }
+
+    public function isFirst()
+    {
+        return $this->getPage()->isFirstChild();
+    }
 }

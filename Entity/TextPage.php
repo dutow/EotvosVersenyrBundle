@@ -125,6 +125,14 @@ class TextPage
      */
     private $round;
 
+    /**
+     * @var object $term
+     *
+     * @ORM\OneToOne(targetEntity="Term", mappedBy="rootPage", cascade={"persist", "remove"})
+     */
+    private $term;
+
+
 
     /**
      * Default constructor.
@@ -514,5 +522,25 @@ class TextPage
         $r .= $this->getTitle();
 
         return $r;
+    }
+
+    /**
+     * Set term
+     *
+     * @param Eotvos\VersenyrBundle\Entity\Term $term
+     */
+    public function setTerm(\Eotvos\VersenyrBundle\Entity\Term $term)
+    {
+        $this->term = $term;
+    }
+
+    /**
+     * Get term
+     *
+     * @return Eotvos\VersenyrBundle\Entity\Term 
+     */
+    public function getTerm()
+    {
+        return $this->term;
     }
 }

@@ -1,49 +1,49 @@
 {% extends 'CancellarAdminBundle::layout.html.twig'  %}
 
 {% block main %}
-<h2>Szoveges oldalak</h2>
-<a style="float: right" href="{{ path('admin_textpage_new') }}">uj alkalom</a>
+<h2>{% trans %}admin.textpage.display.list{% endtrans %}</h2>
+<a style="float: right" href="{{ path('admin_textpage_new') }}">{% trans %}admin.textpage.actions.new{% endtrans %}</a>
 <br />
 <br />
 <table class="standard" style="width:100%;">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nev</th>
-            <th>Special type?</th>
-            <th>Muveletek</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for row in textpages %}
-        <tr>
-          <td style="text-align: left"><a href="{{ path('admin_textpage_show', { id: row.id }) }}">{{ row.id }}</a>
-                {% if not row.firstChild %}
-                <a href="{{ path('admin_textpage_moveup', { id: row.id }) }}" class="button up">fel</a>
-                {% endif %}
-                {% if not row.lastChild %}
-                <a href="{{ path('admin_textpage_movedown', { id: row.id }) }}" class="button down">le</a>
-                {% endif %}
-          </td>
-            <td style="text-align: left">{% for i in 0..row.lvl %}-{% endfor %} {{ row.title }}{% if row.inMenu %} (menuben){% endif %}</td>
-            <td>{{ row.special }}</td>
-            <td>
-                <a href="{{ path('admin_textpage_edit', { id: row.id }) }}">szerkesztes</a>
-                {% if row.isDeletable %}
-                <a href="{{ path('admin_textpage_delete', { id: row.id }) }}">torol</a>
-                {% endif %}
-                {% if row.special == 'sections' %}
-                <a href="{{ path('admin_textpage_new', { parent: row.id, type: 'section' }) }}">uj szekcio</a>
-                {% endif %}
-                {% if row.special == 'section' %}
-                <a href="{{ path('admin_textpage_new', { parent: row.id, type: 'round' }) }}">uj fordulo</a>
-                {% endif %}
-                {% if row.special == 'round' and row.round.roundtypeProvider(container).configurationUrl(row.round) is not null %}
-                <a href="{{ path(row.round.roundtypeProvider(container).configurationUrl(row.round), { id: row.round.id }) }}">konfiguracio</a>
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+  <thead>
+    <tr>
+      <th>{% trans %}admin.textpage.fields.id{% endtrans %}</th>
+      <th>{% trans %}admin.textpage.fields.name{% endtrans %}</th>
+      <th>{% trans %}admin.textpage.fields.special{% endtrans %}</th>
+      <th>{% trans %}admin.actions{% endtrans %}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in textpages %}
+    <tr>
+      <td style="text-align: left"><a href="{{ path('admin_textpage_show', { id: row.id }) }}">{{ row.id }}</a>
+        {% if not row.firstChild %}
+        <a href="{{ path('admin_textpage_moveup', { id: row.id }) }}" class="button up">{% trans %}admin.textpage.actions.up{% endtrans %}</a>
+        {% endif %}
+        {% if not row.lastChild %}
+        <a href="{{ path('admin_textpage_movedown', { id: row.id }) }}" class="button down">{% trans %}admin.textpage.actions.down{% endtrans %}</a>
+        {% endif %}
+      </td>
+      <td style="text-align: left">{% for i in 0..row.lvl %}-{% endfor %} {{ row.title }}{% if row.inMenu %} (menuben){% endif %}</td>
+      <td>{{ ('admin.textpage.special.' ~ row.special)|trans }}</td>
+      <td>
+        <a href="{{ path('admin_textpage_edit', { id: row.id }) }}">{% trans %}admin.textpage.actions.edit{% endtrans %}</a>
+        {% if row.isDeletable %}
+        <a href="{{ path('admin_textpage_delete', { id: row.id }) }}">{% trans %}admin.textpage.actions.delete{% endtrans %}</a>
+        {% endif %}
+        {% if row.special == 'sections' %}
+        <a href="{{ path('admin_textpage_new', { parent: row.id, type: 'section' }) }}">{% trans %}admin.textpage.actions.newsection{% endtrans %}</a>
+        {% endif %}
+        {% if row.special == 'section' %}
+        <a href="{{ path('admin_textpage_new', { parent: row.id, type: 'round' }) }}">{% trans %}admin.textpage.actions.newround{% endtrans %}</a>
+        {% endif %}
+        {% if row.special == 'round' and row.round.roundtypeProvider(container).configurationUrl(row.round) is not null %}
+        <a href="{{ path(row.round.roundtypeProvider(container).configurationUrl(row.round), { id: row.round.id }) }}">konfiguracio</a>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% endblock %}

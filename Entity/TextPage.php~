@@ -125,6 +125,14 @@ class TextPage
      */
     private $round;
 
+    /**
+     * @var object $term
+     *
+     * @ORM\OneToOne(targetEntity="Term", mappedBy="rootPage", cascade={"persist", "remove"})
+     */
+    private $term;
+
+
 
     /**
      * Default constructor.

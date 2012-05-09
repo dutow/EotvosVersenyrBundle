@@ -46,14 +46,14 @@ class SubmissionController extends Controller
             ;
 
         if (null!=$round) {
-            $round = $this->getDoctrine()->findOneById($round);
+            $round = $this->getDoctrine()->getRepository('EotvosVersenyrBundle:Round')->findOneById($round);
             if (!$round) {
                 throw $this->createNotFoundException("Bad parameter");
             }
         }
 
         if ($round) {
-            $submissions = $repo->findByRound($round);
+            $submissions = $repo->findByRound($round->getId());
         } else {
             $submissions = array();
         }
@@ -61,7 +61,7 @@ class SubmissionController extends Controller
         return array(
             'submissions' => $submissions,
             'rounds' => $rounds,
-            'around' => $round,
+            'thisround' => $round,
         );
     }
 
@@ -123,6 +123,7 @@ class SubmissionController extends Controller
 
         $submission = new Submission();
         $submission->setRound($round);
+        $submission->setData('{}'); // empty data for user submitted records
         $form = $this->createForm(new SubmissionType($this->container, $round), $submission);
 
         if ($request->getMethod() == 'POST') {
@@ -140,6 +141,7 @@ class SubmissionController extends Controller
 
         return array(
             'form' => $form->createView(),
+            'round' => $round,
         );
     }
 
@@ -203,7 +205,7 @@ class SubmissionController extends Controller
      *
      * @return array of template parameters
      *
-     * @Route("/{id}", name = "admin_submission_show" )
+     * @Route("/show/{id}", name = "admin_submission_show" )
      * @Template
      */
     public function showAction($id)

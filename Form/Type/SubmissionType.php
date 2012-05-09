@@ -47,7 +47,8 @@ class SubmissionType extends AbstractType
             ->container
             ->get('doctrine')
             ->getRepository('EotvosVersenyrBundle:User')
-            ->findBySection($this->round->getSection());
+            ->getActiveForRound($this->round)
+            ;
 
         $builder->add('user', 'entity', array(
             'class' => 'Eotvos\VersenyrBundle\Entity\User',

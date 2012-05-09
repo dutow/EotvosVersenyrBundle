@@ -13,12 +13,56 @@ admin:
   actions: 'Muveletek'
 
   term:
+    display:
+      list: 'Alkalmak'
+    actions:
+      new: 'Uj alkalom'
+      edit: 'Szerkeszt'
+      delete: 'Torol'
+      save: 'Mentes'
+    fields:
+      id: 'ID'
+      name: 'Nev'
+      active: 'Aktiv?'
+      start: 'Kezdet'
+      type: 'Regisztracio tipusa'
+    activity:
+      active: 'Aktiv'
+      inactive: 'Inaktiv'
     
   textpage:
+    display:
+      list: 'Szoveges oldalak'
+    actions:
+      new: 'Uj oldal'
+      newround: 'Uj fordulo'
+      newsection: 'Uj szekcio'
+      edit: 'Szerkeszt'
+      delete: 'Torol'
+      save: 'Mentes'
+      up: 'Fel'
+      down: 'Le'
+    fields:
+      id: 'ID'
+      name: 'Nev'
+      special: 'Specialis?'
+    activity:
+      active: 'Aktiv'
+      inactive: 'Inaktiv'
+    special:
+      termroot: 'Alkalom'
+      sections: 'Szekciok'
+      section: 'Szekcio'
+      round: 'Fordulo'
+      termemail: 'Alkalom regisztracios e-mail'
+      registration: 'Regisztracio'
+      regend: 'Lejart regisztracio'
+      regmail: 'Regisztracios e-mail'
+      archive: 'Archivum'
 
   submission:
     display:
-      title: 'Megoldasok'
+      list: 'Megoldasok'
       rounds: 'Fordulo:'
     actions:
       new: 'Uj'

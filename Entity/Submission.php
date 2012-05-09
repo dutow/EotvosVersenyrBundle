@@ -30,12 +30,12 @@ class Submission
     private $user_id;
 
     /**
-     * @var integer $round_id
+     * @var integer $round
      *
      * @ORM\JoinColumn(name="round_id", referencedColumnName="id")
      * @ORM\ManyToOne(targetEntity="Round", inversedBy="submissions")
      */
-    private $round_id;
+    private $round;
 
     /**
      * @var boolean $advances
@@ -128,7 +128,7 @@ class Submission
      */
     public function setRound($roundId)
     {
-        $this->round_id = $roundId;
+        $this->round = $roundId;
     }
 
     /**
@@ -138,7 +138,7 @@ class Submission
      */
     public function getRound()
     {
-        return $this->round_id;
+        return $this->round;
     }
 
     /**
