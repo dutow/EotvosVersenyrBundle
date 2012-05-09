@@ -481,7 +481,10 @@ class TextPage
 
             return ($ch[0]->getId() == $this->getId());
         }
+
+        return true;
     }
+
     public function isLastChild()
     {
         if ($this->getParent()) {
@@ -489,6 +492,8 @@ class TextPage
 
             return ($ch[count($ch)-1]->getId() == $this->getId());
         }
+
+        return true;
     }
 
     public function getTitleWithLevel()
