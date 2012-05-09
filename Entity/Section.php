@@ -46,7 +46,7 @@ class Section
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="sections")
+     * @ORM\ManyToMany(targetEntity="Registration", mappedBy="sections")
      */
     private $attendees;
 

@@ -37,6 +37,13 @@ class Registration
     private $user;
 
     /**
+     *
+     * @ORM\ManyToMany(targetEntity="Section", inversedBy="registrations")
+     * @ORM\JoinTable(name="section_registrations")
+     */
+    private $sections;
+
+    /**
      * Get id
      *
      * @return integer
