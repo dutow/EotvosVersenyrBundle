@@ -216,7 +216,7 @@ class Term
         $stop = $until;
         $stop->modify('+4 days');
         $rnd = new Round();
-        $rnd->setRoundtype('eotvos.versenyr.finals');
+        $rnd->setRoundtype('eotvos.versenyr.roundtype.finals');
         $rnd->setConfig('{}');
         $rnd->setStart($until);
         $rnd->setStop($stop);

@@ -127,11 +127,11 @@ class TextPage
 
 
     /**
-     * @ORM\PrePersist
+     * Default constructor.
      */
     public function __construct()
     {
-        //$this->fbbox = false;
+        $this->fbbox = false;
     }
 
     /**

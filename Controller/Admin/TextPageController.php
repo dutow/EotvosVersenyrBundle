@@ -57,6 +57,7 @@ class TextPageController extends Controller
 
         return array(
             'textpages' => $textpages,
+            'container' => $this->container,
         );
     }
 

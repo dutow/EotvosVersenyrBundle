@@ -302,4 +302,9 @@ class Round
     {
         return $this->submissions;
     }
+
+    public function getRoundtypeProvider($container)
+    {
+        return $container->get($this->getRoundtype());
+    }
 }
