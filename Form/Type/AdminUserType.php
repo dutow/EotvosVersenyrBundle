@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormBuilder;
  * @license   MIT License (http://www.opensource.org/licenses/mit-license.php)
  * @version   Release: v0.1
  */
-class UserType extends AbstractType
+class AdminUserType extends AbstractType
 {
 
     /**
@@ -46,7 +46,6 @@ class UserType extends AbstractType
             'email',
             array(
                 'label' => 'registration.form.email',
-                'attr' => array( 'help' => 'registration.form.email_help')
             ))
             ;
 
@@ -62,6 +61,16 @@ class UserType extends AbstractType
                 ),
             ))
             ;
+
+        $builder->add(
+            'admin',
+            'checkbox'
+        );
+
+        $builder->add(
+            'tester',
+            'checkbox'
+        );
 
     }
 
@@ -90,4 +99,5 @@ class UserType extends AbstractType
     }
 
 }
+
 

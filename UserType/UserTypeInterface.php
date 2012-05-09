@@ -24,8 +24,6 @@ interface UserTypeInterface
     /**
      * Returns an instance of the term Registration entity
      *
-     * FormType should extend RegistrationType.
-     * 
      * @return Registration
      */
     public function getRegistrationEntityInstance();

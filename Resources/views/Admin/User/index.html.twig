@@ -1,0 +1,33 @@
+{% extends 'CancellarAdminBundle::layout.html.twig'  %}
+
+{% block main %}
+<h2>{% trans %}admin.user.display.list{% endtrans %}</h2>
+<a style="float: right" href="{{ path('admin_user_new') }}">{% trans %}admin.user.actions.new{% endtrans %}</a>
+<br />
+<br />
+<table class="standard" style="width:100%;">
+  <thead>
+    <tr>
+      <th>{% trans %}admin.user.fields.id{% endtrans %}</th>
+      <th>{% trans %}admin.user.fields.email{% endtrans %}</th>
+      <th>{% trans %}admin.user.fields.status{% endtrans %}</th>
+      <th>{% trans %}admin.user.fields.created{% endtrans %}</th>
+      <th>{% trans %}admin.actions{% endtrans %}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in users %}
+    <tr>
+      <td><a href="{{ path('admin_user_show', { id: row.id }) }}">{{ row.id }}</a></td>
+      <td>{{ row.email }}</td>
+      <td>{{ (row.admin ? 'admin.user.status.admin' : (row.tester? 'admin.user.status.tester' : 'admin.user.status.user'))|trans }}</td>
+      <td>{{ row.createdAt|date('Y-m-d') }}</td>
+      <td>
+        <a href="{{ path('admin_user_edit', { id: row.id }) }}">{% trans %}admin.user.actions.edit{% endtrans %}</a>
+        <a href="{{ path('admin_user_delete', { id: row.id }) }}">{% trans %}admin.user.actions.delete{% endtrans %}</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

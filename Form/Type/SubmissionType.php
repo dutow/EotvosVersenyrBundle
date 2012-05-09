@@ -7,6 +7,8 @@ use Eotvos\VersenyrBundle\Entity as Entity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 /**
  * Form type for user registration. Data modification is handled by different forms.
  *
@@ -16,11 +18,21 @@ use Symfony\Component\Form\FormBuilder;
  * @license   MIT License (http://www.opensource.org/licenses/mit-license.php)
  * @version   Release: v0.1
  */
-class RegistrationType extends AbstractType
+class SubmissionType extends AbstractType
 {
+
+    public function __construct(ContainerInterface $container, Entity\Round $round)
+    {
+        $this->container = $container;
+        $this->round = $round;
+    }
 
     /**
      * Builds the form.
+     *
+     * Symfony2 doesn't let us see the form data in this method, unless using an event listener hook. Which seems
+     * perfectyl logical, but we need it. So we are requiring the calling method to give us the neccessary data in
+     * the constructor...
      * 
      * @param FormBuilder $builder builder
      * @param array       $options form options
@@ -31,24 +43,22 @@ class RegistrationType extends AbstractType
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $builder->add('sections', 'entity', array(
-            'class' => 'Eotvos\VersenyrBundle\Entity\Section',
-            'multiple' => true,
-            'expanded' => true,
-            'required' => true,
-            'query_builder' => function(Entity\SectionRepository $er){
-                $now = new \DateTime();
-                $now->sub(new \DateInterval('P1D'));
+        $users = $this
+            ->container
+            ->get('doctrine')
+            ->getRepository('EotvosVersenyrBundle:User')
+            ->findBySection($this->round->getSection());
 
-                return $er->createQueryBuilder('s')->where('s.registrationUntil > :now')->setParameter('now', $now);
-            }
+        $builder->add('user', 'entity', array(
+            'class' => 'Eotvos\VersenyrBundle\Entity\User',
+            'choices' => $users,
+            'multiple' => false,
+            'expanded' => false,
+            'required' => true,
         ));
 
-        $builder->add('terms', 'checkbox', array(
-            'label' => 'registration.form.accept',
-            'required' => true,
-            'property_path' => false, // this isn't in the entity
-        ));
+        $builder->add('category');
+        $builder->add('points', 'number');
     }
 
     /**
@@ -58,7 +68,7 @@ class RegistrationType extends AbstractType
      */
     public function getName()
     {
-        return 'user_registration_it';
+        return 'submission_form';
     }
 
     /**
@@ -71,7 +81,7 @@ class RegistrationType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-            'data_class' => 'Eotvos\VersenyrBundle\Entity\Registration',
+            'data_class' => 'Eotvos\VersenyrBundle\Entity\Submission',
         );
     }
 

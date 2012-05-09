@@ -1,0 +1,22 @@
+{% extends 'CancellarAdminBundle::layout.html.twig' %}
+
+{% form_theme form 'CancellarAdminBundle::form.html.twig' %}
+
+{% block main %}
+<h2>{% trans %}admin.user.display.edit{% endtrans %}</h2>
+<form class="wide" action="{{ path('admin_user_edit', { 'id': user.id } ) }}" method="post" {{ form_enctype(form) }}>
+  <fieldset>
+    <legend>{% trans %}admin.user.legend.fields{% endtrans %}</legend>
+    {{ form_row(form.email) }}
+    {{ form_row(form.password) }}
+    {{ form_row(form.admin) }}
+    {{ form_row(form.tester) }}
+    <div class="formrow row_required">
+      <p class="inputholder">
+      <input type="submit" value="{% trans %}admin.user.actions.save{% endtrans %}" class="button" />
+      </p>
+    </div>
+  </fieldset>
+  {{ form_rest(form) }}
+</form>
+{% endblock %}

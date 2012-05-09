@@ -114,8 +114,6 @@ class TermController extends Controller
             if ($form->isValid()) {
 
                 $term = $form->getData();
-                $passwordGenerator = $this->get('eotvos.versenyr.password_generator');
-                $passwordGenerator->encodePassword($term, $term->getPassword());
 
                 $em->persist($term);
                 $em->flush();
@@ -168,11 +166,6 @@ class TermController extends Controller
 
                 if ($term->getId()!=$id) {
                     throw $this->createNotFoundException("Don't forge stupid updates");
-                }
-
-                if ($term->getPassword()) {
-                    $passwordGenerator = $this->get('eotvos.versenyr.password_generator');
-                    $passwordGenerator->encodePassword($term, $term->getPassword());
                 }
 
                 $em->flush();

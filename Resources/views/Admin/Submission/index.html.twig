@@ -1,0 +1,46 @@
+{% extends 'CancellarAdminBundle::layout.html.twig'  %}
+
+{% block main %}
+<h2>{% trans %}admin.submission.display.title{% endtrans %}</h2>
+<form>
+    <label>
+        {% trans %}admin.submission.display.rounds{% endtrans %}
+    </label>
+    <select id="rnd">
+        {% for round in rounds %}
+        <option></option>
+        <option value="{{ round.id }}" {% if around == round.id %}selected="selected"{% endif %}>{{ round.page.title }}</option>
+        {% endfor %}
+    </select>
+</form>
+{% if around %}
+<a style="float: right" href="{{ path('admin_submission_new', { 'round' : round.id }) }}">{% trans %}admin.submission.actions.new{% endtrans %}</a>
+{% endif %}
+<br />
+<br />
+<table class="standard" style="width:100%;">
+    <thead>
+        <tr>
+            <th>{% trans %}admin.submission.fields.id{% endtrans %}</th>
+            <th>{% trans %}admin.submission.fields.user{% endtrans %}</th>
+            <th>{% trans %}admin.submission.fields.category{% endtrans %}</th>
+            <th>{% trans %}admin.submission.fields.time{% endtrans %}</th>
+            <th>{% trans %}admin.actions{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in submissions %}
+        <tr>
+            <td>{{ row.id }}</td>
+            <td>{{ row.name }}</td>
+            <td>{{ row.createdAt|date('Y-m-d') }}</td>
+            <td>{{ row.userType }}</td>
+            <td>
+                <a href="{{ path('admin_submission_edit', { id: row.id }) }}">{% trans %}admin.submission.actions.edit{%endtrans%}</a>
+                <a href="{{ path('admin_submission_delete', { id: row.id }) }}">{% trans %}admin.submission.actions.delete{%endtrans%}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

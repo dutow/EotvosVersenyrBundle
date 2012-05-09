@@ -8,3 +8,55 @@ registration:
     password: 'Jelszo'
     confirm:  'Jelszo megegyszer'
     accept: 'A feltetelelet elfogadom'
+
+admin:
+  actions: 'Muveletek'
+
+  term:
+    
+  textpage:
+
+  submission:
+    display:
+      title: 'Megoldasok'
+      rounds: 'Fordulo:'
+    actions:
+      new: 'Uj'
+      edit: 'Szerkeszt'
+      delete: 'Torol'
+      save: 'Mentes'
+    fields:
+      user: 'Versenyzo'
+      category: 'Kategoria'
+      id: 'ID'
+      time: 'Ido'
+    
+  user:
+    display:
+      list: 'Felhasznalok'
+      edit: 'Felhasznalo szerkesztese'
+      new:  'Uj felhasznalo'
+      one:  'Felhasznalo: %email%'
+      registrations: 'Regisztraciok'
+      register: 'Uj regisztracio: %name%'
+      edit_registration: 'Regisztracio: %name%'
+    legend:
+      fields: 'Adatok'
+      terms: 'Feltetelek'
+    actions:
+      new: 'Uj'
+      edit: 'Szerkeszt'
+      delete: 'Torol'
+      save: 'Mentes'
+      delete_registration: 'Torol'
+      edit_registration: 'Szerkeszt'
+      register: 'Regisztral:'
+    fields:
+      status: 'Status'
+      email: 'E-mail'
+      id: 'ID'
+      created: 'Regisztralt'
+    status:
+      admin: 'Admin'
+      tester: 'Tesztelo'
+      user: 'Versenyzo'

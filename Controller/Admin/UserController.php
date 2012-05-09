@@ -198,6 +198,219 @@ class UserController extends Controller
     }
 
     /**
+     * Deletes a registration
+     * 
+     * @param int $user user id
+     * @param int $term term id
+     * 
+     * @return array template parameters
+     *
+     * @Route("/delreg/{user}/{term}", name = "admin_user_delreg" )
+     * @Template
+     */
+    public function deleteRegistrationAction($user, $term)
+    {
+        if (!is_numeric($user)) {
+            throw $this->createNotFoundException("User not found");
+        }
+
+        if (!is_numeric($term)) {
+            throw $this->createNotFoundException("Term not found");
+        }
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $userRepo = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:User')
+            ;
+
+        $user = $userRepo->findOneById($user);
+
+        if (!$user) {
+            throw $this->createNotFoundException("User not found");
+        }
+
+        $termRepo = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ;
+
+        $term = $termRepo->findOneById($term);
+
+        if (!$term) {
+            throw $this->createNotFoundException("Term not found");
+        }
+
+        foreach ($user->getRegistrations() as $registration) {
+            if ($registration->getTerm()==$term) {
+                // found it -> delete
+                $em->remove($registration);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('admin_user_show', array('id' => $user->getId())));
+            }
+        }
+
+        throw $this->createNotFoundException("Regisration not found!");
+    }
+
+    /**
+     * Registers a user to a term
+     * 
+     * @param int $user user id
+     * @param int $term term id
+     * 
+     * @return array template parameters
+     *
+     * @Route("/register/{user}/{term}", name = "admin_user_register" )
+     * @Template
+     */
+    public function registerAction($user, $term)
+    {
+        if (!is_numeric($user)) {
+            throw $this->createNotFoundException("User not found");
+        }
+
+        if (!is_numeric($term)) {
+            throw $this->createNotFoundException("Term not found");
+        }
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $userRepo = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:User')
+            ;
+
+        $user = $userRepo->findOneById($user);
+
+        if (!$user) {
+            throw $this->createNotFoundException("User not found");
+        }
+
+        $termRepo = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ;
+
+        $term = $termRepo->findOneById($term);
+
+        if (!$term) {
+            throw $this->createNotFoundException("Term not found");
+        }
+
+        foreach ($user->getRegistrations() as $registration) {
+            if ($registration->getTerm()==$term) {
+                // just silent redirect, maybe exception or at least a flash?
+                return $this->redirect($this->generateUrl('admin_user_show', array('id' => $user->getId())));
+            }
+        }
+
+        $registrationType = $this->container->get($term->getUsertype());
+
+        $inst = $registrationType->getRegistrationEntityInstance();
+        $inst->setUser($user);
+        $inst->setTerm($term);
+        $form = $this->createForm($registrationType->getRegistrationFormInstance(), $inst);
+
+        $request = $this->get('request');
+
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+
+                $em->persist($form->getData());
+
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('admin_user_show', array('id' => $user->getId())));
+            }
+        }
+
+        return array(
+            'user' => $user,
+            'term' => $term,
+            'form' => $form->createView(),
+            'formpart' => $registrationType->getRegistrationFormPartial(),
+        );
+    }
+
+    /**
+     * Edits a registration
+     * 
+     * @param int $user user id
+     * @param int $term term id
+     * 
+     * @return array template parameters
+     *
+     * @Route("/editreg/{user}/{term}", name = "admin_user_editreg" )
+     * @Template
+     */
+    public function editRegistrationAction($user, $term)
+    {
+        if (!is_numeric($user)) {
+            throw $this->createNotFoundException("User not found");
+        }
+
+        if (!is_numeric($term)) {
+            throw $this->createNotFoundException("Term not found");
+        }
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $userRepo = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:User')
+            ;
+
+        $user = $userRepo->findOneById($user);
+
+        if (!$user) {
+            throw $this->createNotFoundException("User not found");
+        }
+
+        $termRepo = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ;
+
+        $term = $termRepo->findOneById($term);
+
+        if (!$term) {
+            throw $this->createNotFoundException("Term not found");
+        }
+
+        $inst = null;
+        foreach ($user->getRegistrations() as $registration) {
+            if ($registration->getTerm()==$term) {
+                $inst = $registration;
+            }
+        }
+
+        if (null===$inst) {
+            throw $this->createNotFoundException("Regisration not found!");
+        }
+
+        $registrationType = $this->container->get($term->getUsertype());
+
+        $form = $this->createForm($registrationType->getRegistrationFormInstance(), $inst);
+
+        $request = $this->get('request');
+
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+
+                $em->persist($form->getData());
+
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('admin_user_show', array('id' => $user->getId())));
+            }
+        }
+
+        return array(
+            'user' => $user,
+            'term' => $term,
+            'form' => $form->createView(),
+            'formpart' => $registrationType->getRegistrationFormPartial(),
+        );
+    }
+
+
+    /**
      * Shows a user
      *
      * @param int $id Id of the user
@@ -220,12 +433,18 @@ class UserController extends Controller
 
         $user = $repo->findOneById($id);
 
+        $terms = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->findAll() // todo: findUserNotIn($user)
+            ;
+
         if (!$user) {
             throw $this->createNotFoundException("User not found");
         }
 
         return array(
             'user' => $user,
+            'terms' => $terms,
         );
     }
 
