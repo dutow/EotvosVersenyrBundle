@@ -157,4 +157,25 @@ class TextPageRepository extends NestedTreeRepository
         }
     }
 
+    public function getForTermWithSpecial($term, $special)
+    {
+        try {
+            $parent = $this->getTermRoot($term);
+
+            if ($parent===null) {
+                return null;
+            }
+
+            return $this->getEntityManager()
+                ->createQuery('SELECT tp FROM Eotvos\VersenyrBundle\Entity\TextPage tp WHERE tp.root=:parent AND tp.special=:special')
+                ->setParameter('parent', $parent->getId())
+                ->setParameter('special', $special)
+                ->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $nre) {
+            return null;
+        } catch (\Doctrine\ORM\NonUniqueResultException $nure) {
+            throw $nure;
+        }
+    }
+
 }

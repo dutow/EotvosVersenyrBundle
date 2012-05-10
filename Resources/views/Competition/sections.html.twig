@@ -7,6 +7,6 @@
 
 {% block body %}
 {% for display in sections %}
-<a href="{{ display.page | ecvurl  }}" id="sectimg_{{ display.page.slug }}" class="sectimg">{{ display.page.title }}</a>
+<a href="{{ display.page | ecvurl  }}" id="section_{{ display.page.slug }}" class="sectionbox">{{ display.page.title }}</a>
 {% endfor %}
 {% endblock %}

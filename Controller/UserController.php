@@ -77,9 +77,7 @@ class UserController extends Controller
         $pageRec = $tpRep->getForTermWithSlug($term, 'sikeres_regisztracio');
 
         if (!$pageRec) {
-            return $this->render('EotvosVersenyrBundle::error.twig.html', array(
-                'code' => 404,
-            ));
+            return $this->createNotFoundException('page not found');
         }
 
         return array(

@@ -33,21 +33,17 @@ class CompetitionController extends Controller
     public function sectionsAction($term)
     {
         $tpRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:TextPage');
-        $pageRec = $tpRep->getForTermWithSlug($term, 'szekciok');
+        $pageRec = $tpRep->getForTermWithSpecial($term, 'sections');
 
         if (!$pageRec) {
-            return $this->render('EotvosVersenyrBundle::error.twig.html', array(
-                'code' => 404,
-            ));
+            throw $this->createNotFoundException('page not found');
         }
 
         $secRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:Section');
         $sectionsRec = $secRep->getForTerm($term);
 
         if (count($sectionsRec) == 0) {
-            return $this->render('EotvosVersenyrBundle::error.twig.html', array(
-                'code' => 404,
-            ));
+            throw $this->createNotFoundException('page not found');
         }
 
         return array(
@@ -73,9 +69,7 @@ class CompetitionController extends Controller
         $sectionRec = $tpRep->getForTermWithSlug($term, $sectionSlug);
 
         if (!$sectionRec || $sectionRec->getSection()==null) {
-            return $this->render('EotvosVersenyrBundle::error.twig.html', array(
-                'code' => 404,
-            ));
+            throw $this->createNotFoundException('page not found');
         }
 
         return array(
@@ -104,9 +98,7 @@ class CompetitionController extends Controller
         $submissionRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:Submission');
 
         if (!$sectionRec || $sectionRec->getSection()==null || !$roundRec || $roundRec->getRound()==null || $roundRec->getParent()->getId()!=$sectionRec->getId()) {
-            return $this->render('EotvosVersenyrBundle::error.twig.html', array(
-                'code' => 404,
-            ));
+            throw $this->createNotFoundException('page not found');
         }
 
         $submissions = array();
@@ -174,9 +166,7 @@ class CompetitionController extends Controller
         $sectionRec = $tpRep->getForTermWithSlug($term, $sectionSlug);
 
         if (!$sectionRec || $sectionRec->getSection()==null || !$roundRec || $roundRec->getRound()==null || $roundRec->getParent()->getId()!=$sectionRec->getId()) {
-            return $this->render('EotvosVersenyrBundle::error.twig.html', array(
-                'code' => 404,
-            ));
+            throw $this->createNotFoundException('page not found');
         }
 
         return array(
@@ -211,9 +201,7 @@ class CompetitionController extends Controller
         }
 
         if (!$pageRec) {
-            return $this->render('EotvosVersenyrBundle::error.twig.html', array(
-                'code' => 404,
-            ));
+            throw $this->createNotFoundException('page not found');
         }
 
         return array(
