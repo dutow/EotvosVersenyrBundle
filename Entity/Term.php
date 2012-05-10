@@ -179,10 +179,42 @@ class Term
         $root->setParent(null);
         $root->setSpecial('termroot');
         $root->setInMenu(false);
-        $root->setBody("Lorem ipsum stbstb");
+        $root->setBody("Lorem ipsum stbstb this here is never shown");
         $em->persist($root);
 
         $this->setRootPage($root);
+
+        $termmail = new TextPage();
+        $termmail->setTitle('Welcome');
+        $termmail->setParent($root);
+        $termmail->setInMenu(false);
+        $termmail->setSpecial('termmail');
+        $termmail->setBody("Lorem ipsum stbstb");
+        $em->persist($termmail);
+
+        $reg1 = new TextPage();
+        $reg1->setTitle('Registration');
+        $reg1->setParent($root);
+        $reg1->setInMenu(true);
+        $reg1->setSpecial('register');
+        $reg1->setBody("Lorem ipsum stbstb");
+        $em->persist($reg1);
+
+        $reg2 = new TextPage();
+        $reg2->setTitle('Registration');
+        $reg2->setParent($root);
+        $reg2->setInMenu(false);
+        $reg2->setSpecial('register_after');
+        $reg2->setBody("Lorem ipsum stbstb");
+        $em->persist($reg2);
+
+        $archiv = new TextPage();
+        $archiv->setTitle('Archives');
+        $archiv->setParent($root);
+        $archiv->setInMenu(false);
+        $archiv->setSpecial('register_after');
+        $archiv->setBody("Lorem ipsum stbstb");
+        $em->persist($archiv);
 
         $sections = new TextPage();
         $sections->setTitle('Sections');
@@ -201,7 +233,7 @@ class Term
         $em->persist($section);
 
         $until = $this->getRegistrationStart();
-        $until->modify('+4 days');
+        $until->modify('+30 days');
         $sec = new Section();
         $sec->setRegistrationUntil($until);
         $sec->setPage($section);
@@ -218,7 +250,7 @@ class Term
         $em->persist($round);
 
         $stop = $until;
-        $stop->modify('+4 days');
+        $stop->modify('-2 days');
         $rnd = new Round();
         $rnd->setRoundtype('eotvos.versenyr.roundtype.finals');
         $rnd->setConfig('{}');

@@ -92,20 +92,39 @@ class UserController extends Controller
      *
      * @return array template parameters
      *
-     * @Route("/registration", name="competition_register" )
+     * @Route("/{term}/registration", name="competition_register" )
      * @Template()
      */
-    public function registerAction()
+    public function registerAction($term)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
+        $term = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->findOneByName($term)
+            ;
+        if (!$term) {
+            throw $this->createNotFoundException('Term not found');
+        }
+
+        if (!$term->getActive()) {
+            throw $this->createNotFoundException('Term not found');
+        }
+
+        if (false) {
+            // not active: render static page
+
+            return array();
+        }
+
         $tpRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:TextPage');
 
-        $userType = new DummyType();
+        $userType = $this->container->get($term->getUsertype());
 
         $user = new Entity\User();
         $registration = $userType->getRegistrationEntityInstance();
-        $registration->setTerm(2012);
+
+        $registration->setTerm($term);
 
         $user->addRegistration($registration);
 
@@ -121,7 +140,6 @@ class UserController extends Controller
                 $ur = $form->getData();
                 $user = $ur['user'];
                 $registration = $ur['registration'];
-                $registration->setTerm(2012);
                 $user->addRegistration($registration);
 
                 $passwordGenerator = $this->get('eotvos.versenyr.password_generator');

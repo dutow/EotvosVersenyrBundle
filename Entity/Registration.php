@@ -110,6 +110,16 @@ class Registration
     }
 
     /**
+     * Set sections
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function setSections($sections)
+    {
+        return $this->sections = $sections;
+    }
+
+    /**
      * Get sections
      *
      * @return Doctrine\Common\Collections\Collection 

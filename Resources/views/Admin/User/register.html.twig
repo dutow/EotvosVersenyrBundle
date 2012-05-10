@@ -5,8 +5,8 @@
 {% block main %}
 <h2>{% trans with { '%name%': term.name } %}admin.user.display.register{% endtrans %}</h2>
 <form class="wide" action="{{ path('admin_user_register', { 'user': user.id, 'term': term.id } ) }}" method="post" {{ form_enctype(form) }}>
+  {% include formpart with { 'form': form } %}
   <fieldset>
-    {% include formpart with { 'form': form } %}
     <legend>{% trans %}admin.user.legend.terms{% endtrans %}</legend>
     {{ form_row(form.terms) }}
     <div class="formrow row_required">

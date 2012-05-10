@@ -12,17 +12,25 @@ Jelentkezés
 {% block body %}
 <h2>{% trans %}registration.form.title{% endtrans %}</h2>
 <form method="post" {{ form_enctype(form) }}>
+
   <fieldset>
     <legend>Account</legend>
     {{ form_row(form.user.email) }}
     {{ form_row(form.user.password) }}
   </fieldset>
   {% include subform with { 'form' : form } %}
-  <fieldset class="choices">
-    <legend>Sections</legend>
-    {{ form_errors(form.user.sections) }}
-    {{ form_widget(form.user.sections) }}
+
+  <fieldset>
+    <legend>{% trans %}registration.form.legend.terms{% endtrans %}</legend>
+    {{ form_row(form.registration.terms) }}
   </fieldset>
+
+  <fieldset class="choices">
+    <legend>{% trans %}registration.form.legend.sections{% endtrans %}</legend>
+    {{ form_errors(form.registration.sections) }}
+    {{ form_widget(form.registration.sections) }}
+  </fieldset>
+
   {{ form_rest(form) }}
   <input type="submit" value="Register" class="button" />
 </form>

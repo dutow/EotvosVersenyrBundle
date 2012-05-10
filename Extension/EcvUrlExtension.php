@@ -84,26 +84,73 @@ class EcvUrlExtension extends \Twig_Extension implements ContainerAwareInterface
         if ($sentence instanceof Entity\Round) {
             $sentence = $sentence->getPage();
         }
+        if ($sentence instanceof Entity\Term) {
+            $sentence = $sentence->getPage();
+        }
         if ($sentence instanceof Entity\TextPage) {
 
-            if ($sentence->getSpecial()!="") {
-                if ($sentence->getSpecial()=="jelentkezes") {
-                    return $this->container->get('router')->generate('competition_'.$sentence->getSpecial(), array( 'term' => $sentence->getRootNode()->getTitle() ));
-                } else {
-                    return $this->container->get('router')->generate('competition_'.$sentence->getSpecial(), array( 'term' => $sentence->getRootNode()->getTitle(), 'slug' => $sentence->getSlug() ));
-                }
-            }
-            if ($sentence->getSection()!=null) {
-                // section handler, todo
-                return $this->container->get('router')->generate('competition_section', array( 'term' => $sentence->getRootNode()->getTitle(), 'sectionSlug' => $sentence->getSlug()));
-            }
-            if ($sentence->getRound()!=null) {
-                return $this->container->get('router')->generate('competition_round', array( 'term' => $sentence->getRootNode()->getTitle(), 'roundSlug' => $sentence->getSlug(), 'sectionSlug' => $sentence->getParent()->getSlug() ));
-            }
+            switch($sentence->getSpecial()){
 
-            return $this->container->get('router')->generate('competition_page', array( 'term' => $sentence->getRootNode()->getTitle(), 'pageSlug' => $sentence->getSlug() ));
-        } else {
-            return "WTF";
+                case 'section':
+
+                    return $this
+                        ->container
+                        ->get('router')
+                        ->generate(
+                            'competition_section',
+                            array(
+                                'term' => $sentence->getRootNode()->getTerm()->getName(),
+                                'sectionSlug' => $sentence->getSlug()
+                            ));
+
+                case 'sections':
+
+                    return $this
+                        ->container
+                        ->get('router')
+                        ->generate(
+                            'competition_sections',
+                            array(
+                                'term' => $sentence->getRootNode()->getTerm()->getName(),
+                            ));
+
+                case 'round':
+
+                    return $this
+                        ->container
+                        ->get('router')
+                        ->generate(
+                            'competition_round',
+                            array(
+                                'term' => $sentence->getRootNode()->getTerm()->getName(),
+                                'roundSlug' => $sentence->getSlug(),
+                                'sectionSlug' => $sentence->getParent()->getSlug()
+                            ));
+
+                case 'register':
+                    // todo: if active? 
+
+                    return $this
+                        ->container
+                        ->get('router')
+                        ->generate(
+                            'competition_'.$sentence->getSpecial(),
+                            array(
+                                'term' => $sentence->getRootNode()->getTerm()->getName(),
+                            ));
+
+                default:
+
+                    return $this
+                        ->container
+                        ->get('router')
+                        ->generate(
+                            'competition_page',
+                            array(
+                                'term' => $sentence->getRootNode()->getTerm()->getName(),
+                                'pageSlug' => $sentence->getSlug()
+                            ));
+            }
         }
     }
 
