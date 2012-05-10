@@ -59,7 +59,11 @@ class TextPageRepository extends NestedTreeRepository
 
                 $term = $termRep->findOneByName($termName);
 
-                return $term->getRootPage();
+                if ($term) {
+                    return $term->getRootPage();
+                }
+
+                return null;
             }
 
         } catch (\Doctrine\ORM\NoResultException $nre) {

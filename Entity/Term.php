@@ -249,8 +249,10 @@ class Term
         $round->setBody("Lorem ipsum stbstb");
         $em->persist($round);
 
-        $stop = $until;
-        $stop->modify('-2 days');
+        $until = clone($until);
+        $until->modify('-23 days');
+        $stop = clone($until);
+        $stop->modify('+9 days');
         $rnd = new Round();
         $rnd->setRoundtype('eotvos.versenyr.roundtype.finals');
         $rnd->setConfig('{}');

@@ -178,7 +178,7 @@ class EcvUrlExtension extends \Twig_Extension implements ContainerAwareInterface
      */
     public function getRoundController($round)
     {
-        $roundController = $this->container->get('eotvos_versenyr.round.'.$round->getRoundtype());
+        $roundController = $this->container->get($round->getRoundtype());
 
         return $roundController;
     }

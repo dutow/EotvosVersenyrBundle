@@ -202,4 +202,31 @@ class Section
     {
         $this->attendees[] = $attendees;
     }
+
+    public function getRounds()
+    {
+        $ra = array();
+        foreach ($this->getPage()->getChildren() as $ch) {
+            if ($ch->getSpecial()=="round") {
+                $ra[] = $ch->getRound();
+            }
+        }
+
+        return $ra;
+    }
+
+    public function getActiveRoundForDate($date=null)
+    {
+        if (null===$date) {
+            $date = new \DateTime();
+        }
+
+        foreach ($this->getRounds() as $round) {
+            if ($round->getStart() >= $date || $round->getStop() >= $date) {
+               return $round;
+            }
+        }
+
+        return null;
+    }
 }

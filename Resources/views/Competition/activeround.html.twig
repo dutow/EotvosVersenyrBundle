@@ -1,19 +1,20 @@
-{% for child in page.children %}
-  {% if child.round.active %}
+{% set arnd = page.section.activeRoundForDate() %}
+{% if arnd is not null %}
+  {% if arnd.active %}
     <div class="activeround">
-      <h3>Forduló folyamatban: <a href="{{ child | ecvurl }}">{{ child.title }}</a></h3>
+      <h3>Forduló folyamatban: <a href="{{ arnd.page | ecvurl }}">{{ arnd.page.title }}</a></h3>
   {% if app.user %}
-    {% if app.user.hasSection(child.parent.section) %}
+    {% if app.user.hasSection(arnd.page.parent.section) %}
       <p>A forduló jelenleg folyamatban van, és korábban már jelentkeztél a szekcióba, valamint az eddigi fordulókon túljutottál, így részt vehetsz benne.</p>
-      <p>Ehhez a verseny végidőpontjáig, azaz {{ child.round.stop | date('Y. M. d. H:i')  }}-ig van időd.</p>
-      {% render roundcontroller(child.round).getTemplateName() with { 'round': child } %}
+      <p>Ehhez a verseny végidőpontjáig, azaz {{ arnd.stop | date('Y. M. d. H:i')  }}-ig van időd.</p>
+      {% render roundcontroller(arnd).getTemplateName() with { 'round': arnd.page } %}
       <p class="linkbar">
-      {% for name, link in roundcontroller(child.round).getRoundLinks(2011, page.section, child.round) %}
+      {% for name, link in roundcontroller(arnd).getRoundLinks(2011, page.section, arnd) %}
         {% if not (rcnf1 is defined) %}{% set rcnf1 = true %}{% else %} | {% endif %} <a href="{{ link }}">{{ name }}</a>
       {% endfor %}
       </p>
     {% else %}
-      {% if app.user.mayJoin(child.parent.section) %}
+      {% if app.user.mayJoin(arnd.page.parent.section) %}
       <p>Ebben a fordulóban nem veszel részt, mivel nem indultál még a(z) {{ page.title }} szekcióban. Azonban a regisztrációs időszak még tart, így amennyiben meggondoltad magad és indulnál ebben is,
       látogass el a <a href="{{ url('competition_subscriptions', { 'term': 2011 } ) }}">profilod versenybeállítások oldalára</a>, ahol felveheted a választottjaid köze.</p>
       {% else %}
@@ -24,5 +25,13 @@
     <p>A részvételhez azonban be kell jelentkezned. A bejelentkezéshez szükséges jelszót a regisztrációs e-mailedben találod, és azt, valamint e-mail címedet a jobb fölső részen kell megadnod.</p>
   {% endif %}
   </div>
+  {% else %}
+    <div class="nextround">
+      <h3>Kovetkezo fordulo: <a href="{{ arnd.page | ecvurl }}">{{ arnd.page.title }}</a></h3>
+    </div>
+  {% endif %}
+{% else %}
+    <div class="sectionover">
+      <h3>A szekcio nem tartalmaz tobb fordulot.</h3>
+    </div>
 {% endif %}
-{% endfor %}

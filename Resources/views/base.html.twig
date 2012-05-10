@@ -12,10 +12,10 @@
        More info: h5bp.com/b/378 -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>{% block title %}{% endblock %} | Eötvös József Tanulmányi Verseny</title>
+  <title>{% block title %}{% endblock %} | VersenyR</title>
   <meta name="description" content="">
-  <meta name="keywords" content="Eötvös József Tanulmányi Verseny Középiskolás Verseny">
-  <meta name="author" content="Eötvös József Collegium">
+  <meta name="author" content="Zsolt Parragi, Cancellar">
+  <meta name="copyright" content="Zsolt Parragi, Cancellar">
 
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -25,7 +25,6 @@
   <!-- CSS: implied media=all -->
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="{{ asset('bundles/eotvosversenyr/css/h5b.css') }}">
-  <link rel="stylesheet" href="{{ asset('bundles/eotvosversenyr/css/trajanpro.css') }}">
   <link rel="stylesheet" href="{{ asset('bundles/eotvosversenyr/css/jquery.autocomplete.css') }}">
   <link rel="stylesheet" href="{{ asset('bundles/eotvosversenyr/css/jquery.countdown.css') }}">
   <link rel="stylesheet" href="{{ asset('bundles/eotvosversenyr/css/main.css') }}">
@@ -64,7 +63,7 @@
 
     <!-- Change UA-XXXXX-X to be your site's ID -->
     <script>
-      window._gaq = [['_setAccount','UA-26090062-1'],['_trackPageview'],['_trackPageLoadTime']];
+      window._gaq = [['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
       Modernizr.load({
       load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
       });
@@ -94,7 +93,7 @@
           {% include 'EotvosVersenyrBundle::user.html.twig' %}
         </div>
         <div id="head-text">
-          Eötvös József Tanulmányi Verseny<span>{{ block('title') }}</span>
+          VersenyR<span>{{ block('title') }}</span>
         </div>
 
     </header>
@@ -102,10 +101,6 @@
 
       <div id="left-side">
         {% include 'EotvosVersenyrBundle::menu.html.twig' %}
-        <div class="tamogat">
-          <a href="http://www.magveto.hu"><img src="/magveto.jpg" style="width: 80px; display: block; float: right; margin-bottom: 20px;" alt="Magveto" /></a>
-          <a href="http://cancellar.hu"><img src="{{ asset('bundles/eotvosversenyr/images/cancellar_80px.png') }}" alt="Cancellar Informatika Logó" style="display: block; float: right; clear: both; margin-right: 5px;" /></a>
-        </div>
       </div>
       {% if threecol is defined and threecol %}
       <div id="right-side">
@@ -154,24 +149,6 @@
 
     </div>
   </div> <!--! end of #container -->
-  <footer>
-    <img src="{{ asset('bundles/eotvosversenyr/images/ejcdb_80px.png') }}" alt="EJC Dákbizottság Logó" style="display: none;" />
-    <div class="logo">
-      <img src="{{ asset('bundles/eotvosversenyr/images/ejc_80px.png') }}" alt="Eötvös Collegium Logó" />
-      <h3>Copyright &copy; 2011</h3>
-      <a href="http://www.eotvos.elte.hu">Eötvös Collegium</a>
-    </div>
-    <div class="logo">
-      <img src="{{ asset('bundles/eotvosversenyr/images/ejcdb_80px.png') }}" alt="EJC Dákbizottság Logó" />
-      <h3>Szervező</h3>
-      <a href="http://wiki.eotvos.elte.hu/wiki/index.php?title=Diákbizottság">EJC Dákbizottság</a>
-    </div>
-    <div class="logo">
-      <img src="{{ asset('bundles/eotvosversenyr/images/cancellar_80px.png') }}" alt="Cancellar Informatika Logó" />
-      <h3>Weboldal</h3>
-      <a href="http://cancellar.hu">Cancellar Informatika</a>
-    </div>
-  </footer>
 
 </body>
 </html>

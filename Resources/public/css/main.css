@@ -32,16 +32,16 @@ a:hover{
 /************************/
 /**     Common         **/
 /************************/
-body { background: url('../images/backgroundBody.jpg') repeat-x 0 63px; color: #444; font-size: 11px; font-family: "Tahoma", sans-serif; }
+body { font-size: 11px; font-family: "Tahoma", sans-serif; }
 
 /************************/
 /**     Layout         **/
 /************************/
-#container { width: 980px; background: url('../images/backgroundWrapper.jpg') no-repeat; }
+#container { width: 980px; }
 
 header { position: relative; height: 188px; }
-header #logo { position: absolute; width: 163px; height: 163px; top: 24px; left: 70px; }
-header #head-text { font-size: 22px; color: #fff; position: absolute; width: 684px; right:-10px; top: 80px; font-weight: bold; font-family: TrajanProRegular, inherit; }
+header #logo { position: absolute; width: 163px; height: 163px; top: 24px; left: 70px; background-color: #00c; }
+header #head-text { font-size: 22px; color: #000; position: absolute; width: 684px; right:-10px; top: 80px; font-weight: bold; background-color: #00f; }
 header #head-text span { font-size: 22px; display: block; margin-left: 60px; }
 header #search-container { position: absolute; right: 0; bottom: 0;}
 
@@ -98,7 +98,7 @@ header #search-container { position: absolute; right: 0; bottom: 0;}
 #main-menu a{
   text-decoration: none;
 }
-#main-menu .main-menu-item { list-style: none; border-bottom: 1px dotted #D8D8D8; padding: 0 10px 13px 10px; margin: 0 0 13px 0; font-family: "times new roman", serif; font-variant: small-caps; }
+#main-menu .main-menu-item { list-style: none; border-bottom: 1px dotted #D8D8D8; padding: 0 10px 13px 10px; margin: 0 0 13px 0; font-variant: small-caps; }
 #main-menu #active-menu { background: url('../images/backgroundMenuLi.jpg') no-repeat 74px 1px; background-position: 25px 5px; }
 #main-menu .main-menu-item a { font-size: 16px; color: #555; }
 #main-menu .main-menu-item > a{ display: inline-block; font-weight: bold; text-decoration:none; }
@@ -112,30 +112,18 @@ header #search-container { position: absolute; right: 0; bottom: 0;}
 #main-menu .sub-menu-item { padding: 1px 0; }
 #main-menu .sub-menu-item a { font-size: 10px; color: #9B9B9B; }
 
-.sectimg{
-  display: block;
+.sectionbox{
+  display: table-cell;
   float: left;
   width: 240px;
-  height: 100px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border: #888 1px solid;
+  background-color: #aaa;
+  margin: 10px;
   background-repeat: no-repeat;
-  text-indent: -10000px;
-  overflow: hidden;
+  text-align: center;
 }
-#sectimg_angol{  background-image: url('../images/szekciok/sz_angol.png'); }
-#sectimg_bizantinologia{  background-image: url('../images/szekciok/sz_bizantinologia.png'); }
-#sectimg_filozofia{  background-image: url('../images/szekciok/sz_filozofia.png'); }
-#sectimg_foldrajz{  background-image: url('../images/szekciok/sz_foldrajz.png'); }
-#sectimg_francia{  background-image: url('../images/szekciok/sz_francia.png'); }
-#sectimg_informatika{  background-image: url('../images/szekciok/sz_informatika.png'); }
-#sectimg_latin{  background-image: url('../images/szekciok/sz_latin.png'); }
-#sectimg_magyar{  background-image: url('../images/szekciok/sz_magyar.png'); }
-#sectimg_matematika{  background-image: url('../images/szekciok/sz_matematika.png'); }
-#sectimg_nemet{  background-image: url('../images/szekciok/sz_nemet.png'); }
-#sectimg_fizika{  background-image: url('../images/szekciok/sz_fizika.png'); }
-#sectimg_nemet{  background-image: url('../images/szekciok/sz_nemet.png'); }
-#sectimg_ogorog{  background-image: url('../images/szekciok/sz_ogorog.png'); }
-#sectimg_orientalisztika{  background-image: url('../images/szekciok/sz_orientalisztika.png'); }
-#sectimg_tarstud{  background-image: url('../images/szekciok/sz_tarstud.png'); }
 
 
 ul, li{

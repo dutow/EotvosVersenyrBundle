@@ -31,6 +31,23 @@ class UserController extends Controller
      *
      * @return array template parameters
      *
+     * @Route("/logged_in", name="loggedin_page")
+     */
+    public function loggedInAction()
+    {
+        $term = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->getLastTerm()
+            ;
+
+        return $this->redirect($this->generateUrl('profile_action', array('term' => $term->getId())));
+    }
+
+    /**
+     * Login request or failure display
+     *
+     * @return array template parameters
+     *
      * @todo display login request
      * @todo better design
      *
@@ -194,12 +211,20 @@ class UserController extends Controller
     public function subscriptionsAction($term)
     {
         $tpRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:TextPage');
-        $pageRec = $tpRep->getForTermWithSlug($term, 'szekciok');
+        $pageRec = $tpRep->getForTermWithSpecial($term, 'special');
+
+        $term = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->findOneByName($term)
+            ;
+        if (!$term) {
+            throw $this->createNotFoundException('Term not found');
+        }
 
         // TODO: not logged in
         // TODO: move tu user controller
         if (!$pageRec) {
-            throw new NotFoundHttpException("Sections root not found");
+            throw $this->createNotFoundException("Sections root not found");
         }
 
         $secRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:Section');
@@ -229,6 +254,14 @@ class UserController extends Controller
     {
         $tpRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:TextPage');
         $record = $tpRep->getForTermWithSlug($term, $section);
+
+        $term = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->findOneByName($term)
+            ;
+        if (!$term) {
+            throw $this->createNotFoundException('Term not found');
+        }
 
         if (!$record || $record->getSection()==null) {
             $this->get('session')->setFlash('error', "Jelentkezesi hiba!");
