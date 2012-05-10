@@ -57,7 +57,7 @@ class FinalsType
     }
 
     /**
-     * Reorders the given array of [ user, [ category => point ] ] into a descending list.
+     * Reorders the given array of [ user, [ submissions ], nullpoints ] into a descending list.
      * 
      * @param mixed $standing unordered user list
      * 
@@ -65,12 +65,21 @@ class FinalsType
      */
     public function orderStanding($standing)
     {
-        $standing2 =array();
         foreach ($standing as $k => $v) {
-            $standing2[] = array($k, array_sum($v));
-        }
+            $sum = 0;
+            foreach ($v[1] as $subm) {
+                $sum += $subm->getPoints();
+            }
 
-        return $standing2;
+            $standing[$k][2] = $sum;
+        }
+        $rs = $standing;
+
+        uasort($rs, function($a,$b) {
+            return (($a[2]==$b[2]) ? 0 : ($a[2] < $b[2] ? -1 : 1));
+        });
+
+        return $rs;
     }
 
     /**

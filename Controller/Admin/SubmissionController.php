@@ -66,6 +66,56 @@ class SubmissionController extends Controller
     }
 
     /**
+     * Generates advancers list
+     *
+     * @param id $round round id
+     *
+     * @return array template parameters
+     *
+     * @Route("/generate/{round}", name = "admin_submission_generate" )
+     * @Template
+     */
+    public function generateAction($round)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $repo = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Submission')
+            ;
+
+        $request = $this->get('request');
+
+        $round = $this->getDoctrine()->getRepository('EotvosVersenyrBundle:Round')->findOneById($round);
+        if (!$round) {
+            throw $this->createNotFoundException("Bad parameter");
+        }
+
+        $allSub = $repo->getLastByRound($round);
+
+        // by default nobody advances
+        foreach ($allSub as $sub) {
+            $sub->setAdvances(1);
+        }
+
+        $roundtype = $this->container->get($round->getRoundtype());
+
+        $standing = $roundtype->orderStanding($repo->getStandingByRound($round));
+
+        // first N advances
+        for ($i = 0; $i < $round->getAdvanceNo(); $i++) {
+            if ($i >= count($standing)) {
+                break;
+            }
+            foreach ($standing[$i][1] as $sub) {
+                $sub->setAdvances(2);
+            }
+        }
+
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('admin_submission_indexr', array( 'round' => $round->getId())));
+    }
+
+    /**
      * Delete a submission
      *
      * @param int $id Id of the submission

@@ -29,7 +29,7 @@
 {% trans with { '%no%': thisround.advanceno } %}admin.submission.display.advancesno{% endtrans %}
 <br />
 <br />
-<a href="">{% trans %}admin.submission.actions.generate{% endtrans %}</a>
+<a href="{{ path('admin_submission_generate', { 'round': thisround.id }) }}">{% trans %}admin.submission.actions.generate{% endtrans %}</a>
 {% endif %}
 <br />
 <br />

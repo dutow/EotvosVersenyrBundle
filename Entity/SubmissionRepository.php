@@ -12,6 +12,29 @@ use Doctrine\ORM\EntityRepository;
  */
 class SubmissionRepository extends EntityRepository
 {
+    public function getStandingByRound($round)
+    {
+        $list = $this->getLastUniqByRound($round);
+
+        $userList = array();
+
+        foreach ($list as $record) {
+            if (!isset($userList[$record->getUser()->__toString()])) {
+                $userList[$record->getUser()->__toString()] = array();
+            }
+            $ref =& $userList[$record->getUser()->__toString()];
+            $ref[] = $record;
+        }
+
+        $retList = array();
+
+        foreach ($userList as $user => $subm) {
+            $retList[] = array($user, $subm, null);
+        }
+
+        return $retList;
+    }
+
     public function getLastUniqByRound($round)
     {
         $registry = array();
