@@ -35,12 +35,22 @@ class CompetitionController extends Controller
         $tpRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:TextPage');
         $pageRec = $tpRep->getForTermWithSpecial($term, 'sections');
 
+
+        $term = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->findOneByName($term)
+            ;
+        if (!$term) {
+            throw $this->createNotFoundException('Term not found');
+        }
+
+
         if (!$pageRec) {
             throw $this->createNotFoundException('page not found');
         }
 
         $secRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:Section');
-        $sectionsRec = $secRep->getForTerm($term);
+        $sectionsRec = $secRep->getForTerm($term->getName());
 
         if (count($sectionsRec) == 0) {
             throw $this->createNotFoundException('page not found');
@@ -49,6 +59,7 @@ class CompetitionController extends Controller
         return array(
             'page' => $pageRec,
             'sections' => $sectionsRec,
+            'term' => $term,
         );
     }
 
@@ -68,6 +79,15 @@ class CompetitionController extends Controller
         $tpRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:TextPage');
         $sectionRec = $tpRep->getForTermWithSlug($term, $sectionSlug);
 
+
+        $term = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->findOneByName($term)
+            ;
+        if (!$term) {
+            throw $this->createNotFoundException('Term not found');
+        }
+
         if (!$sectionRec || $sectionRec->getSection()==null) {
             throw $this->createNotFoundException('page not found');
         }
@@ -75,6 +95,7 @@ class CompetitionController extends Controller
         return array(
             'page' => $sectionRec,
             'section' => $sectionRec->getSection(),
+            'term' => $term,
         );
     }
 
@@ -96,6 +117,14 @@ class CompetitionController extends Controller
         $roundRec = $tpRep->getForTermWithSlug($term, $roundSlug);
         $sectionRec = $tpRep->getForTermWithSlug($term, $sectionSlug);
         $submissionRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:Submission');
+
+        $term = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->findOneByName($term)
+            ;
+        if (!$term) {
+            throw $this->createNotFoundException('Term not found');
+        }
 
         if (!$sectionRec || $sectionRec->getSection()==null || !$roundRec || $roundRec->getRound()==null || $roundRec->getParent()->getId()!=$sectionRec->getId()) {
             throw $this->createNotFoundException('page not found');
@@ -143,6 +172,7 @@ class CompetitionController extends Controller
             'section' => $sectionRec->getSection(),
             'standing' => $standing2,
             'page' => $roundRec,
+            'term' => $term,
         );
     }
 
@@ -165,6 +195,14 @@ class CompetitionController extends Controller
         $roundRec = $tpRep->getForTermWithSlug($term, $roundSlug);
         $sectionRec = $tpRep->getForTermWithSlug($term, $sectionSlug);
 
+        $term = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->findOneByName($term)
+            ;
+        if (!$term) {
+            throw $this->createNotFoundException('Term not found');
+        }
+
         if (!$sectionRec || $sectionRec->getSection()==null || !$roundRec || $roundRec->getRound()==null || $roundRec->getParent()->getId()!=$sectionRec->getId()) {
             throw $this->createNotFoundException('page not found');
         }
@@ -173,6 +211,7 @@ class CompetitionController extends Controller
             'round' => $roundRec->getRound(),
             'section' => $sectionRec->getSection(),
             'page' => $roundRec,
+            'term' => $term,
         );
     }
 
@@ -192,12 +231,20 @@ class CompetitionController extends Controller
         $tpRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:TextPage');
         $pageRec = $tpRep->getForTermWithSlug($term, $pageSlug);
 
+        $term = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->findOneByName($term)
+            ;
+        if (!$term) {
+            throw $this->createNotFoundException('Term not found');
+        }
+
         if ($pageRec===null) {
             throw $this->createNotFoundException("Page $pageSlug not found!");
         }
 
         if ($pageRec->getRedirectsTo()!="") {
-            return $this->redirect($this->generateUrl('competition_page', array('term' => $term, 'pageSlug' => $pageRec->getRedirectsTo())));
+            return $this->redirect($this->generateUrl('competition_page', array('term' => $term->getId(), 'pageSlug' => $pageRec->getRedirectsTo())));
         }
 
         if (!$pageRec) {
@@ -206,6 +253,7 @@ class CompetitionController extends Controller
 
         return array(
             'page' => $pageRec,
+            'term' => $term,
         );
     }
 }

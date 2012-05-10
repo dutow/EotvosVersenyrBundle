@@ -40,13 +40,13 @@ body { font-size: 11px; font-family: "Tahoma", sans-serif; }
 #container { width: 980px; }
 
 header { position: relative; height: 188px; }
-header #logo { position: absolute; width: 163px; height: 163px; top: 24px; left: 70px; background-color: #00c; }
-header #head-text { font-size: 22px; color: #000; position: absolute; width: 684px; right:-10px; top: 80px; font-weight: bold; background-color: #00f; }
+header #logo { position: absolute; width: 163px; height: 163px; top: 24px; left: 70px; background-color: #767CA8; }
+header #head-text { font-size: 22px; color: #000; position: absolute; width: 684px; right:-10px; top: 80px; padding-top: 10px; padding-left: 20px; font-weight: bold; border-top: #aaa 2px dashed; }
 header #head-text span { font-size: 22px; display: block; margin-left: 60px; }
 header #search-container { position: absolute; right: 0; bottom: 0;}
 
 
-#main { margin-top: 40px; }
+#main { margin-top: 60px; }
 #main:after{
   content: ".";
   display: block;
@@ -99,7 +99,6 @@ header #search-container { position: absolute; right: 0; bottom: 0;}
   text-decoration: none;
 }
 #main-menu .main-menu-item { list-style: none; border-bottom: 1px dotted #D8D8D8; padding: 0 10px 13px 10px; margin: 0 0 13px 0; font-variant: small-caps; }
-#main-menu #active-menu { background: url('../images/backgroundMenuLi.jpg') no-repeat 74px 1px; background-position: 25px 5px; }
 #main-menu .main-menu-item a { font-size: 16px; color: #555; }
 #main-menu .main-menu-item > a{ display: inline-block; font-weight: bold; text-decoration:none; }
 #main-menu #active-menu a { color: #000; text-decoration:none; }

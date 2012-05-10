@@ -93,12 +93,21 @@ class UserController extends Controller
         $tpRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:TextPage');
         $pageRec = $tpRep->getForTermWithSlug($term, 'sikeres_regisztracio');
 
+        $term = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->findOneByName($term)
+            ;
+        if (!$term) {
+            throw $this->createNotFoundException('Term not found');
+        }
+
         if (!$pageRec) {
             return $this->createNotFoundException('page not found');
         }
 
         return array(
             'page' => $pageRec,
+            'term' => $term,
         );
     }
 
@@ -138,6 +147,7 @@ class UserController extends Controller
 
         $user = new Entity\User();
         $registration = $userType->getRegistrationEntityInstance();
+        $registration->setUser($user);
 
         $registration->setTerm($term);
 
@@ -161,7 +171,11 @@ class UserController extends Controller
                 $passwordGenerator->encodePassword($user, $user->getPassword());
 
                 $em->persist($registration);
+                $user->addRegistration($registration);
                 $em->persist($user);
+                $em->flush();
+                $registration->setUser($user);
+                $registration->setTerm($term);
                 $em->flush();
 
                 //$userMailer = $this->get('eotvos.versenyr.mailer.user');
@@ -182,6 +196,7 @@ class UserController extends Controller
             'form' => $formView,
             'subform' => $userType->getRegistrationFormPartial(),
             'rightpart' => $userType->getRegistrationRightBox(),
+            'term' => $term,
         );
     }
 
@@ -232,7 +247,8 @@ class UserController extends Controller
 
         return array(
             'page' => $pageRec,
-            'sections' => $sections
+            'sections' => $sections,
+            'term' => $term,
         );
     }
 

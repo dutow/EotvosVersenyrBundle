@@ -4,7 +4,7 @@
     <div class="activeround">
       <h3>Forduló folyamatban: <a href="{{ arnd.page | ecvurl }}">{{ arnd.page.title }}</a></h3>
   {% if app.user %}
-    {% if app.user.hasSection(arnd.page.parent.section) %}
+    {% if app.user.getRegistrationForTerm(term).hasSection(arnd.page.parent.section) %}
       <p>A forduló jelenleg folyamatban van, és korábban már jelentkeztél a szekcióba, valamint az eddigi fordulókon túljutottál, így részt vehetsz benne.</p>
       <p>Ehhez a verseny végidőpontjáig, azaz {{ arnd.stop | date('Y. M. d. H:i')  }}-ig van időd.</p>
       {% render roundcontroller(arnd).getTemplateName() with { 'round': arnd.page } %}

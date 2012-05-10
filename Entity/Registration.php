@@ -133,4 +133,22 @@ class Registration
     {
         return $this->getTerm()->getName();
     }
+
+    /**
+     * Did the user join the given section?
+     *
+     * @param Section $section question subject
+     * 
+     * @return bool
+     */
+    public function hasSection(\Eotvos\VersenyrBundle\Entity\Section $section)
+    {
+        foreach ($this->getSections() as $sec) {
+            if ($sec->getId() == $section->getId()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
