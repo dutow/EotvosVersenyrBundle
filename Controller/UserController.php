@@ -91,7 +91,7 @@ class UserController extends Controller
     {
 
         $tpRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:TextPage');
-        $pageRec = $tpRep->getForTermWithSlug($term, 'sikeres_regisztracio');
+        $pageRec = $tpRep->getForTermWithSpecial($term, 'register_after');
 
         $term = $this->getDoctrine()
             ->getRepository('EotvosVersenyrBundle:Term')
@@ -102,7 +102,7 @@ class UserController extends Controller
         }
 
         if (!$pageRec) {
-            return $this->createNotFoundException('page not found');
+            throw $this->createNotFoundException('page not found');
         }
 
         return array(
@@ -167,6 +167,7 @@ class UserController extends Controller
                 $registration = $ur['registration'];
                 $user->addRegistration($registration);
 
+                $password = $user->getPassword();
                 $passwordGenerator = $this->get('eotvos.versenyr.password_generator');
                 $passwordGenerator->encodePassword($user, $user->getPassword());
 

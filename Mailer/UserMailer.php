@@ -50,8 +50,8 @@ class UserMailer extends ContainerAware
         $twig = $this
             ->container
             ->get('doctrine')
-            ->get('EotvosVersenyrBundle:TextPage')
-            ->getForTermWithSpecial('register_mail');
+            ->getRepository('EotvosVersenyrBundle:TextPage')
+            ->getForTermWithSpecial($term->getName(), 'register_mail');
 
         $body = $this->renderView(
             $twig->getBody(),
@@ -86,8 +86,8 @@ class UserMailer extends ContainerAware
         $twig = $this
             ->container
             ->get('doctrine')
-            ->get('EotvosVersenyrBundle:TextPage')
-            ->getForTermWithSpecial('section_notify');
+            ->getRepository('EotvosVersenyrBundle:TextPage')
+            ->getForTermWithSpecial($term->getName(), 'section_notify');
 
         $body = $this->renderView(
             $twig->getBody(),
