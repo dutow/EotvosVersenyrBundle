@@ -72,7 +72,7 @@ class Round
     private $page;
 
     /**
-     * @ORM\OneToMany(targetEntity="Submission", mappedBy="round_id")
+     * @ORM\OneToMany(targetEntity="Submission", mappedBy="round")
      */
     private $submissions;
 
@@ -327,5 +327,46 @@ class Round
     public function isFirst()
     {
         return $this->getPage()->isFirstChild();
+    }
+
+    public function advances($registration)
+    {
+        foreach ($this->getSubmissions() as $subm) {
+            if ($subm->getUser()->getId() == $registration->getUser()->getId() && $subm->advanced()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function registrationActive($reg)
+    {
+        if (!$reg->hasSection($this->getSection())) {
+            return false;
+        }
+        if ($this->isFirst()) {
+            return true;
+        }
+
+        foreach ($this->getSection()->getRounds() as $rnd) {
+            if ($rnd->getId() == $this->getId()) {
+                return true;
+            }
+            if (!$rnd->advances($reg)) {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    public function isOver($date=null)
+    {
+        if ($date===null) {
+            $date = new \DateTime();
+        }
+
+        return $date > $this->getStop();
     }
 }

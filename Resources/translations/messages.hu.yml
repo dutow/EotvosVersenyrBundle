@@ -14,6 +14,8 @@ rounds:
       <p>A szekcióba már nem lehet jelentkezni.</p>
     login: |
       <p>A részvételhez azonban be kell jelentkezned. A bejelentkezéshez szükséges jelszót a regisztrációs e-mailedben találod, és azt, valamint e-mail címedet a jobb fölső részen kell megadnod.</p>
+    noteligbe: |
+      Sajnor mar egy korabbi fordulon kiestel, igy mar nem vehetsz reszt a fordulokban.
 
 sidebar:
   type: 'Tipusa'

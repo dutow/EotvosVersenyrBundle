@@ -5,13 +5,17 @@
       <h3>{% trans with { '%round%': '<a href="' ~ (arnd.page|ecvurl) ~'">' ~ arnd.page.title ~ '</a>' } %}rounds.status.active{% endtrans %}</h3>
   {% if app.user %}
     {% if app.user.getRegistrationForTerm(term).hasSection(arnd.page.parent.section) %}
-      {% trans with { '%untildate%': (arnd.stop|date('Y. m. d. H:i')) } %}rounds.longer.eligbe{% endtrans %}
-      {% render roundcontroller(arnd).getDescriptionAction() with { 'round': arnd.page } %}
-      <p class="linkbar">
-      {% for name, link in roundcontroller(arnd).getRoundLinks(term.getName(), page.section, arnd) %}
-        {% if not (rcnf1 is defined) %}{% set rcnf1 = true %}{% else %} | {% endif %} <a href="{{ link }}">{{ name }}</a>
-      {% endfor %}
-      </p>
+      {% if arnd.registrationActive(app.user.getRegistrationForTerm(term)) %}
+        {% trans with { '%untildate%': (arnd.stop|date('Y. m. d. H:i')) } %}rounds.longer.eligbe{% endtrans %}
+        {% render roundcontroller(arnd).getDescriptionAction() with { 'round': arnd.page } %}
+        <p class="linkbar">
+        {% for name, link in roundcontroller(arnd).getRoundLinks(term.getName(), page.section, arnd) %}
+          {% if not (rcnf1 is defined) %}{% set rcnf1 = true %}{% else %} | {% endif %} <a href="{{ link }}">{{ name }}</a>
+        {% endfor %}
+        </p>
+      {% else %}
+        {% trans %}rounds.longer.noteligbe{% endtrans %}
+      {% endif %}
     {% else %}
       {% if app.user.mayJoin(arnd.page.parent.section) %}
       {% trans with { '%url%': url('competition_subscriptions', { term: term.getName() }) } %}rounds.longer.mayjoin{% endtrans %}

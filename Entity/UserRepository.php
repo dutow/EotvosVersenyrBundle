@@ -39,6 +39,7 @@ class UserRepository extends EntityRepository
             return $sectionUsers;
         } else {
             // evaluate users who may be still active
+            die();
         }
     }
 }
