@@ -258,15 +258,17 @@ class UserController extends Controller
     public function subscriptionsAction($term)
     {
         $tpRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:TextPage');
-        $pageRec = $tpRep->getForTermWithSpecial($term, 'special');
 
         $term = $this->getDoctrine()
             ->getRepository('EotvosVersenyrBundle:Term')
             ->findOneByName($term)
             ;
+
         if (!$term) {
             throw $this->createNotFoundException('Term not found');
         }
+
+        $pageRec = $tpRep->getForTermWithSpecial($term->getName(), 'register');
 
         // TODO: not logged in
         // TODO: move tu user controller
@@ -275,12 +277,18 @@ class UserController extends Controller
         }
 
         $secRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:Section');
-        $sections = $secRep->getForTerm($term);
+        $sections = $secRep->getForTerm($term->getName());
+
+        $sec = $this->get('security.context');
+        $curruser = $sec->getToken()->getUser();
+
+        $registration = $curruser->getRegistrationForTerm($term);
 
         return array(
             'page' => $pageRec,
             'sections' => $sections,
             'term' => $term,
+            'registration' => $registration,
         );
     }
 

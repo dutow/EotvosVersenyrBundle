@@ -15,13 +15,13 @@
   </thead>
   <tbody>
   {% for item in sections %}
-  <tr class="{% if app.user.hasSection(item) %}st_subscribed{% else %}{% if app.user.mayJoin(item) %}st_joinable{% else %}st_disabled{% endif %}{% endif %}" id="section_{{ item.page.slug }}">
+  <tr class="{% if registration.hasSection(item) %}st_subscribed{% else %}{% if app.user.mayJoin(item) %}st_joinable{% else %}st_disabled{% endif %}{% endif %}" id="section_{{ item.page.slug }}">
     <td><a href="{{ item | ecvurl }}">{{ item.page.title }}</a></td>
     <td>
-    {% if app.user.hasSection(item) %}
+    {% if registration.hasSection(item) %}
       jelentkezve
     {% else %}
-      {% if app.user.mayJoin(item) %}
+      {% if registration.mayJoin(item) %}
         <a href="{{ url('competition_subscribe', { 'term' : term.getName(), 'section' : item.page.slug } ) }}">jelentkezés</a>
       {% else %}
         -
@@ -29,7 +29,7 @@
     {% endif %}
     </td>
     <td>{{ item.registrationUntil|date("Y. m. d.") }}</td>
-    <td>{% if item.nextRound is not null %}{{ item.nextRound.start|date("Y. m. d. H:i:s") }}{% else %}-{% endif %}</td>
+    <td>{% if item.nextRound is not null %}{{ item.nextRound.start|date("Y. m. d. H:i") }}{% else %}-{% endif %}</td>
   </tr>
   {% endfor %}
   </tbody>
