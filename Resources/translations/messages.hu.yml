@@ -1,3 +1,28 @@
+rounds:
+  status:
+    active: 'Fordulo folyamatban: %round%'
+    notyet: 'Jelenleg nincs folyamatban fordulo. A kovetkezo lesz: <a href="%url%">%title%</a>'
+    over: 'Minden fordulo veget ert'
+  longer:
+    eligbe: |
+      <p>A forduló jelenleg folyamatban van, és korábban már jelentkeztél a szekcióba, valamint az eddigi fordulókon túljutottál, így részt vehetsz benne.</p>
+      <p>Ehhez a fordulo végidőpontjáig, azaz %untildate%-ig van időd.</p>
+    mayjoin: |
+      <p>Ebben a fordulóban nem veszel részt, mivel nem indultál még a(z) {{ page.title }} szekcióban. Azonban a regisztrációs időszak még tart, így amennyiben meggondoltad magad és indulnál ebben is,
+      látogass el a <a href="%url%">profilod versenybeállítások oldalára</a>, ahol felveheted a választottjaid köze.</p>
+    notjoin: |
+      <p>A szekcióba már nem lehet jelentkezni.</p>
+    login: |
+      <p>A részvételhez azonban be kell jelentkezned. A bejelentkezéshez szükséges jelszót a regisztrációs e-mailedben találod, és azt, valamint e-mail címedet a jobb fölső részen kell megadnod.</p>
+
+sidebar:
+  type: 'Tipusa'
+  start: 'Kezdete'
+  stop: 'Vege'
+
+sections:
+  title: 'Szekciok'
+
 registration:
   form:
     title: 'Regisztracio'

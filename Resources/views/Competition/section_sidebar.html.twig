@@ -1,36 +1,33 @@
 <div class="submenu">
 <ul>
-  <li>» <a href="{{ page | ecvurl  }}">{{ page.title }} Szekció Kezdőlap</a></li>
-</ul>
-</div>
-<div class="submenu">
-<h3>Jelentkezési határidő</h3>
-{{ section.registrationUntil|date("Y. m. d.") }}
-</div>
-<div class="submenu">
-<h3>Fordulók</h3>
-<ul>
+  <li><a href="{{ page | ecvurl  }}">{{ page.title }} Szekció Kezdőlap</a></li>
 {% for child in page.children %}
-{% if child.inMenu %}
-<li>» <a href="{{ child | ecvurl  }}">{{ child.title }}</a></li>
+{% if child.inMenu and child.special != "round" %}
+  <li><a href="{{ child | ecvurl  }}">{{ child.title }}</a></li>
 {% endif %}
 {% endfor %}
 </ul>
 </div>
+<div class="subbox">
+<h3>Jelentkezési határidő</h3>
+<span class="untildate">{{ section.registrationUntil|date("Y. m. d.") }}</span>
+</div>
 {% for child in page.children %}
-<div class="submenu standardround">
+{% if child.special == "round" %}
+<div class="roundbox"><div class="standardround">
 <h3><a href="{{ child | ecvurl }}">{{ child.title }}</a></h3>
-<li>» Típusa: {{ child.round.roundtypeDisplay }}</li>
-<li>» Kezdete: {{ child.round.start|date('Y. m. d. H:i')  }}</li>
-<li>» Vége: {{ child.round.stop|date('Y. m. d. H:i')  }}</li>
-<!-- <li>» Résztvevők: <a href="">0 fő</a></li> -->
+<li><strong>{% trans %}sidebar.type{% endtrans %}:</strong> {{ child.round.roundtypeDisplay }}</li>
+<li><strong>{% trans %}sidebar.start{% endtrans %}:</strong> {{ child.round.start|date('Y. m. d. H:i')  }}</li>
+<li><strong>{% trans %}sidebar.stop{% endtrans %}:</strong> {{ child.round.stop|date('Y. m. d. H:i')  }}</li>
 {% if child.round.active %}
   {% for name, link in roundcontroller(child.round).getRoundLinks(term.getName(), page.section, child.round) %}
-    <li>» <a href="{{ link }}">{{ name }}</a></li>
+    <li><a href="{{ link }}">{{ name }}</a></li>
   {% endfor %}
 {% endif %}
 {% if child.round.advanceNo < 10 %}
-    <li>» <a href="{{ url( 'competition_round_sum', { 'term': term.getName(), 'sectionSlug' : section.page.slug, 'roundSlug': child.slug } ) }}">Eredmények</a></li>
+    <li><a href="{{ url( 'competition_round_sum', { 'term': term.getName(), 'sectionSlug' : section.page.slug, 'roundSlug': child.slug } ) }}">Eredmények</a></li>
 {% endif %}
 </div>
+</div>
+{% endif %}
 {% endfor %}

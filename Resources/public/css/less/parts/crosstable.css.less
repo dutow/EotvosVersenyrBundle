@@ -1,0 +1,53 @@
+
+
+#main table.crossstat{
+  width: 300px;
+  text-align: center;
+
+  th{
+    background-color: @complement_5g;
+  }
+
+  th,td{
+    padding: 0.3em;
+  }
+
+  thead{
+    th.lefttophead{
+    }
+    th.headname{
+      border-left: #000 1px solid;
+      border-bottom: #000 2px solid;
+      border-top: #000 3px solid;
+      background-color: @complement_2g;
+    }
+    th.tophead{
+      border-bottom: #000 2px solid;
+      border-top: #000 3px solid;
+    }
+    tr:last-child{
+      border-right: #000 1px solid;
+    }
+    th.tophead + th.tophead{
+      border-bottom: #000 2px solid;
+      border-top: #000 3px solid;
+      border-right: none;
+    }
+  }
+
+  tbody{
+    th{
+      text-align: right;
+    }
+
+    td{
+      border-bottom: #000 1px dashed;
+      border-right: #000 1px dashed;
+      background-color: @secondary_b_5g;
+
+      &.dummy{
+        border-right: none;
+      }
+    }
+  }
+}

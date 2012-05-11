@@ -12,20 +12,19 @@
 {% endblock %}
 
 {% block rbody %}
-{% if page.children|length > 0 or page.parent.children|length > 1 %}
+{% if (page.children|length > 0 or page.parent.children|length > 1) and page.root != page.id %}
 <div class="submenu">
-<h3>Aloldalak</h3>
 <ul>
 {% if page.parent and page.parent.children|length > 1 %}
   {% for item in page.parent.children %}
   {% if item.inmenu %}
-  <li>» <a href="{{ item | ecvurl }}">{{ item.title }}</a></li>
+  <li><a href="{{ item | ecvurl }}">{{ item.title }}</a></li>
   {% endif %}
   {% endfor %}
 {% endif %}
 {% for item in page.children %}
   {% if item.inmenu %}
-<li>» <a href="{{ item | ecvurl }}">{{ item.title }}</a></li>
+<li><a href="{{ item | ecvurl }}">{{ item.title }}</a></li>
   {% endif %}
 {% endfor %}
 </ul>

@@ -1,0 +1,471 @@
+
+.rounded-corners (@radius: 5px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+
+@import "parts/colors.css.less";
+
+@selection_color: #fe57ae;
+@font-family: helvetica, arial, arial, sans-serif;
+@import "h5b/top.css.less";
+
+// Main styles:
+// TODO: less than 480 px, so use single column simple layout!
+
+html{ height: 100%; }
+body{
+  background-color: @secondary_a_3g;
+  font-size: 14px;
+  height: 100%;
+}
+body a, body a:visited{
+  color: @secondary_b_4g;
+}
+
+// flash messages
+.flash-error{
+  background-color: @complement_3g;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  padding: 0.8em;
+  margin: 1em;
+}
+
+#container{
+  width: 700px;
+  padding-left: 60px;
+  padding-right: 30px;
+  margin-left: 200px;
+  background-color: #fff;
+  height: 100%;
+  position: relative;
+
+  header{
+    padding-top: 20px;
+
+    #login-head{
+      font-size: 10px;
+      float: right;
+      margin-right: -10px;
+      margin-top: -10px;
+
+      input[type=text]{ width: 100px; }
+    }
+
+    #head-text{
+
+      margin-top: -15px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      text-align: left;
+      border-left: #aaa 15px solid;
+      padding-left: 3px;
+
+      .page{
+        display: block;
+        font-style: italic;
+        width: 300px;
+        border-top: #aaa 1px dashed;
+        padding-top: 3px;
+        padding-left: 20px;
+      }
+
+      .name{
+        font-weight: bold;
+        display: block;
+        font-variant: small-caps;
+        font-size: 24px;
+        padding-left: 10px;
+      }
+    }
+  }
+}
+
+#left-side{
+  // menu
+  position: absolute;
+  width: 310px;
+  left: -260px;
+
+  #main-menu{
+    padding: 0;
+    margin: 0;
+    margin-left: 160px;
+    background-color: #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 3px;
+    margin-bottom: 30px;
+
+    li{
+      overflow: visible;
+      list-style: none;
+      display: block;
+      background-color: @primary_2g;
+      padding: 1px;
+      margin: 2px;
+      margin-bottom: 4px;
+      font-weight: bold;
+
+      a{
+        display: block;
+        margin: 2px;
+        padding: 5px;
+        padding-top: 8px;
+        padding-left: 8px;
+        color: #000;
+        text-decoration: none;
+
+        &:before{
+          content: "» ";
+        }
+
+      }
+      &:hover{
+        background-color: @primary_3g;
+      }
+
+      &#active-menu{
+        background-color: @secondary_a_2g;
+      }
+    }
+  }
+
+  .subbox{
+    padding: 0;
+    margin: 0;
+    margin-left: 100px;
+    margin-bottom: 30px;
+    background-color: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 3px;
+
+    .untildate{
+      font-size: 20px;
+      display: block;
+      margin-right: 40px;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+
+  .roundbox{
+    padding: 0;
+    margin: 0;
+    margin-left: 100px;
+    margin-bottom: 30px;
+    background-color: #fff;
+    padding-left: 3px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 12px;
+
+    .standardround{
+      background-color: @secondary_b_5g;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .standardround h3{
+      padding-top: 0;
+      margin-top: 0;
+      margin-left: 10px;
+      a{
+        color: black;
+      }
+    }
+
+    li{
+      list-style: none;
+      display: block;
+      padding: 1px;
+      margin: 2px;
+      margin-bottom: 4px;
+
+      &:before{
+        content: "» ";
+      }
+    }
+  }
+
+  .submenu{
+    padding: 0;
+    margin: 0;
+    margin-left: 70px;
+    margin-bottom: 30px;
+
+    ul{
+      background-color: #fff;
+      padding: 0;
+      margin: 0;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-left: 3px;
+    }
+
+    li{
+      list-style: none;
+      display: block;
+      background-color: @secondary_a_2g;
+      padding: 1px;
+      margin: 2px;
+      margin-bottom: 4px;
+      font-weight: bold;
+
+      a{
+        font-size: 12px;
+        display: block;
+        margin: 2px;
+        padding: 5px;
+        padding-top: 8px;
+        padding-left: 8px;
+        color: #000;
+        text-decoration: none;
+
+        &:before{
+          content: "» ";
+        }
+
+      }
+      &:hover{
+        background-color: @primary_3g;
+      }
+
+      &#active-menu{
+        background-color: @secondary_a_2g;
+      }
+    }
+  }
+
+  #fb-like-box{
+    background-color: #fff;
+    margin-top: 30px;
+    padding: 3px;
+    position: absolute;
+    left: -90px;
+  }
+
+}
+
+#breadcrumb{
+  li{
+    list-style: none;
+    display: inline;
+  }
+}
+
+#right-side{
+
+  .sectionbox{
+    float: left;
+    background-color: @secondary_a_5g;
+    width: 185px;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 20px;
+    text-align: center;
+    display: block;
+
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover{
+      background-color: @secondary_a_4g;
+    }
+  }
+  
+/* forms */
+form fieldset{
+}
+
+form fieldset legend{
+  border-bottom: #555 1px dashed;
+  width: 670px;
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+form .formrow{
+  margin: 5px;
+  width: 100%;
+  padding-top: 5px;
+  position: relative;
+}
+
+form .formrow .inputholder{
+  margin: 0px;
+  padding: 0px;
+  padding: 3px;
+  margin-top: 5px;
+  padding-top: 5px;
+  width: 100%;
+  position: relative;
+}
+
+form .formrow .inputholder label{
+  display: block;
+  width: 200px;
+  margin-left: 40px;
+  padding-right: 10px;
+  border-bottom: #777 1px dotted;
+  text-align: left;
+  float: left;
+  font-weight: bold;
+  font-size: 18px;
+  font-family: "Times New Roman", serif;
+}
+form .formrow .inputholder select{
+  position: relative;
+  top: -3px;
+  padding-left: 10px;
+  right: 1px;
+  float: left;
+  font-size: 18px;
+  width: 222px;
+  background-color: #eee;
+  border: #aaa 1px solid;
+}
+
+
+form .formrow .inputholder input{
+  position: relative;
+  top: -3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  right: 1px;
+  float: left;
+  font-size: 18px;
+  width: 200px;
+  background-color: #eee;
+  border: #aaa 1px solid;
+}
+
+form .row_required .inputholder input, form .row_required .inputholder select{
+  background-color: #ddd;
+}
+
+form .inputholder:after{
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hoveridden;
+  text-indent: -10000px;
+  overflow: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+form .formrow .help{
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 40px;
+    padding-left: 10px;
+    font-size: 10px;
+    width: 400px;
+    text-align: justify;
+}
+
+form .button{
+  float: right;
+  border: #555 1px solid;
+  background-color: #ccc;
+  color: #000;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: 60px;
+  font-weight: bold;
+}
+
+
+form .button:hover{
+  background-color: #bbb;
+}
+
+fieldset.choices .choice{
+  margin-left: 20px;
+  float: left;
+  width: 134px;
+  margin-top: 3px;
+  padding: 3px;
+}
+fieldset.choices .choice:hover{
+  background-color: #BAB27A;
+}
+
+fieldset.choices .choice input{
+  margin-right: 5px;
+  position: relative;
+  top: 2px;
+}
+
+form .inputholder input.len4{
+  width: 58px;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
+form .inputholder select.postalcode{
+  width: 150px;
+  margin-left: 10px;
+}
+
+form .row_error, form .row_error input, form .row_error select{
+  color: #410C21;
+}
+
+form .errors{
+  clear: both;
+  font-size: 10px;
+  position: relative;
+  top: -6px;
+  margin-left: 43px;
+  margin-right: 35px;
+  background-color: #410C21;
+  color: #ee0;
+  padding: 3px;
+  font-weight: bold;
+
+}
+form .errors ul, form .errors li{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+fieldset.choices .errors{
+  top: 3px;
+}
+
+}
+
+.activeround{
+  background-color: @secondary_a_5g;
+  padding: 15px;
+  font-size: 12px;
+}
+
+@import "h5b/bottom.css.less";
+
+/* =============================================================================
+   PLACEHOLDER Media Queries for Responsive Design.
+   These override the primary ('mobile first') styles
+   Modify as content requires.
+   ========================================================================== */
+
+/* TODO */
+
+/* =============================================================================
+   Print styles.
+   ========================================================================== */
+@media print{
+  .h5b-print;
+
+  // user styles
+}
+

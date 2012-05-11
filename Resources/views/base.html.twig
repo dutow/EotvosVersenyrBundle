@@ -22,12 +22,14 @@
 
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
 
-  <!-- CSS: implied media=all -->
-  <!-- CSS concatenated and minified via ant build script-->
-  <link rel="stylesheet" href="{{ asset('bundles/eotvosversenyr/css/h5b.css') }}">
-  <link rel="stylesheet" href="{{ asset('bundles/eotvosversenyr/css/jquery.autocomplete.css') }}">
-  <link rel="stylesheet" href="{{ asset('bundles/eotvosversenyr/css/jquery.countdown.css') }}">
-  <link rel="stylesheet" href="{{ asset('bundles/eotvosversenyr/css/main.css') }}">
+  {% stylesheets filter='less,cssrewrite' output='css/*.css'
+   'bundles/eotvosversenyr/css/less/page.css.less'
+   'bundles/eotvosversenyr/css/jquery.autocomplete.css'
+   'bundles/eotvosversenyr/css/jquery.countdown.css'
+  %}
+  <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+  {% endstylesheets %}
+
   <!-- end CSS-->
 
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
@@ -38,6 +40,8 @@
   <!--[if lt IE 9]>
   <script src="{{ asset('bundles/eotvosversenyr/js/libs/ie7/IE9.js') }}"></script>
   <![endif]-->
+  {% block headscripts %}
+  {% endblock %}
   <script src="{{ asset('bundles/eotvosversenyr/js/libs/swfupload.js') }}"></script>
   <script src="{{ asset('bundles/eotvosversenyr/js/libs/swfupload.cookies.js') }}"></script>
 </head>
@@ -45,12 +49,9 @@
 <body>
 
 
-  <!-- JavaScript at the bottom for fast page loading -->
-
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
 
 
     <!-- scripts concatenated and minified via ant build script-->
@@ -93,7 +94,7 @@
           {% include 'EotvosVersenyrBundle::user.html.twig' %}
         </div>
         <div id="head-text">
-          VersenyR<span>{{ block('title') }}</span>
+          <span class="name">VersenyR</span><span class="page">{{ block('title') }}</span>
         </div>
 
     </header>
@@ -101,12 +102,27 @@
 
       <div id="left-side">
         {% include 'EotvosVersenyrBundle::menu.html.twig' %}
+
+        {% if threecol is defined and threecol %}
+        <div id="threecol">
+          {% block rbody %}{% endblock %}
+        </div>
+        {% endif %}
+
+        {% if fbbox is defined and fbbox %}
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) {return;}
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/hu_HU/all.js#xfbml=1";
+          fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script>
+
+        <div id="fb-like-box" class="fb-like-box" data-href="https://www.facebook.com/ejtv2011" data-width="238" height="605" data-show-faces="true" data-stream="true" data-header="false" data-border-color="#fff"></div>
+        {% endif %}
       </div>
-      {% if threecol is defined and threecol %}
       <div id="right-side">
-      {% else %}
-      <div id="right-side" class="long">
-      {% endif %}
         <div id="breadcrumb">
           {% block breadcrumb %}
           {% if page is defined %}
@@ -120,30 +136,13 @@
         </div>
 
         {% for key, flash in app.session.getFlashes() %}
-        <div class="flash flash_{{ key }}">
+        <div class="flash flash-{{ key }}">
           {{ flash }}
         </div>
         {% endfor %}
 
         {% block body %}{% endblock %}
       </div>
-      {% if threecol is defined and threecol %}
-      <div id="right-side2">
-        {% block rbody %}{% endblock %}
-        {% if fbbox %}
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) {return;}
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/hu_HU/all.js#xfbml=1";
-          fjs.parentNode.insertBefore(js, fjs);
-          }(document, 'script', 'facebook-jssdk'));</script>
-
-        <div class="fb-like-box" data-href="https://www.facebook.com/ejtv2011" data-width="238" height="605" data-show-faces="true" data-stream="true" data-header="false" data-border-color="#777"></div>
-        {% endif %}
-      </div>
-      {% endif %}
 
 
 

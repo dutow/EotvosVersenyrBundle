@@ -1,0 +1,45 @@
+
+#main table.standard{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+
+    th{
+      font-family: @font_bold;
+      font-weight: normal;
+    }
+  thead{
+    th{
+      background-color: @complement_5g;
+      font-family: @font_bold;
+      padding-top: 1.5em;
+      padding-bottom: 0.5em;
+    }
+    tr + tr th{
+      padding-top: 0.3em;
+      padding-bottom: 0.5em;
+    }
+  }
+
+  tbody{
+    tr{
+      &:hover{
+        background-color: @secondary_b_5g;
+      }
+    }
+    td{
+      padding: 0.2em;
+      text-align: center;
+      vertical-align: bottom;
+    }
+    th.sub{
+      font-family: @font_normal;
+      font-weight: normal;
+      font-style: italic;
+    }
+    th.sup{
+      padding-top: 0.8em;
+    }
+  }
+}
+

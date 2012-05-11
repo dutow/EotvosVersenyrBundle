@@ -4,11 +4,11 @@
 {% set fbbox = page.fbbox %}
 
 {% block title %}
-  {{ page.title }} Szekció
+  {{ page.title }}
 {% endblock %}
 
 {% block body %}
-  <h2>{{ page.title }} Szekció</h2>
+  <h2>{{ page.title }}</h2>
   {% include 'EotvosVersenyrBundle:Competition:activeround.html.twig' %}
   {{ page.body | markdown }}
 {% endblock %}

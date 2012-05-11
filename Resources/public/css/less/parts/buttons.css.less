@@ -1,0 +1,64 @@
+
+#main .rbuttons{
+  text-align: right;
+  float: right;
+  position: relative;
+  top: 1em;
+}
+
+#main a.button{
+  display: inline-block;
+  padding: 0.2em;
+  margin: 0.5em;
+  margin-left: 1em;
+  margin-right: 1em;
+  text-align: center;
+  font-family: @font_bold;
+  font-weight: normal;
+  color: #333;
+  font-size: 14px;
+  text-decoration: none;
+
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+#main{
+  a.button{
+    &.edit:before{
+      content: ".";
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background-image: url('../../images/iconic/raster/black/pen_12x12.png');
+      overflow: hidden;
+      text-indent: -10000px;
+      margin-right: 0.3em;
+      position: relative;
+      top: 1px;
+    }
+
+    &.up{
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      width: 12px;
+      height: 12px;
+      background-image: url('../../images/iconic/raster/black/arrow_up_12x12.png');
+      overflow: hidden;
+      text-indent: -10000px;
+    }
+
+    &.down{
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      width: 12px;
+      height: 12px;
+      background-image: url('../../images/iconic/raster/black/arrow_down_12x12.png');
+      overflow: hidden;
+      text-indent: -10000px;
+    }
+  }
+}
