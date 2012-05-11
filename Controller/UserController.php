@@ -150,7 +150,7 @@ class UserController extends Controller
                 ->getForTermWithSpecial($term->getName(), 'register_done')
                 ;
 
-            return $this->redirect('competition_page', array( 'term' => $term->getName(), 'pageSlug' => $rec->getSlug()));
+            return $this->redirect($this->generateUrl('competition_page', array( 'term' => $term->getName(), 'pageSlug' => $rec->getSlug())));
         }
 
         if (!$term->open()) {
@@ -159,13 +159,7 @@ class UserController extends Controller
                 ->getForTermWithSpecial($term->getName(), 'register_notopen')
                 ;
 
-            return $this->redirect('competition_page', array( 'term' => $term->getName(), 'pageSlug' => $rec->getSlug()));
-        }
-
-        if (false) {
-            // not active: render static page
-
-            return array();
+            return $this->redirect($this->generateUrl('competition_page', array( 'term' => $term->getName(), 'pageSlug' => $rec->getSlug())));
         }
 
         $tpRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:TextPage');
