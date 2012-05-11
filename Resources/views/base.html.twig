@@ -88,7 +88,7 @@
 
 
 
-    <a href="{{ url("competition_page", { "term": 2014, "pageSlug": "root-page" }) }}"  id="logo"></a>
+    <a href="{{ url("competition_page", { "term": term.getName(), "pageSlug": "root-page" }) }}"  id="logo"></a>
         <div id="login-head">
           {% include 'EotvosVersenyrBundle::user.html.twig' %}
         </div>

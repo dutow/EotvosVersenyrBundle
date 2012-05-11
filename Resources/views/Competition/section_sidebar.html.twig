@@ -25,12 +25,12 @@
 <li>» Vége: {{ child.round.stop|date('Y. m. d. H:i')  }}</li>
 <!-- <li>» Résztvevők: <a href="">0 fő</a></li> -->
 {% if child.round.active %}
-  {% for name, link in roundcontroller(child.round).getRoundLinks(2011, page.section, child.round) %}
+  {% for name, link in roundcontroller(child.round).getRoundLinks(term.getName(), page.section, child.round) %}
     <li>» <a href="{{ link }}">{{ name }}</a></li>
   {% endfor %}
 {% endif %}
 {% if child.round.advanceNo < 10 %}
-    <li>» <a href="{{ url( 'competition_round_sum', { 'term': 2011, 'sectionSlug' : section.page.slug, 'roundSlug': child.slug } ) }}">Eredmények</a></li>
+    <li>» <a href="{{ url( 'competition_round_sum', { 'term': term.getName(), 'sectionSlug' : section.page.slug, 'roundSlug': child.slug } ) }}">Eredmények</a></li>
 {% endif %}
 </div>
 {% endfor %}

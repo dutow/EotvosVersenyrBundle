@@ -40,7 +40,7 @@ class UserController extends Controller
             ->getLastTerm()
             ;
 
-        return $this->redirect($this->generateUrl('profile_action', array('term' => $term->getId())));
+        return $this->redirect($this->generateUrl('competition_profile', array('term' => $term->getName())));
     }
 
     /**
@@ -208,9 +208,19 @@ class UserController extends Controller
      * @Route("/{term}/felhasznalo/profil", name="competition_profile" )
      * @Template()
      */
-    public function profileAction()
+    public function profileAction($term)
     {
-        return array();
+        $term = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->findOneByName($term)
+            ;
+        if (!$term) {
+            throw $this->createNotFoundException('Term not found');
+        }
+
+        return array(
+            'term' => $term,
+        );
     }
 
     /**

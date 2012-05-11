@@ -7,16 +7,16 @@
     {% if app.user.getRegistrationForTerm(term).hasSection(arnd.page.parent.section) %}
       <p>A forduló jelenleg folyamatban van, és korábban már jelentkeztél a szekcióba, valamint az eddigi fordulókon túljutottál, így részt vehetsz benne.</p>
       <p>Ehhez a verseny végidőpontjáig, azaz {{ arnd.stop | date('Y. M. d. H:i')  }}-ig van időd.</p>
-      {% render roundcontroller(arnd).getTemplateName() with { 'round': arnd.page } %}
+      {% render roundcontroller(arnd).getDescriptionAction() with { 'round': arnd.page } %}
       <p class="linkbar">
-      {% for name, link in roundcontroller(arnd).getRoundLinks(2011, page.section, arnd) %}
+      {% for name, link in roundcontroller(arnd).getRoundLinks(term.getName(), page.section, arnd) %}
         {% if not (rcnf1 is defined) %}{% set rcnf1 = true %}{% else %} | {% endif %} <a href="{{ link }}">{{ name }}</a>
       {% endfor %}
       </p>
     {% else %}
       {% if app.user.mayJoin(arnd.page.parent.section) %}
       <p>Ebben a fordulóban nem veszel részt, mivel nem indultál még a(z) {{ page.title }} szekcióban. Azonban a regisztrációs időszak még tart, így amennyiben meggondoltad magad és indulnál ebben is,
-      látogass el a <a href="{{ url('competition_subscriptions', { 'term': 2011 } ) }}">profilod versenybeállítások oldalára</a>, ahol felveheted a választottjaid köze.</p>
+      látogass el a <a href="{{ url('competition_subscriptions', { 'term': term.getName() } ) }}">profilod versenybeállítások oldalára</a>, ahol felveheted a választottjaid köze.</p>
       {% else %}
       A szekcióba már nem lehet jelentkezni.
       {% endif %}

@@ -1,5 +1,5 @@
 {% if app.user %}
-Bejelentkezve: {{ app.user.email }} | <a href="{{ url('competition_profile', { 'term' : 2013 } ) }}">Profil</a> | <a href="{{ url('competition_subscriptions', { 'term' : 2011 }) }}">Verseny</a> | <a href="{{ path('logout') }}">Kijelentkezés</a>
+Bejelentkezve: {{ app.user.email }} | <a href="{{ url('competition_profile', { 'term' : term.getName() } ) }}">Profil</a> | <a href="{{ url('competition_subscriptions', { 'term' : term.getName() }) }}">Verseny</a> | <a href="{{ path('logout') }}">Kijelentkezés</a>
 {% else %}
 <form method="post" action="{{ path("login_check") }}">
   <input name="_username" type="text" placeholder="E-mail cím" tabindex="1" />

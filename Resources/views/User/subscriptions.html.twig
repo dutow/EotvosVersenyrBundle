@@ -22,7 +22,7 @@
       jelentkezve
     {% else %}
       {% if app.user.mayJoin(item) %}
-        <a href="{{ url('competition_subscribe', { 'term' : 2011, 'section' : item.page.slug } ) }}">jelentkezés</a>
+        <a href="{{ url('competition_subscribe', { 'term' : term.getName(), 'section' : item.page.slug } ) }}">jelentkezés</a>
       {% else %}
         -
       {% endif %}

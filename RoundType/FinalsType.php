@@ -29,7 +29,7 @@ class FinalsType
      */
     public function getDescriptionAction()
     {
-        return null;
+        return 'eotvos.versenyr.round.finals:description';
     }
 
     /**
