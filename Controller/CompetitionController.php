@@ -256,4 +256,31 @@ class CompetitionController extends Controller
             'term' => $term,
         );
     }
+
+    /**
+     * archives
+     * 
+     * @return array of template parameters
+     *
+     * @Route("/archives", name="archives" )
+     * @Template()
+     */
+    public function archivesAction()
+    {
+        $term = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->getLastTerm()
+            ;
+
+        $terms = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->findAll()
+            ;
+
+        return array(
+            'terms' => $terms,
+            'term' => $term,
+        );
+    }
+    
 }

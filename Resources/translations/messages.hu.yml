@@ -20,6 +20,9 @@ sidebar:
   start: 'Kezdete'
   stop: 'Vege'
 
+archives:
+  title: 'Archivum'
+
 sections:
   title: 'Szekciok'
 

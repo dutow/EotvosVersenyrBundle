@@ -40,7 +40,7 @@ class UserController extends Controller
             ->getLastTerm()
             ;
 
-        return $this->redirect($this->generateUrl('competition_profile', array('term' => $term->getName())));
+        return $this->redirect($this->generateUrl('archives'));
     }
 
     /**

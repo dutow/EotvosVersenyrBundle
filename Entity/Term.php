@@ -201,7 +201,7 @@ class Term
         $em->persist($reg1);
 
         $reg2 = new TextPage();
-        $reg2->setTitle('Registration');
+        $reg2->setTitle('Succesfull registration');
         $reg2->setParent($root);
         $reg2->setInMenu(false);
         $reg2->setSpecial('register_after');
@@ -211,8 +211,8 @@ class Term
         $archiv = new TextPage();
         $archiv->setTitle('Archives');
         $archiv->setParent($root);
-        $archiv->setInMenu(false);
-        $archiv->setSpecial('register_after');
+        $archiv->setInMenu(true);
+        $archiv->setSpecial('archives');
         $archiv->setBody("Lorem ipsum stbstb");
         $em->persist($archiv);
 

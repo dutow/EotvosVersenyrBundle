@@ -127,6 +127,16 @@ class EcvUrlExtension extends \Twig_Extension implements ContainerAwareInterface
                                 'sectionSlug' => $sentence->getParent()->getSlug()
                             ));
 
+                case 'archives':
+
+                    return $this
+                        ->container
+                        ->get('router')
+                        ->generate(
+                            'archives',
+                            array(
+                            ));
+
                 case 'register':
                     // todo: if active? 
 

@@ -1,0 +1,13 @@
+{% extends 'EotvosVersenyrBundle::base.html.twig' %}
+{% set active_menu = 'arcihves' %}
+
+{% block title %}
+{% trans %}arcihves.title{% endtrans %}
+{% endblock %}
+
+{% block body %}
+<h2>{% trans %}arcihves.title{% endtrans %}</h2>
+{% for display in terms %}
+<a href="{{ display.rootPage | ecvurl  }}" id="archive_{{ display.name }}" class="termbox">{{ display.name }}</a>
+{% endfor %}
+{% endblock %}
