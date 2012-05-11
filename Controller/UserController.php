@@ -59,6 +59,11 @@ class UserController extends Controller
         $request = $this->getRequest();
         $session = $request->getSession();
 
+        $term = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Term')
+            ->getLastTerm()
+            ;
+
         // get the login error if there is one
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
@@ -70,6 +75,7 @@ class UserController extends Controller
             // last username entered by the user
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
             'error'         => $error,
+            'term'          => $term,
         );
     }
 
