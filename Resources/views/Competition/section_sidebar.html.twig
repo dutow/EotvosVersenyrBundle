@@ -34,7 +34,7 @@
 <li><strong>{% trans %}sidebar.start{% endtrans %}:</strong> {{ child.round.start|date('Y. m. d. H:i')  }}</li>
 <li><strong>{% trans %}sidebar.stop{% endtrans %}:</strong> {{ child.round.stop|date('Y. m. d. H:i')  }}</li>
 {% if child.round.active %}
-  {% for name, link in roundcontroller(child.round).getRoundLinks(term.getName(), page.section, child.round) %}
+  {% for name, link in roundcontroller(child.round).getRoundLinks(child.round) %}
     <li><a href="{{ link }}">{{ name }}</a></li>
   {% endfor %}
 {% endif %}

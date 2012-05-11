@@ -143,15 +143,6 @@ class User implements UserInterface, \Serializable
         $this->sections[] = $section;
     }
 
-    /**
-     * Get sections
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getSections()
-    {
-        return $this->sections;
-    }
 
     /**
      * Get username

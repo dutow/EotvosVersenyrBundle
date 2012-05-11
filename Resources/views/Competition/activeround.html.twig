@@ -9,7 +9,7 @@
         {% trans with { '%untildate%': (arnd.stop|date('Y. m. d. H:i')) } %}rounds.longer.eligbe{% endtrans %}
         {% render roundcontroller(arnd).getDescriptionAction() with { 'round': arnd.page } %}
         <p class="linkbar">
-        {% for name, link in roundcontroller(arnd).getRoundLinks(term.getName(), page.section, arnd) %}
+        {% for name, link in roundcontroller(arnd).getRoundLinks(arnd) %}
           {% if not (rcnf1 is defined) %}{% set rcnf1 = true %}{% else %} | {% endif %} <a href="{{ link }}">{{ name }}</a>
         {% endfor %}
         </p>
