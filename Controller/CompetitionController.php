@@ -131,46 +131,16 @@ class CompetitionController extends Controller
         }
 
         $submissions = array();
-        $standing = array();
-        foreach ($submissionRep->getByRound($roundRec->getRound()) as $subm) {
-            if (!isset($submissions[$subm->getUserId()->getUniqueIdentifier()])) {
-                $submissions[$subm->getUserId()->getUniqueIdentifier()] = array();
-                $standing[$subm->getUserId()->getUniqueIdentifier()] = array();
-            }
-            $sR =& $submissions[$subm->getUserId()->getUniqueIdentifier()];
-
-            $cat = $subm->getCategory();
-            if ($cat=='undefined' || $cat == '') {
-                $cat = 'default';
-            }
-
-            if (isset($sR[$cat])) {
-                continue;
-            }
-
-            if ($this->container->get('request')->getMethod() === 'POST') {
-                $subm->setPoints($request->request->get('r'.$subm->getId()));
-            }
-
-            $sR[$cat] = array($subm->getId(),$subm->getPoints());
-
-            $p = (int) $subm->getPoints();
-            $standing[$subm->getUserId()->getUniqueIdentifier()][$cat]= $p;
-        }
-
-        $roundController = $this->container->get('eotvos_versenyr.round.'.$roundRec->getRound()->getRoundtype());
-
-        $standing2 = $roundController->orderStanding($standing, $roundRec->getRound());
+        $submissions = $submissionRep->getStandingByRound($roundRec->getRound());
+        $roundtype = $this->get($roundRec->getRound()->getRoundtype());
+        $standing = $roundtype->orderStanding($submissions, $roundRec->getRound());
 
 
-        usort($standing2, function($a,$b) {
-            return ($b[1]-$a[1]);
-        });
 
         return array(
             'round' => $roundRec->getRound(),
             'section' => $sectionRec->getSection(),
-            'standing' => $standing2,
+            'standing' => $standing,
             'page' => $roundRec,
             'term' => $term,
         );
