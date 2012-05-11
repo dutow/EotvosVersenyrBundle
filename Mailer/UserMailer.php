@@ -29,7 +29,10 @@ class UserMailer extends ContainerAware
      */
     protected function renderView($view, array $parameters = array(), Response $response = null)
     {
-        return $this->container->get('templating')->renderResponse($view, $parameters, $response);
+        $tpl = $this->container->get('twigstring');
+
+
+        return $tpl->renderResponse($view, $parameters);
     }
 
     /**
@@ -42,15 +45,21 @@ class UserMailer extends ContainerAware
      *
      * @todo make sender parameters and subject customizable
      */
-    public function sendRegistrationNotification($userObject, $password)
+    public function sendRegistrationNotification($term, $userObject, $password)
     {
+        $twig = $this
+            ->container
+            ->get('doctrine')
+            ->get('EotvosVersenyrBundle:TextPage')
+            ->getForTermWithSpecial('register_mail');
+
         $body = $this->renderView(
-            'EotvosVersenyrBundle:User:email.txt.twig',
+            $twig->getBody(),
             array('user' => $userObject, 'password' => $password)
         );
 
         $message = \Swift_Message::newInstance()
-            ->setSubject('Eötvös József Tanulmányi Verseny Regisztráció')
+            ->setSubject($twig->getTitle())
             ->setFrom('verseny@eotvos.elte.hu')
             ->setTo($userObject->getEmail())
             ->setBody($body)
@@ -72,26 +81,26 @@ class UserMailer extends ContainerAware
      * @todo refactor into one multi recipient bcc mail
      * @todo make recipients and subject customizable
      */
-    public function sendRegistrationAdminMessages($userObject)
+    public function sendRegistrationAdminMessages($term, $userObject)
     {
-        $body = $this->renderView('EotvosVersenyrBundle:User:email_belso.txt.twig', array('user' => $userObject));
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Eötvös József Tanulmányi Verseny Regisztráció')
-            ->setFrom('verseny@eotvos.elte.hu')
-            ->setTo('eotvosversenyr@gmail.com')
-            ->setBody($body)
-            ;
+        $twig = $this
+            ->container
+            ->get('doctrine')
+            ->get('EotvosVersenyrBundle:TextPage')
+            ->getForTermWithSpecial('section_notify');
 
-        $this->container->get('mailer')->send($message);
-
-        $body = $this->renderView('EotvosVersenyrBundle:User:email_belso.txt.twig', array('user' => $userObject));
+        $body = $this->renderView(
+            $twig->getBody(),
+            array('user' => $userObject)
+        );
 
         foreach ($userObject->getSections() as $sec) {
             $targets = json_decode($sec->getNotify());
+
             foreach ($targets as $key => $email) {
                 $email = $email[1];
                 $message = \Swift_Message::newInstance()
-                    ->setSubject('Eötvös József Tanulmányi Verseny Regisztráció')
+                    ->setSubject($twig->getTitle())
                     ->setFrom('verseny@eotvos.elte.hu')
                     ->setTo($email)
                     ->setBody($body)

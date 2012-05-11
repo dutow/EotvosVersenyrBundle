@@ -178,11 +178,11 @@ class UserController extends Controller
                 $registration->setTerm($term);
                 $em->flush();
 
-                //$userMailer = $this->get('eotvos.versenyr.mailer.user');
-                //$userMailer->sendRegistrationNotification($user, $password);
-                //$userMailer->sendRegistrationAdminMessages($user);
+                $userMailer = $this->get('eotvos.versenyr.mailer.user');
+                $userMailer->sendRegistrationNotification($term, $user, $password);
+                $userMailer->sendRegistrationAdminMessages($term, $user);
 
-                return $this->redirect($this->generateUrl('competition_register_success', array()));
+                return $this->redirect($this->generateUrl('competition_register_success', array('term' => $term->getName())));
             }
         }
 

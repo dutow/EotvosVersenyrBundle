@@ -208,6 +208,23 @@ class Term
         $reg2->setBody("Lorem ipsum stbstb");
         $em->persist($reg2);
 
+        $reg3 = new TextPage();
+        $reg3->setTitle('Succesfull registration');
+        $reg3->setParent($root);
+        $reg3->setInMenu(false);
+        $reg3->setSpecial('register_mail');
+        $reg3->setBody("Lorem ipsum stbstb");
+        $em->persist($reg3);
+
+        $reg4 = new TextPage();
+        $reg4->setTitle('User registration');
+        $reg4->setParent($root);
+        $reg4->setInMenu(false);
+        $reg4->setSpecial('section_notify');
+        $reg4->setBody("Lorem ipsum stbstb");
+        $em->persist($reg4);
+
+
         $archiv = new TextPage();
         $archiv->setTitle('Archives');
         $archiv->setParent($root);
