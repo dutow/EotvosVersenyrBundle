@@ -39,7 +39,7 @@
         <a href="{{ path('admin_textpage_new', { parent: row.id, type: 'round' }) }}">{% trans %}admin.textpage.actions.newround{% endtrans %}</a>
         {% endif %}
         {% if row.special == 'round' and row.round.roundtypeProvider(container).configurationUrl(row.round) is not null %}
-        <a href="{{ path(row.round.roundtypeProvider(container).configurationUrl(row.round), { id: row.round.id }) }}">konfiguracio</a>
+        <a href="{{ path(row.round.roundtypeProvider(container).configurationUrl(row.round), { round: row.round.id }) }}">konfiguracio</a>
         {% endif %}
       </td>
     </tr>
