@@ -9,5 +9,17 @@
 <h2>{% trans %}archives.title{% endtrans %}</h2>
 {% for display in terms %}
 <a href="{{ display.rootPage | ecvurl  }}" id="archive_{{ display.name }}" class="termbox">{{ display.name }}</a>
+{% if app.user %}
+<br />
+{% if app.user.getRegistrationForTerm(display) is null %}
+  {% if term.open %}
+    {% trans with { '%url%': (display.rootPage|ecvurl) } %}archives.term.register{% endtrans %}
+  {% else %}
+    {% trans %}archives.term.noregister{% endtrans %}
+  {% endif %}
+{% else %}
+  {% trans %}archives.term.registered{% endtrans %}
+{% endif %}
+{% endif %}
 {% endfor %}
 {% endblock %}

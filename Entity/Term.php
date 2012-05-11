@@ -172,6 +172,18 @@ class Term
         return $this->registrationStart;
     }
 
+    public function getRegistrationUntil()
+    {
+        $until = $this->getRegistrationStart();
+        foreach ($this->getSections() as $sec) {
+            if ($sec->getRegistrationUntil() > $until) {
+                $until = $sec->getRegistrationUntil();
+            }
+        }
+
+        return $until;
+    }
+
     public function generateChildren($em)
     {
         $root = new TextPage();
@@ -303,5 +315,14 @@ class Term
     public function getRegistrations()
     {
         return $this->registrations;
+    }
+
+    public function open($date=null)
+    {
+        if (null===$date) {
+            $date = new \DateTime();
+        }
+
+        return $date < $this->getRegistrationUntil();
     }
 }

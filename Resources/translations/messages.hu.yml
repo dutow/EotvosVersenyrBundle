@@ -22,6 +22,10 @@ sidebar:
 
 archives:
   title: 'Archivum'
+  term:
+    registered: 'Mar regisztraltal az alkalomra'
+    register: 'Az alkalomra meg nem regisztraltal. A regisztraciora <a href="%url%">itt</a> van lehetoseged.'
+    noregister: 'Az alkalmon nem vettel reszt.'
 
 sections:
   title: 'Szekciok'

@@ -439,14 +439,11 @@ class User implements UserInterface, \Serializable
     public function getRegistrationForTerm($term)
     {
         foreach ($this->getRegistrations() as $reg) {
-            var_dump($reg->getTerm()->getId());
             if ($reg->getTerm()->getId()==$term->getId()) {
                 return $reg;
             }
         }
 
-        var_dump($term->getId());
-        die('asdf');
         return null;
     }
 }
