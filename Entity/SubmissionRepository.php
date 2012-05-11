@@ -104,7 +104,7 @@ class SubmissionRepository extends EntityRepository
         }
 
         return $this->getEntityManager()
-            ->createQuery('SELECT s FROM Eotvos\VersenyrBundle\Entity\Submission s WHERE s.user_id=:user_id AND s.round_id=:round_id ORDER BY s.submitted_at DESC')
+            ->createQuery('SELECT s FROM Eotvos\VersenyrBundle\Entity\Submission s WHERE s.user_id=:user_id AND s.round=:round_id ORDER BY s.submitted_at DESC')
             ->setParameter('user_id', $user->getId())
             ->setParameter('round_id', $round->getId())
             ->getResult();
