@@ -152,6 +152,24 @@ class Term
         return $this->rootPage;
     }
 
+    public function getSections()
+    {
+        $secs = array();
+        foreach ($this->getRootPage()->getChildren() as $child) {
+            if ('sections'==$child->getSpecial()) {
+                foreach ($child->getChildren as $ch) {
+                    if ('section'==$child->getSpecial()) {
+                        $secs[] =$child->getSection();
+                    }
+                }
+            }
+
+            return $secs;
+        }
+
+        return $secs;
+    }
+
     /**
      * Set registrationStart
      *
@@ -235,6 +253,22 @@ class Term
         $reg4->setSpecial('section_notify');
         $reg4->setBody("Lorem ipsum stbstb");
         $em->persist($reg4);
+
+        $reg5 = new TextPage();
+        $reg5->setTitle('No registration');
+        $reg5->setParent($root);
+        $reg5->setInMenu(false);
+        $reg5->setSpecial('register_notopen');
+        $reg5->setBody("Lorem ipsum stbstb");
+        $em->persist($reg5);
+
+        $reg6 = new TextPage();
+        $reg6->setTitle('No registration');
+        $reg6->setParent($root);
+        $reg6->setInMenu(false);
+        $reg6->setSpecial('register_done');
+        $reg6->setBody("Lorem ipsum stbstb");
+        $em->persist($reg6);
 
 
         $archiv = new TextPage();

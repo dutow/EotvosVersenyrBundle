@@ -135,6 +135,27 @@ class UserController extends Controller
             throw $this->createNotFoundException('Term not found');
         }
 
+        $sec = $this->get('security.context');
+        $curruser = $sec->getToken()->getUser();
+
+        if ($sec->isGranted('ROLE_USER') && $curruser->getRegistrationForTerm($term)) {
+            $rec = $this->getDoctrine()
+                ->getRepository('EotvosVersenyrBundle:Textpage')
+                ->getForTermWithSpecial($term->getName(), 'register_done')
+                ;
+
+            return $this->redirect('competition_page', array( 'term' => $term->getName(), 'pageSlug' => $rec->getSlug()));
+        }
+
+        if (!$term->open()) {
+            $rec = $this->getDoctrine()
+                ->getRepository('EotvosVersenyrBundle:Textpage')
+                ->getForTermWithSpecial($term->getName(), 'register_notopen')
+                ;
+
+            return $this->redirect('competition_page', array( 'term' => $term->getName(), 'pageSlug' => $rec->getSlug()));
+        }
+
         if (false) {
             // not active: render static page
 
