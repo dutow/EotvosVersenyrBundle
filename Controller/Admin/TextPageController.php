@@ -160,11 +160,24 @@ class TextPageController extends Controller
                 $textpage = $form->getData();
 
                 $em->persist($textpage);
+
                 if ("section" == $subtype) {
                     $em->persist($textpage->getSection());
                 }
                 if ("round" == $subtype) {
                     $em->persist($textpage->getRound());
+                }
+
+                $em->flush();
+                if ("section" == $subtype) {
+                    $section = $textpage->getSection();
+                    $section->setPage($textpage);
+                    $em->persist($section);
+                }
+                if ("round" == $subtype) {
+                    $round = $textpage->getRound();
+                    $round->setPage($textpage);
+                    $em->persist($round);
                 }
 
                 $em->flush();

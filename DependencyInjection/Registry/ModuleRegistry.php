@@ -10,9 +10,9 @@ class ModuleRegistry
         $this->modules = array();
     }
 
-    public function register($service_id)
+    public function register($service_name, $service_type)
     {
-        $this->modules[] = $service_id;
+        $this->modules[$service_name] = $service_type;
     }
 
     public function getModuleList()

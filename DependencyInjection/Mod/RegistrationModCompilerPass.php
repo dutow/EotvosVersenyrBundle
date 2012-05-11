@@ -16,7 +16,7 @@ class RegistrationModCompilerPass implements CompilerPassInterface
         $registry = $container->getDefinition('eotvos.versenyr.registrationregistry');
 
         foreach ($container->findTaggedServiceIds('eotvos.versenyr.registrationtype') as $id => $attributes) {
-            $registry->addMethodCall('register', array(new Reference($id)));
+            $registry->addMethodCall('register', array($id, new Reference($id)));
         }
     }
 }

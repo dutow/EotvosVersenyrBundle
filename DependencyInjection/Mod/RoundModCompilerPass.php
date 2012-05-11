@@ -15,7 +15,7 @@ class RoundModCompilerPass implements CompilerPassInterface
         $registry = $container->getDefinition('eotvos.versenyr.roundregistry');
 
         foreach ($container->findTaggedServiceIds('eotvos.versenyr.roundtype') as $id => $attributes) {
-            $registry->addMethodCall('register', array(new Reference($id)));
+            $registry->addMethodCall('register', array($id, new Reference($id)));
         }
     }
 }
