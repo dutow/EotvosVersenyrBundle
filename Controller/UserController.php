@@ -330,19 +330,20 @@ class UserController extends Controller
         } else {
             $user = $this->get('security.context')->getToken()->getUser();
 
-            if (!$user->mayJoin($record->getSection())) {
+            if (!$user->getRegistrationForTerm($term)->mayJoin($record->getSection())) {
                 $this->get('session')->setFlash('error', "Jelentkezesi hiba!");
             } else {
-                $user->addSection($record->getSection());
+                $registration = $user->getRegistrationForTerm($term);
+                $registration->addSection($record->getSection());
 
                 $em = $this->getDoctrine()->getEntityManager();
-                $em->persist($user);
+                $em->persist($registration);
                 $em->flush();
 
                 $this->get('session')->setFlash('info', "Sikeresen jelentkeztél a szekcióba!");
             }
         }
 
-        return $this->redirect($this->generateUrl('competition_subscriptions', array('term' => $term)));
+        return $this->redirect($this->generateUrl('competition_subscriptions', array('term' => $term->getName())));
     }
 }

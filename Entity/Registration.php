@@ -151,4 +151,19 @@ class Registration
 
         return false;
     }
+
+    /**
+     * May the user join the given section?
+     *
+     * @param Section $section question subject
+     *
+     * @return bool true if possible
+     */
+    public function mayJoin(\Eotvos\VersenyrBundle\Entity\Section $section)
+    {
+        $now = new \DateTime();
+        $now->sub(new \DateInterval('P1D'));
+
+        return ($section->getRegistrationUntil() > $now);
+    }
 }

@@ -15,7 +15,7 @@
   </thead>
   <tbody>
   {% for item in sections %}
-  <tr class="{% if registration.hasSection(item) %}st_subscribed{% else %}{% if app.user.mayJoin(item) %}st_joinable{% else %}st_disabled{% endif %}{% endif %}" id="section_{{ item.page.slug }}">
+  <tr class="{% if registration.hasSection(item) %}st_subscribed{% else %}{% if registration.mayJoin(item) %}st_joinable{% else %}st_disabled{% endif %}{% endif %}" id="section_{{ item.page.slug }}">
     <td><a href="{{ item | ecvurl }}">{{ item.page.title }}</a></td>
     <td>
     {% if registration.hasSection(item) %}
