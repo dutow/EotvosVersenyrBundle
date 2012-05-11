@@ -21,6 +21,11 @@ services:
     tags:
       - { name: eotvos.versenyr.roundtype }
 
+  eotvos.versenyr.round.finals:
+    class: Eotvos\VersenyrBundle\Controller\FinalsController
+    calls:
+      - [ setContainer, [@service_container] ]
+
   eotvos.versenyr.cwm.module:
     class:  Eotvos\VersenyrBundle\Cwm\VersenyrModule
     tags:

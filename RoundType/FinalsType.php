@@ -29,7 +29,7 @@ class FinalsType
      */
     public function getDescriptionAction()
     {
-        return 'eotvos.versenyr.round.finals:description';
+        return 'eotvos.versenyr.round.finals:activeDescriptionAction';
     }
 
     /**
