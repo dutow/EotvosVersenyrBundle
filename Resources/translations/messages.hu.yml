@@ -38,8 +38,11 @@ eotvos:
         results:
             title: 'Eredmenyek'
             name: 'Nev'
+            identifier: 'Azonosito'
             points: 'Pontok'
             advances: 'Tovabbjutott?'
+            yes: 'Igen'
+            no: 'Nem'
         round:
             finals:
                 message: 'Helyi fordulo, amely a helyszinen kerul megrendezesre.'

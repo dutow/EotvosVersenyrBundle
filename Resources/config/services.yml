@@ -37,6 +37,9 @@ services:
   eotvos.versenyr.roundregistry:
     class: Eotvos\VersenyrBundle\DependencyInjection\Registry\ModuleRegistry
 
+  eotvos.versenyr.resultregistry:
+    class: Eotvos\VersenyrBundle\DependencyInjection\Registry\ModuleRegistry
+
   EotvosBundle.twig.ecvurl:
     class: Eotvos\VersenyrBundle\Extension\EcvUrlExtension
     tags:
@@ -50,4 +53,25 @@ services:
       - { name: twig.extension }
     calls: 
       - [ setContainer,  [@service_container] ] 
+
+  eotvos.versenyr.results.public:
+    class: Eotvos\VersenyrBundle\ResultType\PublicResults
+    calls:
+      - [ setContainer, [@service_container] ]
+    tags:
+      - { name: eotvos.versenyr.resulttype }
+
+  eotvos.versenyr.results.private:
+    class: Eotvos\VersenyrBundle\ResultType\PrivateResults
+    calls:
+      - [ setContainer, [@service_container] ]
+    tags:
+      - { name: eotvos.versenyr.resulttype }
+
+  eotvos.versenyr.results.nopoint:
+    class: Eotvos\VersenyrBundle\ResultType\NopointResults
+    calls:
+      - [ setContainer, [@service_container] ]
+    tags:
+      - { name: eotvos.versenyr.resulttype }
 

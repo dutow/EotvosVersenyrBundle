@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 use Eotvos\VersenyrBundle\DependencyInjection\Mod\RoundModCompilerPass;
 use Eotvos\VersenyrBundle\DependencyInjection\Mod\RegistrationModCompilerPass;
+use Eotvos\VersenyrBundle\DependencyInjection\Mod\ResultModCompilerPass;
 
 /**
  * EotvosVersenyrBundle
@@ -27,6 +28,7 @@ class EotvosVersenyrBundle extends Bundle
 
         $container->addCompilerPass(new RoundModCompilerPass());
         $container->addCompilerPass(new RegistrationModCompilerPass());
+        $container->addCompilerPass(new ResultModCompilerPass());
     }
 
 }

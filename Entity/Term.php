@@ -322,7 +322,7 @@ class Term
         $rnd->setStart($until);
         $rnd->setStop($stop);
         $rnd->setPage($round);
-        $rnd->setPublicity('private');
+        $rnd->setPublicity('eotvos.versenyr.results.private');
         $rnd->setAdvanceNo(10);
         $em->persist($rnd);
     }

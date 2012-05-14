@@ -48,11 +48,22 @@ class RoundType extends AbstractType
             $types[$service] = $obj->getDisplayName();
         }
 
+        $resulttypes = $this->container->get('eotvos.versenyr.resultregistry')->getModuleList();
+        $results = array();
+        foreach ($resulttypes as $service => $obj) {
+            $results[$service] = $obj->getName();
+        }
+
 
         $builder->add('start', 'date', array('widget' => 'single_text', 'format' => 'yyyy-MM-dd'));
         $builder->add('stop', 'date', array('widget' => 'single_text', 'format' => 'yyyy-MM-dd'));
         $builder->add('advanceNo', 'number');
-        $builder->add('publicity', 'text');
+        $builder->add('publicity', 'choice', array(
+            'choices' => $results,
+            'required' => true,
+            'multiple' => false,
+            'expanded' => false,
+        ));
 
         $builder->add('roundtype', 'choice', array(
             'choices' => $types,
