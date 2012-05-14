@@ -3,10 +3,10 @@
 {% form_theme form 'CancellarAdminBundle::form.html.twig' %}
 
 {% block main %}
-<h2>Uj szoveges oldal letrehozasa</h2>
+<h2>{{ 'admin.textpage.display.new'|trans }}</h2>
 <form class="wide" method="post" {{ form_enctype(form) }}>
   <fieldset>
-    <legend>Adatok</legend>
+    <legend>{{ 'admin.textpage.label.fields'|trans }}
     {{ form_errors(form) }}
     {{ form_row(form.title) }}
     {% if textpage.parent == null %}
@@ -16,7 +16,7 @@
     {{ form_rest(form) }}
     <div class="formrow row_required">
       <p class="inputholder">
-      <input type="submit" value="Mentés" class="button" />
+      <input type="submit" value="{{ 'admin.textpage.actions.save'|trans }}button" />
       </p>
     </div>
   </fieldset>

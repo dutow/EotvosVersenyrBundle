@@ -3,10 +3,10 @@
 {% form_theme form 'CancellarAdminBundle::form.html.twig' %}
 
 {% block main %}
-<h2>Oldal szerkesztese</h2>
+<h2>{{ 'admin.textpage.display.edit'|trans }}</h2>
 <form class="wide" action="{{ path('admin_textpage_edit', { 'id': textpage.id } ) }}" method="post" {{ form_enctype(form) }}>
   <fieldset>
-    <legend>Adatok</legend>
+    <legend>{{ 'admin.textpage.label.fields'|trans }}</legend>
     {{ form_row(form.title) }}
     {% if textpage.parentChangable %}
     {{ form_row(form.parent) }}
@@ -15,7 +15,7 @@
     {{ form_rest(form) }}
     <div class="formrow row_required">
       <p class="inputholder">
-      <input type="submit" value="Mentés" class="button" />
+      <input type="submit" value="{{ 'admin.textpage.actions.save'|trans }} class="button" />
       </p>
     </div>
   </fieldset>

@@ -100,6 +100,8 @@ admin:
   term:
     display:
       list: 'Alkalmak'
+      new: 'Uj alkalom'
+      edit: 'Alkalom szerkesztese'
     actions:
       new: 'Uj alkalom'
       edit: 'Szerkeszt'
@@ -114,10 +116,13 @@ admin:
     activity:
       active: 'Aktiv'
       inactive: 'Inaktiv'
+    legend:
+      fields: 'Adatok'
     
   textpage:
     display:
       list: 'Szoveges oldalak'
+      show: 'Felhasznalo: '
     actions:
       new: 'Uj oldal'
       newround: 'Uj fordulo'
@@ -127,6 +132,7 @@ admin:
       save: 'Mentes'
       up: 'Fel'
       down: 'Le'
+      config: 'Konfiguracio'
     fields:
       id: 'ID'
       name: 'Nev'

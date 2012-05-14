@@ -3,17 +3,17 @@
 {% form_theme form 'CancellarAdminBundle::form.html.twig' %}
 
 {% block main %}
-<h2>Alkalom szerkesztese</h2>
+<h2>{{ 'admin.term.display.edit'|trans }}</h2>
 <form class="wide" action="{{ path('admin_term_edit', { 'id': term.id } ) }}" method="post" {{ form_enctype(form) }}>
   <fieldset>
-    <legend>Adatok</legend>
+    <legend>{{ 'admin.term.label.fields'|trans }}</legend>
     {{ form_row(form.name) }}
     {{ form_row(form.userType) }}
     {{ form_row(form.registrationStart) }}
     {{ form_row(form.active) }}
     <div class="formrow row_required">
       <p class="inputholder">
-      <input type="submit" value="Mentés" class="button" />
+      <input type="submit" value="{{ 'admin.term.actions.save'|trans }}" class="button" />
       </p>
     </div>
   </fieldset>
