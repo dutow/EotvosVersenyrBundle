@@ -126,6 +126,7 @@ admin:
     display:
       list: 'Szoveges oldalak'
       show: 'Felhasznalo: '
+      edit: 'Szerkesztes'
     actions:
       new: 'Uj oldal'
       newround: 'Uj fordulo'
@@ -153,6 +154,8 @@ admin:
       regend: 'Lejart regisztracio'
       regmail: 'Regisztracios e-mail'
       archive: 'Archivum'
+    label:
+      fields: 'Adatok'
 
   submission:
     display:
