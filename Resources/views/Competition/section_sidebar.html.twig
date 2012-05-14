@@ -15,7 +15,7 @@
 {% for child in page.children %}
 {% if child.special == "round" %}
 {% set boxtype = 'standardround' %}
-{% if app.user.getRegistrationForTerm(term).hasSection( child.round.section ) %}
+{% if app.user and app.user.getRegistrationForTerm(term).hasSection( child.round.section ) %}
   {% if child.round.isOver() %}
     {% if child.round.advances(app.user.getRegistrationForTerm(term)) %}
       {% set boxtype = 'successround' %}
