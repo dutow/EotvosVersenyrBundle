@@ -15,7 +15,7 @@
 {% for child in page.children %}
 {% if child.special == "round" %}
 {% set boxtype = 'standardround' %}
-{% if app.user and app.user.isRegisteredForTerm(term) and app.user.getRegistrationForTerm(term).hasSection( child.round.section ) %}
+  {% if app.user and ((app.user.isRegisteredForTerm(term) and app.user.getRegistrationForTerm(term).hasSection( child.round.section )) or (app.user.tester or app.user.admin)) %}
   {% if child.round.isOver() %}
     {% if child.round.advances(app.user.getRegistrationForTerm(term)) %}
       {% set boxtype = 'successround' %}
@@ -23,7 +23,7 @@
       {% set boxtype = 'failedround' %}
     {% endif %}
   {% else %}
-    {% if not child.round.registrationActive(app.user.getRegistrationForTerm(term)) %}
+    {% if app.user.getRegistrationForTerm(term) != null and not child.round.registrationActive(app.user.getRegistrationForTerm(term)) %}
       {% set boxtype = 'failedround' %}
     {% endif %}
   {% endif %}

@@ -40,6 +40,9 @@ eotvos:
             name: 'Nev'
             points: 'Pontok'
             advances: 'Tovabbjutott?'
+        round:
+            finals:
+                message: 'Helyi fordulo, amely a helyszinen kerul megrendezesre.'
 
 rounds:
   status:
