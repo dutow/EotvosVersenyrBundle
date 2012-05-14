@@ -30,6 +30,11 @@ eotvos:
             tester: 'Tesztelo'
 
         sitename: 'Oldal neve'
+        admin:
+          contact: 'Kapcsolati informacio'
+        sender:
+          name: 'E-mail felado neve'
+          email: 'E-mail feladato cime'
         facebook:
             page: 'Facebook oldal neve'
         section:
@@ -149,11 +154,15 @@ admin:
       sections: 'Szekciok'
       section: 'Szekcio'
       round: 'Fordulo'
-      termemail: 'Alkalom regisztracios e-mail'
-      registration: 'Regisztracio'
-      regend: 'Lejart regisztracio'
-      regmail: 'Regisztracios e-mail'
+      termmail: 'Alkalom regisztracios e-mail'
+      registrer: 'Regisztracio'
+      register_after: 'Regisztracio utani oldal'
+      register_mail: 'Regisztracios e-mail'
       archive: 'Archivum'
+      section_notify: 'Szekcio ertesito level'
+      register_notopen: 'Regisztracios idoszak utan'
+      register_done: 'Mar regisztralt felhasznalo'
+      archives: 'Archivum'
     label:
       fields: 'Adatok'
 
