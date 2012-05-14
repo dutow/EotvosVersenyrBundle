@@ -176,7 +176,7 @@ admin:
     advances:
       yes: 'IGEN'
       no: 'NEM'
-    
+
   user:
     display:
       list: 'Felhasznalok'
@@ -206,3 +206,22 @@ admin:
       admin: 'Admin'
       tester: 'Tesztelo'
       user: 'Versenyzo'
+
+  configuration:
+    fields:
+      value: 'Ertek'
+      name: 'Nev'
+      id: 'ID'
+    display:
+      list: 'Konfiguracios beallitasok'
+    actions:
+      edit: 'Szerkeszt'
+
+  heading:
+    term: 'Alkalmak'
+    textpage: 'Oldalak'
+    submission: 'Megoldasok'
+    configuration: 'Konfiguracio'
+    user: 'Felhasznalok'
+
+  logout: 'Kijelentkezes'

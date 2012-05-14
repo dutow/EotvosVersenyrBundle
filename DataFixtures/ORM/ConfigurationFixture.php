@@ -58,6 +58,20 @@ class ConfigurationFixture extends AbstractFixture implements OrderedFixtureInte
         $conf->setValue('http://versenyr.info');
         $om->persist($conf);
 
+        $conf = new Configuration();
+        $conf->setName('eotvos.versenyr.admin.contact');
+        $conf->setValue('contact@example.com');
+        $om->persist($conf);
+
+        $conf = new Configuration();
+        $conf->setName('eotvos.versenyr.sender.email');
+        $conf->setValue('noreply@example.com');
+        $om->persist($conf);
+
+        $conf = new Configuration();
+        $conf->setName('eotvos.versenyr.sender.title');
+        $conf->setValue('VersenyR Mailer');
+        $om->persist($conf);
 
         $om->flush();
     }

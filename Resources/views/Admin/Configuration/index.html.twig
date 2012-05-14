@@ -1,0 +1,27 @@
+{% extends 'CancellarAdminBundle::layout.html.twig'  %}
+
+{% block main %}
+<h2>{% trans %}admin.configuration.display.list{% endtrans %}</h2>
+<table class="standard" style="width:100%;">
+  <thead>
+    <tr>
+      <th>{% trans %}admin.configuration.fields.id{% endtrans %}</th>
+      <th>{% trans %}admin.configuration.fields.name{% endtrans %}</th>
+      <th>{% trans %}admin.configuration.fields.value{% endtrans %}</th>
+      <th>{% trans %}admin.actions{% endtrans %}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in configurations %}
+    <tr>
+      <td>{{ row.id }}</td>
+      <td>{{ row.name|trans }}</td>
+      <td>{{ row.value }}</td>
+      <td>
+        <a href="{{ path('admin_configuration_edit', { id: row.id }) }}">{% trans %}admin.configuration.actions.edit{% endtrans %}</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'CancellarAdminBundle::layout.html.twig' %}
+
+{% form_theme form 'CancellarAdminBundle::form.html.twig' %}
+
+{% block main %}
+<h2>{{ 'admin.configuration.display.edit'|trans }} {{ configuration.name }}</h2>
+<form class="wide" action="{{ path('admin_configuration_edit', { 'id': configuration.id } ) }}" method="post" {{ form_enctype(form) }}>
+  <fieldset>
+    <legend>{{ 'admin.configuration.label.fields'|trans }}</legend>
+    {{ form_row(form.value) }}
+    <div class="formrow row_required">
+      <p class="inputholder">
+      <input type="submit" value="{{ 'admin.configuration.actions.save'|trans }}" class="button" />
+      </p>
+    </div>
+  </fieldset>
+  {{ form_rest(form) }}
+</form>
+{% endblock %}
