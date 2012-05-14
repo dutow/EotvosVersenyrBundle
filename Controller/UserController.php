@@ -320,12 +320,12 @@ class UserController extends Controller
         }
 
         if (!$record || $record->getSection()==null) {
-            $this->get('session')->setFlash('error', "Jelentkezesi hiba!");
+            $this->get('session')->setFlash('error', "eotvos.versenyr.contest.joinerror");
         } else {
             $user = $this->get('security.context')->getToken()->getUser();
 
             if (!$user->getRegistrationForTerm($term)->mayJoin($record->getSection())) {
-                $this->get('session')->setFlash('error', "Jelentkezesi hiba!");
+                $this->get('session')->setFlash('error', "eotvos.versenyr.contest.joinerror");
             } else {
                 $registration = $user->getRegistrationForTerm($term);
                 $registration->addSection($record->getSection());
@@ -334,7 +334,7 @@ class UserController extends Controller
                 $em->persist($registration);
                 $em->flush();
 
-                $this->get('session')->setFlash('info', "Sikeresen jelentkeztél a szekcióba!");
+                $this->get('session')->setFlash('info', "eotvos.versenyr.contest.joinsuccess");
             }
         }
 

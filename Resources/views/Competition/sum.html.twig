@@ -4,15 +4,15 @@
 {% set fbbox = page.fbbox %}
 
 {% block title %}
-  {{ section.page.title }} Szekció
+  {{ section.page.title }}
 {% endblock %}
 
 {% block body %}
   {% include 'EotvosVersenyrBundle:Competition:activeround.html.twig'  with { 'page' : section.page } %}
-  <h2>{{ section.page.title }} Eredmények - {{ page.title }}</h2>
+  <h2>{{ section.page.title }} - {{ 'eotvos.versenyr.results.title'|trans }} - {{ page.title }}</h2>
 <table>
   <thead>
-    <tr><th style="width: 50%;">Név</th><th style="width: 30%;">Pont</th><th style="width: 20%;">Továbbjutott?</th></tr>
+    <tr><th style="width: 50%;">{{ 'eotvos.versenyr.results.name'|trans }} Név</th><th style="width: 30%;">{{ 'eotvos.versenyr.results.points'|trans }}</th><th style="width: 20%;">{{ 'eotvos.versenyr.results.advanced'|trans }}</th></tr>
   </thead>
 </thead>
 <tbody>

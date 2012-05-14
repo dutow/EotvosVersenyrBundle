@@ -422,4 +422,18 @@ class User implements UserInterface, \Serializable
 
         return null;
     }
+
+    public function isRegisteredForTerm($term)
+    {
+        return $this->getRegistrationForTerm($term) != null;
+    }
+
+    public function mayJoin($term, $date=null)
+    {
+        if ($date===null) {
+            $date = new \DateTime();
+        }
+
+        return ($this->getRegistrationForTerm($term) == null) && ($term->getRegistrationUntil() > $date);
+    }
 }

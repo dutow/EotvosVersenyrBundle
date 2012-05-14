@@ -1,6 +1,6 @@
 <div class="submenu">
 <ul>
-  <li><a href="{{ page | ecvurl  }}">{{ page.title }} Szekció Kezdőlap</a></li>
+  <li><a href="{{ page | ecvurl  }}">{{ page.title }}</a></li>
 {% for child in page.children %}
 {% if child.inMenu and child.special != "round" %}
   <li><a href="{{ child | ecvurl  }}">{{ child.title }}</a></li>
@@ -9,13 +9,13 @@
 </ul>
 </div>
 <div class="subbox">
-<h3>Jelentkezési határidő</h3>
+  <h3>{{ 'eotvos.versenyr.section.deadline'|trans }}</h3>
 <span class="untildate">{{ section.registrationUntil|date("Y. m. d.") }}</span>
 </div>
 {% for child in page.children %}
 {% if child.special == "round" %}
 {% set boxtype = 'standardround' %}
-{% if app.user and app.user.getRegistrationForTerm(term).hasSection( child.round.section ) %}
+{% if app.user and app.user.isRegisteredForTerm(term) and app.user.getRegistrationForTerm(term).hasSection( child.round.section ) %}
   {% if child.round.isOver() %}
     {% if child.round.advances(app.user.getRegistrationForTerm(term)) %}
       {% set boxtype = 'successround' %}
@@ -38,8 +38,8 @@
     <li><a href="{{ link }}">{{ name }}</a></li>
   {% endfor %}
 {% endif %}
-{% if child.round.advanceNo < 10 %}
-    <li><a href="{{ url( 'competition_round_sum', { 'term': term.getName(), 'sectionSlug' : section.page.slug, 'roundSlug': child.slug } ) }}">Eredmények</a></li>
+{% if child.round.publicity != null %}
+<li><a href="{{ url( 'competition_round_sum', { 'term': term.getName(), 'sectionSlug' : section.page.slug, 'roundSlug': child.slug } ) }}">{{ 'eotvos.versenyr.section.results'|trans }}</a></li>
 {% endif %}
 </div>
 </div>

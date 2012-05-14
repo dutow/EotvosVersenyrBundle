@@ -3,6 +3,6 @@
 {% set fbbox = false %}
 {% block body %}
 {% if error %}
-    <div>{{ error.message }}</div>
+    <div>{{ error.message|trans }}</div>
 {% endif %}
 {% endblock %}

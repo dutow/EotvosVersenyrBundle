@@ -3,9 +3,7 @@
 {% set threecol = true %}
 {% set fbbox = page.fbbox %}
 
-{% block title %}
-  {{ page.title }}
-{% endblock %}
+{% block title %}{{ page.title }}{% endblock %}
 
 {% block body %}
 {{ page.body | markdown }}
@@ -14,7 +12,7 @@
 {% block rbody %}
 {% if page.children|length > 1 %}
 <div class="submenu">
-<h3>Aloldalak</h3>
+  <h3>{{ 'eotvos.versenyr.subpages'|trans }}</h3>
 <ul>
 {% for item in page.children %}
 <li>» <a href="{{ item | ecvurl }}">{{ item.title }}</a></li>

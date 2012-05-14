@@ -94,7 +94,7 @@
           {% include 'EotvosVersenyrBundle::user.html.twig' %}
         </div>
         <div id="head-text">
-          <span class="name">VersenyR</span><span class="page">{{ block('title') }}</span>
+          <span class="name">{{ eotvos_versenyr_sitename }}</span><span class="page">{{ block('title')|trans }}</span>
         </div>
 
     </header>
@@ -119,7 +119,7 @@
           fjs.parentNode.insertBefore(js, fjs);
           }(document, 'script', 'facebook-jssdk'));</script>
 
-        <div id="fb-like-box" class="fb-like-box" data-href="https://www.facebook.com/ejtv2011" data-width="238" height="605" data-show-faces="true" data-stream="true" data-header="false" data-border-color="#fff"></div>
+        <div id="fb-like-box" class="fb-like-box" data-href="{{ eotvos_versenyr_facebook_page }}" data-width="238" height="605" data-show-faces="true" data-stream="true" data-header="false" data-border-color="#fff"></div>
         {% endif %}
       </div>
       <div id="right-side">
@@ -137,7 +137,7 @@
 
         {% for key, flash in app.session.getFlashes() %}
         <div class="flash flash-{{ key }}">
-          {{ flash }}
+          {{ flash|trans }}
         </div>
         {% endfor %}
 

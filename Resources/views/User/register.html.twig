@@ -3,9 +3,7 @@
 {% set threecol = true %}
 {% set fbbox = false %}
 
-{% block title %}
-Jelentkezés
-{% endblock %}
+{% block title %}eotvos.versenyr.user.register{% endblock %}
 
 {% form_theme form 'EotvosVersenyrBundle:User:form.html.twig' %}
 
@@ -14,7 +12,7 @@ Jelentkezés
 <form method="post" {{ form_enctype(form) }}>
 
   <fieldset>
-    <legend>Account</legend>
+    <legend>{{ 'registration.form.legend.data' }}</legend>
     {{ form_row(form.user.email) }}
     {{ form_row(form.user.password) }}
   </fieldset>
@@ -32,7 +30,7 @@ Jelentkezés
   </fieldset>
 
   {{ form_rest(form) }}
-  <input type="submit" value="Register" class="button" />
+  <input type="submit" value="{{ 'registration.form.button'|trans }}" class="button" />
 </form>
 {% endblock %}
 

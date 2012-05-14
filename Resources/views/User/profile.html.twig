@@ -3,15 +3,15 @@
 {% set fbbox = false %}
 
 {% block body %}
-<h2>Felhasználói profil</h2>
+<h2>{{ 'eotvos.versenyr.user.profile'|trans }}</h2>
 
 <div class="profil">
 <ul>
-  <li><span class="key">E-mail: </span><span class="value">{{ app.user.email }}</span></li>
-  <li><span class="key">Azonosító: </span><span class="value">{{ app.user.uniqueIdentifier }}</span></li>
+  <li><span class="key">{{ 'eotvos.versenyr.user.fields.email'|trans' }}: </span><span class="value">{{ app.user.email }}</span></li>
+  <li><span class="key">{{ 'eotvos.versenyr.user.fields.identifier'|trans' }}: </span><span class="value">{{ app.user.uniqueIdentifier }}</span></li>
 </ul>
 </div>
 <p>
- Amennyiben valamelyik adatod megváltozott, vagy véletlenül elírtad, kérjük írj a <a href="mailto:verseny@eotvos.elte.hu">verseny@eotvos.elte.hu</a> e-mail címre egy e-mailt.
+{% trans with { 'email': eotvos_versenyr_admin_contact } %}eotvos.versenyr.user.datachange{% endtrans %}
 </p>
 {% endblock %}

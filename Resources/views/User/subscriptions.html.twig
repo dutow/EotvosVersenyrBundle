@@ -3,14 +3,14 @@
 {% set fbbox = false %}
 
 {% block body %}
-  <h2>Versenyhelyzet</h2>
+<h2>{{ 'eotvos.versenyr.contest.title'| trans }}</h2>
   <table class="sectionsubscription">
   <thead>
     <tr>
-      <th style="width: 200px;">Szekció</th>
-      <th style="width: 150px;">Státusz</th>
-      <th>Regisztrációs határidő</th>
-      <th>Következő forduló</th>
+      <th style="width: 200px;">{{ 'eotvos.versenyr.contest.name'| trans }}</th>
+      <th style="width: 150px;">{{ 'eotvos.versenyr.contest.status'| trans }}</th>
+      <th>{{ 'eotvos.versenyr.contest.reguntil'| trans }}</th>
+      <th>{{ 'eotvos.versenyr.contest.nextround'| trans }}</th>
     </tr>
   </thead>
   <tbody>
@@ -19,12 +19,12 @@
     <td><a href="{{ item | ecvurl }}">{{ item.page.title }}</a></td>
     <td>
     {% if registration.hasSection(item) %}
-      jelentkezve
+      {{ 'eotvos.versenyr.contest.status.joined'|trans }}
     {% else %}
       {% if registration.mayJoin(item) %}
-        <a href="{{ url('competition_subscribe', { 'term' : term.getName(), 'section' : item.page.slug } ) }}">jelentkezés</a>
+      <a href="{{ url('competition_subscribe', { 'term' : term.getName(), 'section' : item.page.slug } ) }}">{{ 'eotvos.versenyr.contest.status.mayjoin'|trans }}</a>
       {% else %}
-        -
+        {{ 'eotvos.versenyr.contest.status.nojoin'|trans }}
       {% endif %}
     {% endif %}
     </td>

@@ -1,3 +1,46 @@
+eotvos:
+    versenyr:
+        subpages: 'Aloldalak'
+        contest:
+            title: 'Versenyhelyzet'
+            name: 'Szekcio neve'
+            status: 'Statusz'
+            reguntil: 'Regisztracios hatarido'
+            nextround: 'Kovetkezo fordulo'
+            status:
+                joined: 'Csatlakozva'
+                mayjoin: 'jelentkezes'
+                nojoin: '-'
+            joinsuccess: 'Sikeresen jelentkeztel a szekcioba!'
+            joinerror: 'Jelentkezesi hiba!'
+        login:
+            loggedin: 'Bejelentkezve'
+            name: 'E-mail cim'
+            password: Jelszo
+            submit: 'Bejelentkezes'
+        user:
+            profile: Profil
+            contest: Verseny
+            logout: Kijelentkezes
+            fields:
+                email: 'E-mail cim'
+                identifier: 'Azonosito'
+            datachange: 'Amennyiben valamely adatod elirtad, vagy nem stimmel, kerjuk irj egy emailt az <a href="mailto:%email%">%email%</a> cimre.'
+            register: 'Jelentkezes'
+            tester: 'Tesztelo'
+
+        sitename: 'Oldal neve'
+        facebook:
+            page: 'Facebook oldal neve'
+        section:
+            deadline: 'Jelentkezesi hatarido'
+            results: 'Eredmenyek'
+        results:
+            title: 'Eredmenyek'
+            name: 'Nev'
+            points: 'Pontok'
+            advances: 'Tovabbjutott?'
+
 rounds:
   status:
     active: 'Fordulo folyamatban: %round%'
@@ -42,6 +85,11 @@ registration:
     password: 'Jelszo'
     confirm:  'Jelszo megegyszer'
     accept: 'A feltetelelet elfogadom'
+    legend:
+        data: 'Alapadatok'
+        term: 'Feltetelek'
+        sections: 'Szekciok'
+    button: 'Regisztral'
 
 admin:
   actions: 'Muveletek'

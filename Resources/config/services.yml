@@ -36,3 +36,18 @@ services:
 
   eotvos.versenyr.roundregistry:
     class: Eotvos\VersenyrBundle\DependencyInjection\Registry\ModuleRegistry
+
+  EotvosBundle.twig.ecvurl:
+    class: Eotvos\VersenyrBundle\Extension\EcvUrlExtension
+    tags:
+      - { name: twig.extension }
+    calls: 
+      - [ setContainer,  [@service_container] ] 
+
+  EotvosBundle.twig.configuration:
+    class: Eotvos\VersenyrBundle\Extension\ConfigurationExtension
+    tags:
+      - { name: twig.extension }
+    calls: 
+      - [ setContainer,  [@service_container] ] 
+
