@@ -3,6 +3,7 @@
 {% set fbbox = false %}
 
 {% block body %}
+{% if registration %}
 <h2>{{ 'eotvos.versenyr.contest.title'| trans }}</h2>
   <table class="sectionsubscription">
   <thead>
@@ -34,4 +35,7 @@
   {% endfor %}
   </tbody>
   </table>
+{% else %}
+{{ 'eotvos.versenyr.subscriptions.noreg'|trans }}
+{% endif %}
 {% endblock %}

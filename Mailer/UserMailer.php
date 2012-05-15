@@ -39,13 +39,12 @@ class UserMailer extends ContainerAware
      * Sends a message to the newly registered user.
      *
      * @param UserInterface $userObject registered object
-     * @param string        $password   initial password
      *
      * @return void
      *
      * @todo make sender parameters and subject customizable
      */
-    public function sendRegistrationNotification($term, $userObject, $password)
+    public function sendRegistrationNotification($term, $userObject)
     {
         $twig = $this
             ->container
@@ -55,7 +54,7 @@ class UserMailer extends ContainerAware
 
         $body = $this->renderView(
             $twig->getBody(),
-            array('user' => $userObject, 'password' => $password)
+            array('user' => $userObject)
         );
 
         $message = \Swift_Message::newInstance()
@@ -81,7 +80,7 @@ class UserMailer extends ContainerAware
      * @todo refactor into one multi recipient bcc mail
      * @todo make recipients and subject customizable
      */
-    public function sendRegistrationAdminMessages($term, $userObject)
+    public function sendRegistrationAdminMessages($term, $reg, $userObject)
     {
         $twig = $this
             ->container
@@ -94,11 +93,21 @@ class UserMailer extends ContainerAware
             array('user' => $userObject)
         );
 
-        foreach ($userObject->getSections() as $sec) {
+        foreach ($reg->getSections() as $sec) {
             $targets = json_decode($sec->getNotify());
 
+            if (!is_array($targets)) {
+                $targets = explode(',', $sec->getNotify());
+            }
+
+            if (!is_array($targets)) {
+                return;
+            }
+
             foreach ($targets as $key => $email) {
-                $email = $email[1];
+                if (is_array($email)) {
+                    $email = $email[1];
+                }
                 $message = \Swift_Message::newInstance()
                     ->setSubject($twig->getTitle())
                     ->setFrom('verseny@eotvos.elte.hu')

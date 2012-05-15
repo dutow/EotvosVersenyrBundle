@@ -51,6 +51,8 @@ eotvos:
         round:
             finals:
                 message: 'Helyi forduló, amely a helyszínen kerül megrendezésre.'
+        subscriptions:
+            noreg: 'Nem vagy regisztralva erre az alkalomra!'
 
 rounds:
   status:

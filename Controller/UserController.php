@@ -163,19 +163,33 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('competition_page', array( 'term' => $term->getName(), 'pageSlug' => $rec->getSlug())));
         }
 
+
         $tpRep = $this->getDoctrine()->getRepository('\EotvosVersenyrBundle:TextPage');
 
-        $userType = $this->container->get($term->getUsertype());
+        if ($sec->isGranted('ROLE_USER')) {
+            $userType = $this->container->get($term->getUsertype());
 
-        $user = new Entity\User();
-        $registration = $userType->getRegistrationEntityInstance();
-        $registration->setUser($user);
+            $user = $sec->getToken()->getUser();
+            $registration = $userType->getRegistrationEntityInstance();
+            $registration->setUser($user);
+            $registration->setTerm($term);
 
-        $registration->setTerm($term);
+            $form = $this->createForm($userType->getRegistrationFormInstance());
+            $formtype = 'regonly';
+        } else {
+            $userType = $this->container->get($term->getUsertype());
 
-        $user->addRegistration($registration);
+            $user = new Entity\User();
+            $registration = $userType->getRegistrationEntityInstance();
+            $registration->setUser($user);
 
-        $form = $this->createForm(new FormType\UserregType($userType->getRegistrationFormInstance()));
+            $registration->setTerm($term);
+
+            $user->addRegistration($registration);
+
+            $form = $this->createForm(new FormType\UserregType($userType->getRegistrationFormInstance()));
+            $formtype = 'standard';
+        }
 
         $request = $this->getRequest();
 
@@ -184,26 +198,35 @@ class UserController extends Controller
             $form->bindRequest($request);
 
             if ($form->isValid()) {
-                $ur = $form->getData();
-                $user = $ur['user'];
-                $registration = $ur['registration'];
-                $user->addRegistration($registration);
+                if ($formtype=='standard') {
+                    $ur = $form->getData();
+                    $user = $ur['user'];
+                    $registration = $ur['registration'];
+                    $user->addRegistration($registration);
 
-                $password = $user->getPassword();
-                $passwordGenerator = $this->get('eotvos.versenyr.password_generator');
-                $passwordGenerator->encodePassword($user, $user->getPassword());
+                    $password = $user->getPassword();
+                    $passwordGenerator = $this->get('eotvos.versenyr.password_generator');
+                    $passwordGenerator->encodePassword($user, $user->getPassword());
 
-                $em->persist($registration);
-                $user->addRegistration($registration);
-                $em->persist($user);
-                $em->flush();
-                $registration->setUser($user);
-                $registration->setTerm($term);
-                $em->flush();
+                    $em->persist($registration);
+                    $user->addRegistration($registration);
+                    $em->persist($user);
+                    $em->flush();
+                    $registration->setUser($user);
+                    $registration->setTerm($term);
+                    $em->flush();
+                    $regdata = $registration;
+                } else {
+                    $regdata=  $form->getData();
+                    $regdata->setTerm($term);
+                    $regdata->setUser($user);
+                    $em->persist($regdata);
+                    $em->flush();
+                }
 
                 $userMailer = $this->get('eotvos.versenyr.mailer.user');
-                $userMailer->sendRegistrationNotification($term, $user, $password);
-                $userMailer->sendRegistrationAdminMessages($term, $user);
+                $userMailer->sendRegistrationNotification($term, $user);
+                $userMailer->sendRegistrationAdminMessages($term, $regdata, $user);
 
                 return $this->redirect($this->generateUrl('competition_register_success', array('term' => $term->getName())));
             }
@@ -212,7 +235,9 @@ class UserController extends Controller
         $formView = $form->createView();
         // dirty hack, but according to symfony docs, this is the best...
         // http://stackoverflow.com/questions/8012718/symfony2-form-repeated-element-custom-labels
-        $formView->getChild('user')->getChild('password')->getChild('second')->set('label', 'registration.form.confirm');
+        if ($formtype=='standard') {
+            $formView->getChild('user')->getChild('password')->getChild('second')->set('label', 'registration.form.confirm');
+        }
 
         return array(
             //'page' => $pageRec,
@@ -220,6 +245,7 @@ class UserController extends Controller
             'subform' => $userType->getRegistrationFormPartial(),
             'rightpart' => $userType->getRegistrationRightBox(),
             'term' => $term,
+            'formtype' => $formtype,
         );
     }
 
