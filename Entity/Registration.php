@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="regtype", type="string")
+ * @ORM\DiscriminatorMap({"registration" = "Eotvos\VersenyrBundle\Entity\Registration", "school" = "Eotvos\DemoBundle\Entity\SchoolRegistration"})
  */
 class Registration
 {
