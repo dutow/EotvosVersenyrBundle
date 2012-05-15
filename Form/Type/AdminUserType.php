@@ -64,12 +64,14 @@ class AdminUserType extends AbstractType
 
         $builder->add(
             'admin',
-            'checkbox'
+            'checkbox',
+            array('required' => false)
         );
 
         $builder->add(
             'tester',
-            'checkbox'
+            'checkbox',
+            array('required' => false)
         );
 
     }
