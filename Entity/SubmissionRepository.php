@@ -127,7 +127,7 @@ class SubmissionRepository extends EntityRepository
 
         try {
             return $this->getEntityManager()
-                ->createQuery('SELECT s FROM Eotvos\VersenyrBundle\Entity\Submission s WHERE s.user_id=:user_id AND s.round_id=:round_id ORDER BY s.submitted_at DESC')
+                ->createQuery('SELECT s FROM Eotvos\VersenyrBundle\Entity\Submission s WHERE s.user_id=:user_id AND s.round=:round_id ORDER BY s.submitted_at DESC')
                 ->setParameter('user_id', $user->getId())
                 ->setParameter('round_id', $round->getId())
                 ->setMaxResults(1)
@@ -150,7 +150,7 @@ class SubmissionRepository extends EntityRepository
     {
         try {
             return $this->getEntityManager()
-                ->createQuery('SELECT MIN(s.points) FROM Eotvos\VersenyrBundle\Entity\Submission s WHERE s.category=:category AND s.round_id=:round_id')
+                ->createQuery('SELECT MIN(s.points) FROM Eotvos\VersenyrBundle\Entity\Submission s WHERE s.category=:category AND s.round=:round_id')
                 ->setParameter('round_id', $round->getId())
                 ->setParameter('category', $category)
                 ->setMaxResults(1)
@@ -173,7 +173,7 @@ class SubmissionRepository extends EntityRepository
     {
         try {
             return $this->getEntityManager()
-                ->createQuery('SELECT MAX(s.points) FROM Eotvos\VersenyrBundle\Entity\Submission s WHERE s.category=:category AND s.points<>0 AND s.round_id=:round_id')
+                ->createQuery('SELECT MAX(s.points) FROM Eotvos\VersenyrBundle\Entity\Submission s WHERE s.category=:category AND s.points<>0 AND s.round=:round_id')
                 ->setParameter('round_id', $round->getId())
                 ->setParameter('category', $category)
                 ->setMaxResults(1)
