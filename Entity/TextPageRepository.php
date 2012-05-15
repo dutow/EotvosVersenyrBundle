@@ -50,9 +50,9 @@ class TextPageRepository extends NestedTreeRepository
             if ($termName=='') {
                 $term = $this->getEntityManager()
                     ->createQuery('SELECT t FROM EotvosVersenyrBundle:Term t WHERE t.active = true ORDER BY t.registrationStart DESC')
-                    ->getsingleResult();
+                    ->getResult();
 
-                return $term->getRootPage();
+                return $term[0]->getRootPage();
             } else {
                 $termRep = $this->getEntityManager()
                     ->getRepository('EotvosVersenyrBundle:Term');

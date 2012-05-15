@@ -22,9 +22,9 @@ class TermRepository extends EntityRepository
         try {
             $term = $this->getEntityManager()
                 ->createQuery('SELECT t FROM EotvosVersenyrBundle:Term t WHERE t.active = true ORDER BY t.registrationStart DESC')
-                ->getsingleResult();
+                ->getResult();
 
-            return $term;
+            return $term[0];
         } catch (\Doctrine\ORM\NoResultException $nre) {
             return null;
         } catch (\Doctrine\ORM\NonUniqueResultException $nure) {
