@@ -80,7 +80,7 @@ class RoundType extends AbstractType
      */
     public function getName()
     {
-        return 'section_form';
+        return 'round_form';
     }
 
     /**
