@@ -4,7 +4,7 @@
     <div class="activeround">
       <h3>{% trans with { '%round%': '<a href="' ~ (arnd.page|ecvurl) ~'">' ~ arnd.page.title ~ '</a>' } %}rounds.status.active{% endtrans %}</h3>
   {% if app.user %}
-    {% if app.user and ((app.user.isRegisteredForTerm(term) and app.user.getRegistrationForTerm(term).hasSection( child.round.section )) or (app.user.tester or app.user.admin)) %}
+    {% if app.user and ((app.user.isRegisteredForTerm(term) and app.user.getRegistrationForTerm(term).hasSection( arnd.section )) or (app.user.tester or app.user.admin)) %}
       {% if app.user.tester or app.user.admin or arnd.registrationActive(app.user.getRegistrationForTerm(term)) %}
         {% trans with { '%untildate%': (arnd.stop|date('Y. m. d. H:i')) } %}rounds.longer.eligbe{% endtrans %}
         {% render roundcontroller(arnd).getDescriptionAction() with { 'round': arnd.page } %}
