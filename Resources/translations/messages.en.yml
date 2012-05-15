@@ -155,7 +155,7 @@ admin:
       section: 'Szekcio'
       round: 'Fordulo'
       termmail: 'Alkalom regisztracios e-mail'
-      registrer: 'Regisztracio'
+      register: 'Regisztracio'
       register_after: 'Regisztracio utani oldal'
       register_mail: 'Regisztracios e-mail'
       archive: 'Archivum'
