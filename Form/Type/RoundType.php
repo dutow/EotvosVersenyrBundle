@@ -60,7 +60,7 @@ class RoundType extends AbstractType
         $builder->add('advanceNo', 'number');
         $builder->add('publicity', 'choice', array(
             'choices' => $results,
-            'required' => true,
+            'required' => false,
             'multiple' => false,
             'expanded' => false,
         ));

@@ -97,8 +97,8 @@ registration:
     confirm:  'Jelszó megegyszer'
     accept: 'A feltételeket elfogadom'
     legend:
-        data: 'Alapadatok'
-        term: 'Feltételek'
+        fields: 'Alapadatok'
+        terms: 'Feltételek'
         sections: 'Szekciók'
     button: 'Regisztrál'
 

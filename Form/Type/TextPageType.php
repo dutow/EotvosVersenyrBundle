@@ -76,7 +76,7 @@ class TextPageType extends AbstractType
                 'expanded' => false,
             ));
         } else {
-            if ($this->subform) {
+            if ($this->subform!=null) {
                 $builder->add($this->special, $this->subform);
             }
         }

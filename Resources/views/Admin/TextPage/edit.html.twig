@@ -8,7 +8,7 @@
   <fieldset>
     <legend>{{ 'admin.textpage.label.fields'|trans }}</legend>
     {{ form_row(form.title) }}
-    {% if textpage.parentChangable %}
+    {% if textpage.special == '' %}
     {{ form_row(form.parent) }}
     {% endif %}
     {{ form_row(form.body) }}

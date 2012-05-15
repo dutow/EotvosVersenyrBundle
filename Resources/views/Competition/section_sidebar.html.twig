@@ -30,7 +30,6 @@
 {% endif %}
 <div class="roundbox"><div class="{{ boxtype }}">
 <h3><a href="{{ child | ecvurl }}">{{ child.title }}</a></h3>
-<li><strong>{% trans %}sidebar.type{% endtrans %}:</strong> {{ child.round.roundtypeDisplay }}</li>
 <li><strong>{% trans %}sidebar.start{% endtrans %}:</strong> {{ child.round.start|date('Y. m. d. H:i')  }}</li>
 <li><strong>{% trans %}sidebar.stop{% endtrans %}:</strong> {{ child.round.stop|date('Y. m. d. H:i')  }}</li>
 {% if child.round.active %}

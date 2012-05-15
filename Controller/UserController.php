@@ -159,6 +159,7 @@ class UserController extends Controller
                 ->getForTermWithSpecial($term->getName(), 'register_notopen')
                 ;
 
+
             return $this->redirect($this->generateUrl('competition_page', array( 'term' => $term->getName(), 'pageSlug' => $rec->getSlug())));
         }
 

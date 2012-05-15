@@ -12,7 +12,7 @@
 <form method="post" {{ form_enctype(form) }}>
 
   <fieldset>
-    <legend>{{ 'registration.form.legend.data' }}</legend>
+    <legend>{{ 'registration.form.legend.fields'|trans }}</legend>
     {{ form_row(form.user.email) }}
     {{ form_row(form.user.password) }}
   </fieldset>

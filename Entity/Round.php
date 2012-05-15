@@ -31,7 +31,7 @@ class Round
     /**
      * @var string $publicity
      *
-     * @ORM\Column(name="publicity", type="string", length=32)
+     * @ORM\Column(name="publicity", type="string", length=32, nullable="true")
      */
     private $publicity;
 
