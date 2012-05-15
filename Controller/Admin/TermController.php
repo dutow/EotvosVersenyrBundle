@@ -117,6 +117,8 @@ class TermController extends Controller
 
                 $em->persist($term);
                 $em->flush();
+                $term->generateChildren($em);
+                $em->flush();
 
                 return $this->redirect($this->generateUrl('admin_term_index'));
             }
