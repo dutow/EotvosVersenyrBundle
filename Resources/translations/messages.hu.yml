@@ -3,60 +3,60 @@ eotvos:
         subpages: 'Aloldalak'
         contest:
             title: 'Versenyhelyzet'
-            name: 'Szekcio neve'
-            status: 'Statusz'
-            reguntil: 'Regisztracios hatarido'
-            nextround: 'Kovetkezo fordulo'
+            name: 'Szekció neve'
+            status: 'Státusz'
+            reguntil: 'Regisztrációs határidő'
+            nextround: 'Kovetkező forduló'
             status:
                 joined: 'Csatlakozva'
-                mayjoin: 'jelentkezes'
+                mayjoin: 'jelentkezés'
                 nojoin: '-'
-            joinsuccess: 'Sikeresen jelentkeztel a szekcioba!'
-            joinerror: 'Jelentkezesi hiba!'
+            joinsuccess: 'Sikeresen jelentkeztél a szekcióba!'
+            joinerror: 'Jelentkezési hiba!'
         login:
             loggedin: 'Bejelentkezve'
-            name: 'E-mail cim'
-            password: Jelszo
-            submit: 'Bejelentkezes'
+            name: 'E-mail cím'
+            password: Jelszó
+            submit: 'Bejelentkezás'
         user:
             profile: Profil
             contest: Verseny
-            logout: Kijelentkezes
+            logout: Kijelentkezés
             fields:
                 email: 'E-mail cim'
-                identifier: 'Azonosito'
-            datachange: 'Amennyiben valamely adatod elirtad, vagy nem stimmel, kerjuk irj egy emailt az <a href="mailto:%email%">%email%</a> cimre.'
-            register: 'Jelentkezes'
-            tester: 'Tesztelo'
+                identifier: 'Azonositó'
+            datachange: 'Amennyiben valamely adatod elírtad, vagy nem stimmel, kerjük irj egy e-mailt az <a href="mailto:%email%">%email%</a> címre.'
+            register: 'Jelentkezés'
+            tester: 'TESZTELŐ'
 
         sitename: 'Oldal neve'
         admin:
-          contact: 'Kapcsolati informacio'
+          contact: 'Kapcsolati információ'
         sender:
-          name: 'E-mail felado neve'
-          email: 'E-mail feladato cime'
+          name: 'E-mail feladó neve'
+          email: 'E-mail feladató címe'
         facebook:
             page: 'Facebook oldal neve'
         section:
-            deadline: 'Jelentkezesi hatarido'
-            results: 'Eredmenyek'
+            deadline: 'Jelentkezési hataridő'
+            results: 'Eredmények'
         results:
-            title: 'Eredmenyek'
+            title: 'Eredmények'
             name: 'Nev'
-            identifier: 'Azonosito'
+            identifier: 'Azonosíto'
             points: 'Pontok'
-            advances: 'Tovabbjutott?'
+            advances: 'Továbbjutott?'
             yes: 'Igen'
             no: 'Nem'
         round:
             finals:
-                message: 'Helyi fordulo, amely a helyszinen kerul megrendezesre.'
+                message: 'Helyi forduló, amely a helyszínen kerül megrendezésre.'
 
 rounds:
   status:
-    active: 'Fordulo folyamatban: %round%'
-    notyet: 'Jelenleg nincs folyamatban fordulo. A kovetkezo lesz: <a href="%url%">%title%</a>'
-    over: 'Minden fordulo veget ert'
+    active: 'Forduló folyamatban: %round%'
+    notyet: 'Jelenleg nincs folyamatban forduló. A következő lesz: <a href="%url%">%title%</a>'
+    over: 'Minden forduló véget ért'
   longer:
     eligbe: |
       <p>A forduló jelenleg folyamatban van, és korábban már jelentkeztél a szekcióba, valamint az eddigi fordulókon túljutottál, így részt vehetsz benne.</p>
@@ -69,124 +69,124 @@ rounds:
     login: |
       <p>A részvételhez azonban be kell jelentkezned. A bejelentkezéshez szükséges jelszót a regisztrációs e-mailedben találod, és azt, valamint e-mail címedet a jobb fölső részen kell megadnod.</p>
     noteligbe: |
-      Sajnor mar egy korabbi fordulon kiestel, igy mar nem vehetsz reszt a fordulokban.
+      Sajnor már egy korábbi fordulón kiestél, így már nem vehetsz részt a további fordulókban.
 
 sidebar:
-  type: 'Tipusa'
+  type: 'Típusa'
   start: 'Kezdete'
-  stop: 'Vege'
+  stop: 'Vége'
 
 archives:
-  title: 'Archivum'
+  title: 'Archívum'
   term:
-    registered: 'Mar regisztraltal az alkalomra'
-    register: 'Az alkalomra meg nem regisztraltal. A regisztraciora <a href="%url%">itt</a> van lehetoseged.'
-    noregister: 'Az alkalmon nem vettel reszt.'
+    registered: 'Már regosztráltál az alkalomra'
+    register: 'Az alkalomra még nem regisztráltál. A regisztrációra <a href="%url%">itt</a> van lehetőseged.'
+    noregister: 'Az alkalmon nem vettél részt.'
 
 sections:
-  title: 'Szekciok'
+  title: 'Szekciók'
 
 registration:
   form:
-    title: 'Regisztracio'
-    account: 'Felhasznaloi adatok'
-    sections: 'Szekciok'
-    email: 'E-mail cim'
+    title: 'Regisztráció'
+    account: 'Felhasználói adatok'
+    sections: 'Szekciók'
+    email: 'E-mail cím'
     email_help: 'Erre a címre küldjük el a belépéshez szükséges jelszót'
-    password: 'Jelszo'
-    confirm:  'Jelszo megegyszer'
-    accept: 'A feltetelelet elfogadom'
+    password: 'Jelszó'
+    confirm:  'Jelszó megegyszer'
+    accept: 'A feltételeket elfogadom'
     legend:
         data: 'Alapadatok'
-        term: 'Feltetelek'
-        sections: 'Szekciok'
-    button: 'Regisztral'
+        term: 'Feltételek'
+        sections: 'Szekciók'
+    button: 'Regisztrál'
 
 admin:
-  actions: 'Muveletek'
+  actions: 'Műveletek'
 
   term:
     display:
       list: 'Alkalmak'
-      new: 'Uj alkalom'
-      edit: 'Alkalom szerkesztese'
+      new: 'Új alkalom'
+      edit: 'Alkalom szerkesztése'
     actions:
-      new: 'Uj alkalom'
+      new: 'Új alkalom'
       edit: 'Szerkeszt'
-      delete: 'Torol'
-      save: 'Mentes'
+      delete: 'Töröl'
+      save: 'Mentés'
     fields:
       id: 'ID'
-      name: 'Nev'
-      active: 'Aktiv?'
+      name: 'Név'
+      active: 'Aktív?'
       start: 'Kezdet'
-      type: 'Regisztracio tipusa'
+      type: 'Regisztráció típusa'
     activity:
-      active: 'Aktiv'
-      inactive: 'Inaktiv'
+      active: 'Aktív'
+      inactive: 'Inaktív'
     legend:
       fields: 'Adatok'
     
   textpage:
     display:
-      list: 'Szoveges oldalak'
-      show: 'Felhasznalo: '
-      edit: 'Szerkesztes'
+      list: 'Szöveges oldalak'
+      show: 'Felhasználó: '
+      edit: 'Szerkesztés'
     actions:
-      new: 'Uj oldal'
-      newround: 'Uj fordulo'
-      newsection: 'Uj szekcio'
+      new: 'Új oldal'
+      newround: 'Új forduló'
+      newsection: 'Új szekció'
       edit: 'Szerkeszt'
-      delete: 'Torol'
-      save: 'Mentes'
+      delete: 'Töröl'
+      save: 'Mentés'
       up: 'Fel'
       down: 'Le'
-      config: 'Konfiguracio'
+      config: 'Konfiguráció'
     fields:
       id: 'ID'
-      name: 'Nev'
-      special: 'Specialis?'
+      name: 'Név'
+      special: 'Speciális?'
     activity:
-      active: 'Aktiv'
-      inactive: 'Inaktiv'
+      active: 'Aktív'
+      inactive: 'Inaktív'
     special:
       termroot: 'Alkalom'
-      sections: 'Szekciok'
-      section: 'Szekcio'
-      round: 'Fordulo'
-      termmail: 'Alkalom regisztracios e-mail'
-      registrer: 'Regisztracio'
-      register_after: 'Regisztracio utani oldal'
-      register_mail: 'Regisztracios e-mail'
-      archive: 'Archivum'
-      section_notify: 'Szekcio ertesito level'
-      register_notopen: 'Regisztracios idoszak utan'
-      register_done: 'Mar regisztralt felhasznalo'
-      archives: 'Archivum'
+      sections: 'Szekciók'
+      section: 'Szekció'
+      round: 'Forduló'
+      termmail: 'Alkalom regisztrácios e-mail'
+      registrer: 'Regisztració'
+      register_after: 'Regisztració utáni oldal'
+      register_mail: 'Regisztrációs e-mail'
+      archive: 'Archívum'
+      section_notify: 'Szekció értesítő levél'
+      register_notopen: 'Regisztrációs időszak után'
+      register_done: 'Már regisztrált felhasználó'
+      archives: 'Archívum'
     label:
       fields: 'Adatok'
 
   submission:
     display:
-      list: 'Megoldasok'
-      rounds: 'Fordulo:'
-      advancesno: 'Maximum tovabbjutok szama: %no%'
-      edit: 'Megoldas szerkesztese'
-      new:  'Uj megoldas'
+      list: 'Megoldások'
+      rounds: 'Forduló:'
+      advancesno: 'Maximum továbbjutok száma: %no%'
+      edit: 'Megoldás szerkesztése'
+      new:  'Új megoldás'
     actions:
-      new: 'Uj'
+      new: 'Új'
       edit: 'Szerkeszt'
-      delete: 'Torol'
-      save: 'Mentes'
-      generate: 'Tovabbjutok frissitese'
+      delete: 'Töröl'
+      save: 'Mentés'
+      generate: 'Továbbjutók frissítése'
     legend:
       fields: 'Adatok'
     fields:
-      user: 'Versenyzo'
-      category: 'Kategoria'
+      user: 'Versenyző'
+      category: 'Kategória'
       id: 'ID'
       time: 'Ido'
-      advances: 'Tovabbjutott'
+      advances: 'Továbbjutott'
       points: 'Pontok'
     advances:
       yes: 'IGEN'
@@ -194,53 +194,53 @@ admin:
 
   user:
     display:
-      list: 'Felhasznalok'
-      edit: 'Felhasznalo szerkesztese'
-      new:  'Uj felhasznalo'
-      one:  'Felhasznalo: %email%'
-      registrations: 'Regisztraciok'
-      register: 'Uj regisztracio: %name%'
-      edit_registration: 'Regisztracio: %name%'
+      list: 'Felhasználók'
+      edit: 'Felhasználó szerkesztése'
+      new:  'Új felhasznaló'
+      one:  'Felhasználó: %email%'
+      registrations: 'Regisztráciok'
+      register: 'Új regisztráció: %name%'
+      edit_registration: 'Regisztráció: %name%'
     legend:
       fields: 'Adatok'
-      terms: 'Feltetelek'
+      terms: 'Feltételek'
     actions:
-      new: 'Uj'
+      new: 'Új'
       edit: 'Szerkeszt'
-      delete: 'Torol'
-      save: 'Mentes'
-      delete_registration: 'Torol'
+      delete: 'Töröl'
+      save: 'Mentés'
+      delete_registration: 'Töröl'
       edit_registration: 'Szerkeszt'
-      register: 'Regisztral:'
+      register: 'Regisztrál:'
     fields:
-      status: 'Status'
+      status: 'Státus'
       email: 'E-mail'
       id: 'ID'
-      created: 'Regisztralt'
+      created: 'Regisztrált'
     status:
       admin: 'Admin'
-      tester: 'Tesztelo'
-      user: 'Versenyzo'
+      tester: 'Tesztelő'
+      user: 'Versenyző'
 
   configuration:
     fields:
-      value: 'Ertek'
-      name: 'Nev'
+      value: 'Értek'
+      name: 'Név'
       id: 'ID'
     display:
-      list: 'Konfiguracios beallitasok'
-      edit: 'Beallitas szerkesztese'
+      list: 'Konfigurációs beállítások'
+      edit: 'Beállitás szerkesztáse'
     actions:
       edit: 'Szerkeszt'
-      save: 'Mentes'
+      save: 'Mentés'
     label:
       fields: 'Adatok'
 
   heading:
     term: 'Alkalmak'
     textpage: 'Oldalak'
-    submission: 'Megoldasok'
-    configuration: 'Konfiguracio'
-    user: 'Felhasznalok'
+    submission: 'Megoldások'
+    configuration: 'Konfiguráció'
+    user: 'Felhasználók'
 
-  logout: 'Kijelentkezes'
+  logout: 'Kijelentkezés'
