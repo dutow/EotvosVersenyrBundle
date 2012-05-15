@@ -12,7 +12,6 @@
       <th>{% trans %}admin.term.fields.name{% endtrans %}</th>
       <th>{% trans %}admin.term.fields.active{% endtrans %}</th>
       <th>{% trans %}admin.term.fields.start{% endtrans %}</th>
-      <th>{% trans %}admin.term.fields.type{% endtrans %}</th>
       <th>{% trans %}admin.actions{% endtrans %}</th>
     </tr>
   </thead>
@@ -23,7 +22,6 @@
       <td>{{ row.name }}</td>
       <td>{{ (row.active? 'admin.term.activity.active' : 'admin.term.activity.inactive')|trans }}</td>
       <td>{{ row.registrationStart|date('Y-m-d') }}</td>
-      <td>{{ row.userType }}</td>
       <td>
         <a href="{{ path('admin_term_edit', { id: row.id }) }}">{% trans %}admin.term.actions.edit{% endtrans %}</a>
         <a href="{{ path('admin_term_delete', { id: row.id }) }}">{% trans %}admin.term.actions.delete{% endtrans %}</a>
