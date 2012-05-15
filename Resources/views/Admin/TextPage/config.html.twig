@@ -1,0 +1,20 @@
+{% extends 'CancellarAdminBundle::layout.html.twig' %}
+
+{% form_theme form 'CancellarAdminBundle::form.html.twig' %}
+
+{% block main %}
+<h2>{{ 'admin.textpage.display.config'|trans({ '%round%': round.page.title }) }}</h2>
+<form class="wide" method="post" {{ form_enctype(form) }}>
+  <fieldset>
+    <legend>{{ 'admin.textpage.label.fields'|trans }}</legend>
+    {{ form_row(form.config) }}
+    {{ form_rest(form) }}
+    <div class="formrow row_required">
+      <p class="inputholder">
+      <input type="submit" value="{{ 'admin.textpage.actions.save'|trans }}" class="button" />
+      </p>
+    </div>
+  </fieldset>
+</form>
+{% endblock %}
+

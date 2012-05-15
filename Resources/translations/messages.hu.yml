@@ -136,6 +136,7 @@ admin:
       list: 'Szöveges oldalak'
       show: 'Felhasználó: '
       edit: 'Szerkesztés'
+      config: 'Konfiguracio (JSON szerkesztes)'
     actions:
       new: 'Új oldal'
       newround: 'Új forduló'

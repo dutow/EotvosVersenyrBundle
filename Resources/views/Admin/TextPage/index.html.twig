@@ -41,6 +41,9 @@
         {% if row.special == 'round' and row.round.roundtypeProvider(container).configurationUrl(row.round) is not null %}
         <a href="{{ path(row.round.roundtypeProvider(container).configurationUrl(row.round), { round: row.round.id }) }}">{{ 'admin.textpage.actions.config'|trans }}</a>
         {% endif %}
+        {% if row.special == 'round' and row.round.roundtypeProvider(container).configurationUrl(row.round) is null %}
+        <a href="{{ path('admin_round_defaultconfig', { id: row.round.id }) }}">{{ 'admin.textpage.actions.config'|trans }}</a>
+        {% endif %}
       </td>
     </tr>
     {% endfor %}

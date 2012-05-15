@@ -8,6 +8,7 @@ use Eotvos\VersenyrBundle\Entity\Round;
 use Eotvos\VersenyrBundle\Form\Type\TextPageType;
 use Eotvos\VersenyrBundle\Form\Type\SectionType;
 use Eotvos\VersenyrBundle\Form\Type\RoundType;
+use Eotvos\VersenyrBundle\Form\Type\SimpleConfigType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -361,4 +362,58 @@ class TextPageController extends Controller
             'textpage' => $textpage,
         );
     }
+
+    /**
+     * Shows a textpage
+     *
+     * @param int $id Id of the textpage
+     *
+     * @return array of template parameters
+     *
+     * @Route("/roundconfig/{id}", name = "admin_round_defaultconfig" )
+     * @Template
+     */
+    public function configAction($id)
+    {
+        if (!is_numeric($id)) {
+            throw $this->createNotFoundException("Round not found");
+        }
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $repo = $this->getDoctrine()
+            ->getRepository('EotvosVersenyrBundle:Round')
+            ;
+
+        $round = $repo->findOneById($id);
+
+        if (!$round) {
+            throw $this->createNotFoundException("Round not found");
+        }
+
+        $form = $this->createForm(new SimpleConfigType($this->container), $round);
+
+        $request = $this->get('request');
+
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+
+                $round = $form->getData();
+
+                if ($round->getId()!=$id) {
+                    throw $this->createNotFoundException("Don't forge stupid updates");
+                }
+
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('admin_textpage_index'));
+            }
+        }
+
+        return array(
+            'round' => $round,
+            'form' => $form->createView(),
+        );
+    }
 }
+
