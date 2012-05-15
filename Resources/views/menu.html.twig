@@ -1,10 +1,10 @@
 <ul id="main-menu">
 {% if ecvroot() %}
-{% set menuitem = ecvroot() %}
+{% set menuitem = ecvroot(term.name) %}
   <li class="main-menu-item" {% if active_menu is defined and active_menu==menuitem.slug %}id="active-menu"{% endif %}>
     <a href="{{ menuitem | ecvurl }}" title="{{ menuitem.title }}">{{ menuitem.title }}</a>
   </li>
-{% for menuitem in ecvroot().children %}
+{% for menuitem in ecvroot(term.name).children %}
 {% if menuitem.inMenu %}
   <li class="main-menu-item" {% if active_menu is defined and active_menu==menuitem.slug %}id="active-menu"{% endif %}>
     <a href="{{ menuitem | ecvurl }}" title="{{ menuitem.title }}">{{ menuitem.title }}</a>

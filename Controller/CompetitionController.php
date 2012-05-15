@@ -205,6 +205,7 @@ class CompetitionController extends Controller
             ->getRepository('EotvosVersenyrBundle:Term')
             ->findOneByName($term)
             ;
+
         if (!$term) {
             throw $this->createNotFoundException('Term not found');
         }
