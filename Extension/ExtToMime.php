@@ -32,7 +32,7 @@ class ExtToMime
         $out = array();
         $file = fopen('/etc/mime.types', 'r');
         while (($line = fgets($file)) !== false) {
-            $line = trim(preg_replace('///.*/', '', $line));
+            $line = trim(preg_replace('%//.*%', '', $line));
             if (!$line) {
                 continue;
             }
@@ -89,7 +89,7 @@ class ExtToMime
         $out = array();
         $file = fopen('/etc/mime.types', 'r');
         while (($line = fgets($file)) !== false) {
-            $line = trim(preg_replace('///.*/', '', $line));
+            $line = trim(preg_replace('%//.*%', '', $line));
             if (!$line) {
                 continue;
             }
