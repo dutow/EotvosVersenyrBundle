@@ -37,7 +37,7 @@ class LayoutTest extends ModelWebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/Example%20term/root-page');
         $this->assertTrue($client->getResponse()->isSuccessful());
-        $this->assertTrue($crawler->filter('li.main-menu-item')->count() == 4);
+        $this->assertEquals(4,$crawler->filter('li.main-menu-item')->count());
 
     }
 
