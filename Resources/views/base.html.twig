@@ -29,6 +29,11 @@
   %}
   <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
   {% endstylesheets %}
+  {% stylesheets filter='cssrewrite' output='css/*.css'
+   'bundles/eotvosversenyr/css/ui-lightness/jquery-ui-1.8.20.custom.css'
+  %}
+  <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+  {% endstylesheets %}
 
   <!-- end CSS-->
 
@@ -57,6 +62,7 @@
     <!-- scripts concatenated and minified via ant build script-->
     <script defer src="{{ asset('bundles/eotvosversenyr/js/libs/jquery.autocomplete.min.js') }}"></script>
     <script defer src="{{ asset('bundles/eotvosversenyr/js/libs/jquery.countdown.js') }}"></script>
+    <script defer src="{{ asset('bundles/eotvosversenyr/js/jquery-ui-1.8.20.custom.min.js') }}"></script>
     <script defer src="{{ asset('bundles/eotvosversenyr/js/plugins.js') }}"></script>
     <script defer src="{{ asset('bundles/eotvosversenyr/js/script.js') }}"></script>
     <!-- end scripts-->
@@ -107,6 +113,7 @@
         <div id="threecol">
           {% block rbody %}{% endblock %}
         </div>
+        <div style="clear:both"></div>
         {% endif %}
 
         {% if fbbox is defined and fbbox %}
@@ -143,6 +150,7 @@
 
         {% block body %}{% endblock %}
       </div>
+      <div style="clear:both"></div>
 
 
 
