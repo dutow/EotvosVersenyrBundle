@@ -305,7 +305,7 @@ class Term
 
 
         $round = new TextPage();
-        $round->setTitle('Example section');
+        $round->setTitle('Example round');
         $round->setParent($section);
         $round->setInMenu(false);
         $round->setSpecial('round');
