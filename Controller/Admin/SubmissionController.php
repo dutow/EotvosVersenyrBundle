@@ -98,7 +98,7 @@ class SubmissionController extends Controller
 
         $roundtype = $this->container->get($round->getRoundtype());
 
-        $standing = $roundtype->orderStanding($repo->getStandingByRound($round));
+        $standing = $roundtype->orderStanding($repo->getStandingByRound($round), $round);
 
         // first N advances
         for ($i = 0; $i < $round->getAdvanceNo(); $i++) {
