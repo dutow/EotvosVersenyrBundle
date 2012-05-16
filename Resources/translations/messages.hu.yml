@@ -46,6 +46,7 @@ eotvos:
             identifier: 'Azonosíto'
             points: 'Pontok'
             advances: 'Továbbjutott?'
+            advanced: 'Továbbjutott?'
             yes: 'Igen'
             no: 'Nem'
         round:
